@@ -2,7 +2,7 @@ Introduction
 ---
 
 pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations 
-when writing textual content. Its main applicability is to correctly render complex writing systems 
+when writing textual content. Its main function is to correctly render complex writing systems 
 such as the right-to-left Hebrew and Arabic scripts, 
 and the various writing systems of the Indian subcontinent and its surroundings. 
 In addition, it can also handle kerning and other optional features that can be provided by certain fonts in other writing systems.
@@ -21,7 +21,7 @@ and are determined to come as close to that goal as technology allows us.
 
 In earlier versions of iText, we were already able to render Chinese-Japanese-Korean (CJK) glyphs in PDF documents, 
 and had limited support for the right-to-left Hebrew and Arabic scripts. 
-With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts.
+With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, used mostly in the Indian subcontinent.
 
 A bit of writing history
 ---
