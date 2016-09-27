@@ -101,6 +101,7 @@ the Brahmic scripts are a large family of writing systems used primarily in Indi
 The family is split into a Northern and a Southern branch.
 The Northern branch is characterized by the use of half-characters in consonant clusters,
 
+
 They are abugidas, i.e. consonants are written with an implied vowel,
 and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
 
@@ -128,9 +129,8 @@ make sure your valid license file is loaded,
 and iText 7 will automatically go into the pdfCalligraph code when text instructions are encountered 
 that contain Indic texts, or a script that is written from right to left.
 
-Even though it exposes a number of API methods, this is not necessary. 
 The iText layout module will automatically look for the pdfCalligraph module on the classpath 
-if Indic/Arabic text is encountered. If it is available, it will call pdfCalligraph's functionality 
+if Indic/Arabic text is encountered by the Renderer Framework. If pdfCalligraph is available, iText will call its functionality 
 to provide the correct glyph shapes to write to the PDF file. iText will not attempt any advanced shaping operations 
 if the pdfCalligraph module is not loaded on the classpath.
 
@@ -138,3 +138,71 @@ The exact dependencies to load are:
 
 * the pdfCalligraph library itself
 * the license key library
+
+pdfCalligraph exposes a number of APIs so that it can be reached from iText Core,
+but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
+
+This code will just work:
+
+```java
+// initial actions
+LicenseKey.loadLicenseFile("/path/to/license.xml");
+Document arabicPdf = new Document(new PdfDocument(new PdfWriter("/path/to/output.pdf")));
+
+// create a font, and make it the default for the document
+PdfFont f = PdfFontFactory.createFont(FilePath.getFont("/path/to/arabicFont.ttf"));
+arabicPdf.setFont(f);
+
+// add content: السلام عليكم (as-salaamu 'aleykum - peace be upon you)
+arabicPdf.add(new Paragraph("\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064A\u0643\u0645"));
+
+arabicPdf.close();
+```
+
+iText will only attempt to apply advanced shaping in a text on the characters that constitute a majority
+[footnote: technically, the plurality https://en.wikipedia.org/wiki/Plurality_(voting) ] 
+of characters of that text. This can be overridden by explicitly setting the script for a layout element.
+This is done as follows:
+
+```java
+PdfFont f = PdfFontFactory.createFont(FilePath.getFont("/path/to/unicodeFont.ttf"));
+Paragraph mixed = new Paragraph("The concept of \u0915\u0930\u094D\u092E (karma) is at least as old as the Vedic texts.");
+mixed.setFont(f);
+
+mixed.setProperty(Property.FONT_SCRIPT, Character.UnicodeScript.DEVANAGARI);
+```
+
+iText will of course fail to do shaping operations with the Latin text,
+but it will correctly make the र (ra) into the combining diacritic form it assumes in consonant clusters.
+
+However, this becomes more problematic when mixing two alphabets that both require pdfCalligraph logic.
+Therefore, it is generally wiser to separate the contents, when they appear in a single paragraph,
+into a number of Text layout objects. This can even be automated:
+
+```java
+Map<UnicodeScript, PdfFont> fonts = new EnumMap<>(UnicodeScript.class);
+String fontFolder = "C:/Windows/Fonts/";
+fonts.put(UnicodeScript.LATIN, PdfFontFactory.createFont("/path/to/latinFont.ttf", PdfEncodings.IDENTITY_H, true));
+fonts.put(UnicodeScript.TAMIL, PdfFontFactory.createFont("/path/to/tamilFont.ttf", PdfEncodings.IDENTITY_H, true));
+
+String input = "Translation: \u0BAE\u0BC1\u0BA9\u0BCD\u0BA9\u0BC7\u0BB1\u0BCD\u0BB1\u0BAE\u0BCD means 'improvement' !";
+
+Paragraph para = new Paragraph("");
+
+StringBuilder build = new StringBuilder();
+UnicodeScript script = UnicodeScript.of(input.charAt(0));
+for (char unicodePoint : input.toCharArray()) {
+	if (UnicodeScript.of(unicodePoint).equals(script) || UnicodeScript.of(unicodePoint).equals(UnicodeScript.COMMON)) {
+		build.append(unicodePoint);
+	} else {
+		para.add(new Text(build.toString()).setFont(fonts.get(script)));
+		build = new StringBuilder();
+		build.append(unicodePoint);
+		script = UnicodeScript.of(unicodePoint);
+	}
+}
+para.add(new Text(build.toString()).setFont(fonts.get(script)));
+
+doc.add(para);
+doc.close();
+```
