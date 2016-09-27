@@ -22,27 +22,27 @@ In earlier versions of iText, we were already able to render Chinese, Japanese, 
 and had limited support for the right-to-left Hebrew and Arabic scripts. 
 With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, which are used mostly in the Indian subcontinent.
 
-A bit of writing history
----
-
-Over the last 5000+ years, humanity created a plethora of writing systems. 
-After an extended initial period of protowriting, which tried to convey 
-thoughts through drawn images, a number of more abstract systems evolved. 
-One of the most influential writing systems was the alphabet developed 
-and exported by the seafaring trade nation of Phoenicia. From it evolved, 
-after extended periods of time, scripts like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
-and Aramaic and its descendants (Arabic, Hebrew, Syriac, etc). 
-Although this is a matter of scientific debate, it is possible that the Phoenician alphabet is also 
-an ancestor of the entire Brahmic family of scripts, which contains Kannada, Thai, Telugu, 
-and over a hundred other writing systems used primarily in South-East Asia.
-
-The other highly influential writing system that is probably an original invention, the Han script, 
-has descendants used throughout the rest of East Asia in the Chinese-Japanese-Korean spheres of influence.
-
 A bit of font & encoding history
 ---
 
-TTF & OTF
+TTF & OTF & Unicode
+
+A bit of writing history
+---
+
+Over the last 5000+ years, humanity has created a plethora of writing systems. 
+After an extended initial period of protowriting, when people tried to convey 
+concepts and/or words through drawn images, a number of more abstract systems evolved. 
+One of the most influential writing systems was the script developed 
+and exported by the seafaring trade nation of Phoenicia. From it evolved, 
+after extended periods of time, alphabets like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
+and the Aramaic abjad and its descendants (Arabic, Hebrew, Syriac, etc). 
+Although this is a matter of scientific debate, it is possible that the Phoenician alphabet is also 
+an ancestor of the entire Brahmic family of scripts, which contains Kannada, Thai, Telugu, 
+and over a hundred other writing systems used primarily in South-East Asia and the Indian subcontinent.
+
+The other highly influential writing system that is probably an original invention, the Han script, 
+has descendants used throughout the rest of East Asia in the Chinese-Japanese-Korean spheres of influence.
 
 A very brief introduction to the Arabic script
 ---
@@ -76,15 +76,16 @@ As a result, all characters have several appearances, depending on whether or no
 
 This concept is easy to illustrate with a hands-on example. The Arabic word 'aniq (meaning elegant) is written with the following letters:
 
-![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
+![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
 
-However, in writing, the graphical representation is radically different. 
+However, in writing, the graphical representation is shows marked differences. 
 
-![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
+![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
 
-The rightmost letter, alif, is unchanged, because it does not join with any subsequent characters. The leftmost three letters are joined to one another,
-to the point where the middle character is unrecognizable compared to its base form, save for the double dot underneath it. 
-
+The rightmost letter, alif, is unchanged, because by rule it does not join with any subsequent characters.
+The leftmost three letters are joined to one another,
+to the point where the character in the medial position is unrecognizable compared to its base form, 
+save for the double dot underneath it. 
 
 In the Unicode standard, the Arabic script is encoded into a number of ranges of Unicode points:
 * The base forms for both Standard Arabic and a number of derived alphabets in Asia are located in U+0600–U+06FF (Arabic).
@@ -94,6 +95,14 @@ that define unique Unicode points for all contextual appearances (isolated, init
 
 A very brief introduction to the Brahmic scripts
 ---
+
+So named because of their descent from the ancient alphabet called Brahmi,
+the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
+The family is split into a Northern and a Southern branch.
+The Northern branch is characterized by the use of half-characters in consonant clusters,
+
+They are abugidas, i.e. consonants are written with an implied vowel,
+and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
 
 Support
 ---
