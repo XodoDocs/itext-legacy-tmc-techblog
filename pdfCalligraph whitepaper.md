@@ -2,30 +2,22 @@ Introduction
 ---
 
 pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations 
-when writing textual content. Its main function is to correctly render complex writing systems 
+when writing textual content to a PDF file. Its main function is to correctly render complex writing systems 
 such as the right-to-left Hebrew and Arabic scripts, 
 and the various writing systems of the Indian subcontinent and its surroundings. 
 In addition, it can also handle kerning and other optional features that can be provided by certain fonts in other writing systems.
 
+In this position paper, we first provide a number of cursory introductions: we'll start out by exploring the murky history of encoding standards for digital text, and then go into some detail about how the Arabic and Brahmic alphabets are structured. Afterwards, we will of course discuss the problems those writing systems pose in the PDF standard, the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
 
-A bit of iText history
+Technical overview
 ---
 
-The iText library was originally written in the context of Western European languages, 
-and it was only designed to handle left-to-right alphabetic scripts. 
-However, the writing systems of the world can be much more complex and varied 
-than just a sequence of letters with no interaction. 
-Supporting every type of writing system that humanity has developed is a tall order, 
-but we strive to be a truly global company. As such, we are determined to come as close to that goal as technology allows us as long as there's a decent business case [NOTE: phrasing].
+We will not be sharing revolutionary insights in this section, so if you are comfortable with your knowledge about character encodings, the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those sections.
 
-In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
-and had limited support for the right-to-left Hebrew and Arabic scripts. 
-With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, which are used mostly in the Indian subcontinent.
-
-A bit of font & encoding history
+A bit of encoding history
 ---
 
-TTF & OTF & Unicode
+Unicode
 
 A bit of writing history
 ---
@@ -47,10 +39,10 @@ has descendants used throughout the rest of East Asia in the Chinese-Japanese-Ko
 A very brief introduction to the Arabic script
 ---
 
-Arabic is writing system used for a large number of languages in the greater Middle East.
-It is most prominently known from its usage for the Arabic language, 
+Arabic is a writing system used for a large number of languages in the greater Middle East.
+It is most prominently known from its usage for the Semitic language Arabic, 
 and from that language's close association with Islam, since most religious Muslim literature is written in Arabic.
-As a result, many other language communities in and around the culturally Arabic/Muslim sphere of 
+As a result, many other non-Semitic language communities in and around the culturally Arabic/Muslim sphere of 
 influence have also adopted the Arabic script, like Farsi (Iran), Pashto (Afghanistan),
 Mandinka (Senegal, Gambia), Malay (Malaysia, Indonesia, ...), etc.
 Some of these communities have introduced new letters for the alphabet, 
@@ -78,16 +70,22 @@ This concept is easy to illustrate with a hands-on example. The Arabic word 'ani
 
 ![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
 
-However, in writing, the graphical representation is shows marked differences. 
+However, in actual writing, the graphical representation shows marked differences. 
 
 ![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
 
 The rightmost letter, alif, is unchanged, because by rule it does not join with any subsequent characters.
 The leftmost three letters are joined to one another,
 to the point where the character in the medial position is unrecognizable compared to its base form, 
-save for the double dot underneath it. 
+save for the double dot underneath it.
 
-In the Unicode standard, the Arabic script is encoded into a number of ranges of Unicode points:
+It is possible to write fully vocalized Arabic, with all phonetic information available,
+through the use of diacritics. This is mostly used for students who are learning Arabic,
+and for texts where phonetic ambiguity must be avoided (e.g. the Qur'an).
+The phonetic diacritics as a group are commonly known as tashkil;
+its most-used members are the harakat (short /a/, /i/, /u/), and the sukun which denotes absence of a vowel.
+
+In the Unicode standard, the Arabic script is encoded into a number of ranges of code points:
 * The base forms for both Standard Arabic and a number of derived alphabets in Asia are located in U+0600–U+06FF (Arabic).
 * Supplemental characters, mostly for African and European languages, are in U+0750–U+077F (Arabic Supplement) and U+08A0–U+08FF (Arabic Extended-A)
 * Two ranges, U+FB50–U+FDFF (Arabic Pres. Forms-A) and U+FE70–U+FEFF (Arabic Pres. Forms-B),
@@ -98,12 +96,52 @@ A very brief introduction to the Brahmic scripts
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
-The family is split into a Northern and a Southern branch.
-The Northern branch is characterized by the use of half-characters in consonant clusters,
-
-
 They are abugidas, i.e. consonants are written with an implied vowel,
 and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
+All Brahmic alphabets are written from left to right, and have as a defining feature
+that the characters can change shape in a number of contexts.
+
+The Brahmic family is very large and diverse, with over 100 existing writing systems. Some are used for a
+single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, for Hindi, Marathi, Nepali),
+and others only in specific contexts (e.g. Baybayin, only for ritualistic uses of Tagalog).
+The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' script associated with it.
+
+The Brahmic scripts diverged into a Northern and a Southern branch.
+The Northern branch is characterized by the use of half-characters in consonant clusters
+(affixing a modified version of the first letter to an unchanged form of the second),
+and many show the characteristic horizontal bar to signify the grouping of characters into words.
+
+![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
+
+The Southern branch shows more diversity but, in general, will blend clustering characters into unique forms
+rather than affixing one to the other. It will also, usually, show the characters as more isolated:
+
+![Kannada word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
+
+In a very broad generalization, Northern Brahmic scripts are more often used for the Indo-European languages prevalent
+in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages, and for
+Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
+
+
+
+A bit of font history
+---
+
+A bit of iText history
+---
+
+The iText library was originally written in the context of Western European languages, 
+and it was only designed to handle left-to-right alphabetic scripts. 
+However, the writing systems of the world can be much more complex and varied 
+than just a sequence of letters with no interaction. 
+Supporting every type of writing system that humanity has developed is a tall order, 
+but we strive to be a truly global company. As such, we are determined to come as close to that goal as technology allows us as long as there's a decent business case [NOTE: phrasing].
+
+In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
+and had limited support for the right-to-left Hebrew and Arabic scripts. 
+With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, which are used mostly in the Indian subcontinent.
+
+Java limitations
 
 Support
 ---
