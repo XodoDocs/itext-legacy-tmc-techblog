@@ -1,5 +1,4 @@
-Introduction
----
+# Introduction
 
 pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations 
 when writing textual content to a PDF file. Its main function is to correctly render complex writing systems 
@@ -13,21 +12,18 @@ and then go into some detail about how the Arabic and Brahmic alphabets are stru
 Afterwards, we will of course discuss the problems those writing systems pose in the PDF standard, 
 the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
 
-Technical overview
----
+# Technical overview
 
 We will not be sharing revolutionary insights in this section, 
 so if you are comfortable with your knowledge about character encodings, 
 the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those sections.
 
-A bit of encoding history
----
+## A bit of encoding history
 
 In order to represent data in a digital way, 
 ASCII -> Unicode (code points, code blocks, alternates)
 
-A bit of writing history
----
+## A bit of writing history
 
 Over the last 5000+ years, humanity has created a plethora of writing systems. 
 After an extended initial period of protowriting, when people tried to convey 
@@ -43,8 +39,7 @@ and over a hundred other writing systems used primarily in South-East Asia and t
 The other highly influential writing system that is probably an original invention, the Han script, 
 has descendants used throughout the rest of East Asia in the Chinese-Japanese-Korean spheres of influence.
 
-A very brief introduction to the Arabic script
----
+## A very brief introduction to the Arabic script
 
 Arabic is a writing system used for a large number of languages in the greater Middle East.
 It is most prominently known from its usage for the Semitic language Arabic, 
@@ -98,8 +93,7 @@ In the Unicode standard, the Arabic script is encoded into a number of ranges of
 * Two ranges, U+FB50–U+FDFF (Arabic Pres. Forms-A) and U+FE70–U+FEFF (Arabic Pres. Forms-B),
 that define unique Unicode points for all contextual appearances (isolated, initial, medial, final) of Arabic glyphs
 
-A very brief introduction to the Brahmic scripts
----
+## A very brief introduction to the Brahmic scripts
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
@@ -118,8 +112,7 @@ In a very broad generalization, Northern Brahmic scripts are used for the Indo-E
 in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages, and for
 Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
-Northern Brahmi
----
+### Northern Brahmi
 
 The Northern branch is characterized by the use of half-characters in consonant clusters
 (affixing a modified version of the first letter to an unchanged form of the second),
@@ -149,19 +142,18 @@ and also everything from the left character up until the long vertical bar. This
 
 The interesting thing is that #7 and #8 show the exact same characters, only in a different order. The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
 
-Southern Brahmi
----
+### Southern Brahmi
 
 The Southern branch shows more diversity but, in general, will blend clustering characters into unique forms
 rather than affixing one to the other. It will also, usually, show the characters as more isolated:
 
 ![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
 
-A bit of font history
----
+## A bit of font history
 
-A bit of iText history
----
+# pdfCalligraph
+
+## A bit of iText history
 
 The iText library was originally written in the context of Western European languages, 
 and it was only designed to handle left-to-right alphabetic scripts. 
@@ -175,10 +167,9 @@ and had limited support for the right-to-left Hebrew and Arabic scripts.
 With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, 
 which are used mostly in the Indian subcontinent.
 
-Java limitations
+## Java limitations
 
-Support
----
+## Support
 
 The initial release of pdfCalligraph provided support for the following scripts:
 
@@ -193,8 +184,7 @@ The second release, version 1.0.1, expanded this support to:
 * Gurmukhi, used for writing Punjabi
 * Kannada
 
-Using pdfCalligraph
----
+## Using pdfCalligraph
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
 make sure your valid license file is loaded, 
