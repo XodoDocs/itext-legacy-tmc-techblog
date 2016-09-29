@@ -7,17 +7,24 @@ such as the right-to-left Hebrew and Arabic scripts,
 and the various writing systems of the Indian subcontinent and its surroundings. 
 In addition, it can also handle kerning and other optional features that can be provided by certain fonts in other writing systems.
 
-In this position paper, we first provide a number of cursory introductions: we'll start out by exploring the murky history of encoding standards for digital text, and then go into some detail about how the Arabic and Brahmic alphabets are structured. Afterwards, we will of course discuss the problems those writing systems pose in the PDF standard, the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
+In this position paper, we first provide a number of cursory introductions:
+we'll start out by exploring the murky history of encoding standards for digital text, 
+and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
+Afterwards, we will of course discuss the problems those writing systems pose in the PDF standard, 
+the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
 
 Technical overview
 ---
 
-We will not be sharing revolutionary insights in this section, so if you are comfortable with your knowledge about character encodings, the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those sections.
+We will not be sharing revolutionary insights in this section, 
+so if you are comfortable with your knowledge about character encodings, 
+the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those sections.
 
 A bit of encoding history
 ---
 
-Unicode
+In order to represent data in a digital way, 
+ASCII -> Unicode (code points, code blocks, alternates)
 
 A bit of writing history
 ---
@@ -106,23 +113,49 @@ single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, 
 and others only in specific contexts (e.g. Baybayin, only for ritualistic uses of Tagalog).
 The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' script associated with it.
 
-The Brahmic scripts diverged into a Northern and a Southern branch.
+The Brahmic scripts historically diverged into a Northern and a Southern branch.
+In a very broad generalization, Northern Brahmic scripts are used for the Indo-European languages prevalent
+in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages, and for
+Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
+
+Northern Brahmi
+---
+
 The Northern branch is characterized by the use of half-characters in consonant clusters
 (affixing a modified version of the first letter to an unchanged form of the second),
 and many show the characteristic horizontal bar to signify the grouping of characters into words.
 
 ![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
 
+In Devanagari, one of the more prominent alphabets of the Northern Brahmi branch,
+the inherent vowel /a/ is not expressed (#1), while other vowels take the shape of various diacritics (#2-5).
+#5 is a special case, because the short /i/ diacritic is positioned to the left of its consonant,
+even though it follows it in the byte string. When typing a language written in Devanagari,
+one would first input the त and then the ि, but they will be reversed by a good editor in any visual representation.
+
+![Devanagari t combined with various vowels](./typography/basic%20vowels%20devanagari.svg)
+
+When writing consonant clusters, a diacritic called the *halant* must be interjected
+to make it clear that the first consonant must not be pronounced with its inherent vowel.
+
+![Devanagari effect of halant](./typography/halant%20devanagari.svg)
+
+
+If the character accompanied by the halant is followed by a space, then the character is shown with the accent below (#8).
+If it is not followed by a space, then a half character is rendered (#7).
+As you can see, line #7 contains the right character completely, 
+and also everything from the left character up until the long vertical bar. This form is known as a “half character”.
+
+
+The interesting thing is that #7 and #8 show the exact same characters, only in a different order. The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
+
+Southern Brahmi
+---
+
 The Southern branch shows more diversity but, in general, will blend clustering characters into unique forms
 rather than affixing one to the other. It will also, usually, show the characters as more isolated:
 
-![Kannada word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
-
-In a very broad generalization, Northern Brahmic scripts are more often used for the Indo-European languages prevalent
-in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages, and for
-Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
-
-
+![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
 
 A bit of font history
 ---
@@ -139,7 +172,8 @@ but we strive to be a truly global company. As such, we are determined to come a
 
 In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
 and had limited support for the right-to-left Hebrew and Arabic scripts. 
-With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, which are used mostly in the Indian subcontinent.
+With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, 
+which are used mostly in the Indian subcontinent.
 
 Java limitations
 
