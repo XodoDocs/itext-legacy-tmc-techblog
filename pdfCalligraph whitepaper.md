@@ -133,7 +133,7 @@ the inherent vowel /a/ is not expressed (#1), while other vowels take the shape 
 even though it follows it in the byte string. When typing a language written in Devanagari,
 one would first input the त and then the ि, but they will be reversed by a good editor in any visual representation.
 
-![Devanagari t combined with various vowels](./typography/basic%20vowels%20devanagari.svg)
+![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
 
 When writing consonant clusters, a diacritic called the *halant* must be interjected
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
