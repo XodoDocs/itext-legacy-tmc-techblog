@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="basic vowels devanagari.svg">
+   sodipodi:docname="vowels devanagari.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-283.57143"
-     inkscape:cy="321.15969"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="498.10533"
+     inkscape:cy="464.37943"
      inkscape:document-units="px"
-     inkscape:current-layer="text3417"
+     inkscape:current-layer="text3490"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1027"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -148,14 +148,6 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
            id="path3545" />
         <path
-           d="m 595.69615,663.35932 16.17188,0 0,98.4375 -16.17188,0 0,-98.4375 z m 0,-38.32031 16.17188,0 0,20.47852 -16.17188,0 0,-20.47852 z"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-           id="path3547" />
-        <path
-           d="m 645.61803,663.35932 16.17187,0 0,98.4375 -16.17187,0 0,-98.4375 z m 0,-38.32031 16.17187,0 0,20.47852 -16.17187,0 0,-20.47852 z"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-           id="path3549" />
-        <path
            d="m 119.32896,932.77049 q 8.70118,0 16.17188,2.46094 7.55859,2.37304 13.0957,7.11914 5.625,4.74609 8.78906,11.77734 3.16407,7.03125 3.16407,16.25977 0,10.01953 -2.98828,18.01757 -2.98829,7.99805 -8.87696,13.53515 -5.88867,5.5371 -14.58984,8.5254 -8.61328,2.9004 -19.86328,2.9004 -4.48242,0 -8.87696,-0.4395 -4.30664,-0.4394 -8.349605,-1.3183 -3.955078,-0.791 -7.558593,-2.1094 -3.603516,-1.3184 -6.503907,-3.0762 l 0,-15.11716 q 2.900391,2.02149 6.767579,3.60352 3.955078,1.58203 8.261718,2.63672 4.306638,1.05469 8.613278,1.66992 4.39453,0.52734 8.08594,0.52734 6.94336,0 12.39258,-1.58203 5.44922,-1.66992 9.22851,-5.09765 3.7793,-3.42774 5.80079,-8.61328 2.02148,-5.18555 2.02148,-12.30469 0,-12.56836 -7.73437,-19.16016 -7.73438,-6.67969 -22.5,-6.67969 -2.37305,0 -5.18555,0.26368 -2.72461,0.17578 -5.53711,0.52734 -2.72461,0.35156 -5.273438,0.79102 -2.460938,0.35156 -4.306641,0.70312 l -7.910156,-5.00976 4.833984,-60.46875 60.644531,0 0,14.58984 -46.75781,0 -3.42774,36.82617 q 2.8125,-0.52734 7.38282,-1.14258 4.6582,-0.61523 10.98632,-0.61523 z"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
            id="path3551" />
@@ -179,6 +171,14 @@
            d="m 595.69615,913.17088 16.17188,0 0,98.43752 -16.17188,0 0,-98.43752 z m 0,-38.32031 16.17188,0 0,20.47851 -16.17188,0 0,-20.47851 z"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
            id="path3561" />
+        <g
+           style="font-style:normal;font-weight:normal;font-size:180px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           id="text3365">
+          <path
+             d="m 577.47144,627.62555 52.55859,0 0,13.00781 -52.55859,0 0,-13.00781 z m 18.19335,35.5957 16.17188,0 0,98.4375 -16.17188,0 0,-98.4375 z m 8.08594,-2.37304 0,0 z"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Noto Sans Devanagari';-inkscape-font-specification:'Noto Sans Devanagari, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+             id="path3370" />
+        </g>
       </g>
     </g>
   </g>

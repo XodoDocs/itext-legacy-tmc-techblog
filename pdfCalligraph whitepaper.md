@@ -27,7 +27,7 @@ ASCII -> Unicode (code points, code blocks, alternates)
 
 Over the last 5000+ years, humanity has created a plethora of writing systems. 
 After an extended initial period of protowriting, when people tried to convey 
-concepts and/or words through drawn images, a number of more abstract systems evolved. 
+concepts and/or words by drawing images, a number of more abstract systems evolved. 
 One of the most influential writing systems was the script developed 
 and exported by the seafaring trade nation of Phoenicia. From it evolved, 
 after extended periods of time, alphabets like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
@@ -53,7 +53,7 @@ often based on the existent ones, to account for sounds and features not found i
 Arabic is an abjad, meaning that, in principle, only the consonants of a given word will be written. 
 Like most other abjads, it is 'impure' in that the long vowels (/a:/, /i:/, /u:/) are also written, 
 the latter two with the same character that is also used for /j/ and /w/. 
-The missing information about the presence and and quality of short vowels must be filled in by the reader; 
+The missing information about the presence and quality of short vowels must be filled in by the reader; 
 hence, it is usually necessary for the user to actually know the language that is written 
 in order to be able to fully pronounce the written text.
 
@@ -64,7 +64,7 @@ These basic modification dots, called i'jam, have been all but mandatory in writ
 
 Like the other Semitic abjads, Arabic is written from right to left, and does not have a distinction between upper and lower case. 
 It is in all circumstances written cursively, making extensive use of ligatures to join letters together into words. 
-As a result, all characters have several appearances, depending on whether or not they're adjoined to the previous and/or next letter.
+As a result, all characters have several appearances, depending on whether or not they're being adjoined to the previous and/or next letter in the word.
 
 ![contextual variation of characters (from Wikipedia.org)](./mutations.png)
 
@@ -105,7 +105,7 @@ that the characters can change shape in a number of contexts.
 The Brahmic family is very large and diverse, with over 100 existing writing systems. Some are used for a
 single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, for Hindi, Marathi, Nepali),
 and others only in specific contexts (e.g. Baybayin, only for ritualistic uses of Tagalog).
-The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' script associated with it.
+The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' alphabet associated with it.
 
 The Brahmic scripts historically diverged into a Northern and a Southern branch.
 In a very broad generalization, Northern Brahmic scripts are used for the Indo-European languages prevalent
@@ -114,44 +114,59 @@ Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
 ### Northern Brahmi
 
-The Northern branch is characterized by the use of half-characters in consonant clusters
-(affixing a modified version of the first letter to an unchanged form of the second),
-and many show the characteristic horizontal bar to signify the grouping of characters into words.
+Many scripts of the Northern branch show the characteristic horizontal bar to signify the grouping of characters into words.
 
 ![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
 
 In Devanagari, one of the more prominent alphabets of the Northern Brahmi branch,
-the inherent vowel /a/ is not expressed (#1), while other vowels take the shape of various diacritics (#2-5).
+an implied vowel /a/ is not expressed in writing (#1), while other vowels take the shape of various diacritics (#2-5).
 #5 is a special case, because the short /i/ diacritic is positioned to the left of its consonant,
 even though it follows it in the byte string. When typing a language written in Devanagari,
-one would first input the त and then the ि, but they will be reversed by a good editor in any visual representation.
+one would first input the consonant and then the vowel, but they will be reversed by a good text editor in any visual representation.
 
 ![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
 
-When writing consonant clusters, a diacritic called the *halant* must be interjected
+Another common occurrence is the use of half-characters in consonant clusters i.e.
+affixing a modified version of the first letter to an unchanged form of the second.
+When writing consonant clusters, a diacritic called the *halant* must be inserted in the byte sequence
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
+Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
 ![Devanagari effect of halant](./typography/halant%20devanagari.svg)
 
-
-If the character accompanied by the halant is followed by a space, then the character is shown with the accent below (#8).
+If the character accompanied by the halant is followed by a space, then the character is shown with an accent-like diacritic below (#8).
 If it is not followed by a space, then a half character is rendered (#7).
 As you can see, line #7 contains the right character completely, 
 and also everything from the left character up until the long vertical bar. This form is known as a “half character”.
 
 
-The interesting thing is that #7 and #8 show the exact same characters, only in a different order. The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
+The interesting thing is that #7 and #8 are composed of the exact same characters, only in a different order which has a drastic effect on the eventual visual realization. The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
 
 ### Southern Brahmi
 
-The Southern branch shows more diversity but, in general, will blend clustering characters into unique forms
-rather than affixing one to the other. It will also, usually, show the characters as more isolated:
+The Southern branch shows more diversity but, in general, will show the characters as more isolated:
 
 ![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
 
+Some vowels will change the shape of the accompanying consonants, rather than being simple diacritical marks:
+
+![Kannada s combined with various vowels](./typography/vowels%20kannada.svg)
+
+Southern Brahmi also has more of a tendency to blend clustering characters into unique forms
+rather than affixing one to the other.
+
+![Kannada effect of halant](./typography/halant%20kannada.svg)
+
+Some scripts will also do more repositioning logic for some vowels, rather than substitutions.
+
+![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
+
+
 ## A bit of font history
 
-# pdfCalligraph
+TTF & OTF
+
+# Using pdfCalligraph
 
 ## A bit of iText history
 
@@ -168,6 +183,10 @@ With iText 7, we took the next step and went on to create a module that could su
 which are used mostly in the Indian subcontinent.
 
 ## Java limitations
+
+iText 7
+
+## PDF limitations
 
 ## Support
 
