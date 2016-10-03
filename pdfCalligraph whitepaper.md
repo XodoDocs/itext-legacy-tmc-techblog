@@ -192,6 +192,17 @@ iText 7
 
 ## PDF limitations
 
+PDF, as a format, is not designed to leverage the power of OpenType fonts.
+It only knows the glyph ID in a font that must be rendered in the document,
+and has no concept of glyph substitutions or glyph repositioning logic.
+In a PDF document, the exact glyphs that make up a visual representation must be specified:
+the Unicode locations of the original characters - typical for most other formats that can provide visual rendering -
+are not enough.
+
+As an example, the word Sanskrit, in Devanagari, is saved in Unicode byte stream as follows:
+
+
+
 ## Support
 
 The initial release of pdfCalligraph provided support for the following scripts:
