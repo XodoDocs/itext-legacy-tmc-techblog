@@ -9,7 +9,7 @@ In addition, it can also handle kerning and other optional features that can be 
 In this position paper, we first provide a number of cursory introductions:
 we'll start out by exploring the murky history of encoding standards for digital text, 
 and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
-Afterwards, we will of course discuss the problems those writing systems pose in the PDF standard, 
+Afterwards, we will discuss the problems those writing systems pose in the PDF standard, 
 the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
 
 # Technical overview
@@ -25,7 +25,7 @@ ASCII -> Unicode (code points, code blocks, alternates)
 
 ## A bit of writing history
 
-Over the last 5000+ years, humanity has created a plethora of writing systems. 
+Over the last 5000+ years, humanity has created a cornucopia of writing systems. 
 After an extended initial period of protowriting, when people tried to convey 
 concepts and/or words by drawing images, a number of more abstract systems evolved. 
 One of the most influential writing systems was the script developed 
@@ -54,7 +54,7 @@ Arabic is an abjad, meaning that, in principle, only the consonants of a given w
 Like most other abjads, it is 'impure' in that the long vowels (/a:/, /i:/, /u:/) are also written, 
 the latter two with the same character that is also used for /j/ and /w/. 
 The missing information about the presence and quality of short vowels must be filled in by the reader; 
-hence, it is usually necessary for the user to actually know the language that is written 
+hence, it is usually necessary for the user to actually know the language that is written,
 in order to be able to fully pronounce the written text.
 
 Standard Arabic has 28 characters, but there are only 16 base forms: a number of the characters are dotted variants of others.
@@ -97,7 +97,7 @@ that define unique Unicode points for all contextual appearances (isolated, init
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
-They are abugidas, i.e. consonants are written with an implied vowel,
+They are abugidas, i.e. writing systems in which consonants are written with an implied vowel,
 and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
 All Brahmic alphabets are written from left to right, and have as a defining feature
 that the characters can change shape in a number of contexts.
@@ -114,7 +114,7 @@ Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
 ### Northern Brahmi
 
-Many scripts of the Northern branch show the characteristic horizontal bar to signify the grouping of characters into words.
+Many scripts of the Northern branch show the grouping of characters into words with the characteristic horizontal bar.
 
 ![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
 
@@ -128,7 +128,7 @@ one would first input the consonant and then the vowel, but they will be reverse
 
 Another common occurrence is the use of half-characters in consonant clusters i.e.
 affixing a modified version of the first letter to an unchanged form of the second.
-When writing consonant clusters, a diacritic called the *halant* must be inserted in the byte sequence
+When typing consonant clusters, a diacritic called the *halant* must be inserted in the byte sequence
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
 Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
@@ -139,8 +139,9 @@ If it is not followed by a space, then a half character is rendered (#7).
 As you can see, line #7 contains the right character completely, 
 and also everything from the left character up until the long vertical bar. This form is known as a “half character”.
 
-
-The interesting thing is that #7 and #8 are composed of the exact same characters, only in a different order which has a drastic effect on the eventual visual realization. The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
+The interesting thing is that #7 and #8 are composed of the exact same characters,
+only in a different order which has a drastic effect on the eventual visual realization.
+The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
 
 ### Southern Brahmi
 
@@ -153,7 +154,9 @@ Some vowels will change the shape of the accompanying consonants, rather than be
 ![Kannada s combined with various vowels](./typography/vowels%20kannada.svg)
 
 Southern Brahmi also has more of a tendency to blend clustering characters into unique forms
-rather than affixing one to the other.
+rather than affixing one to the other. If one of the characters is kept unchanged,
+it will usually be the first one, whereas Northern Brahmi scripts will usually preserve the second one.
+They use the same technique of halant, but the mutations will be markedly different.
 
 ![Kannada effect of halant](./typography/halant%20kannada.svg)
 
@@ -175,7 +178,8 @@ and it was only designed to handle left-to-right alphabetic scripts.
 However, the writing systems of the world can be much more complex and varied 
 than just a sequence of letters with no interaction. 
 Supporting every type of writing system that humanity has developed is a tall order, 
-but we strive to be a truly global company. As such, we are determined to come as close to that goal as technology allows us as long as there's a decent business case [NOTE: phrasing].
+but we strive to be a truly global company. As such, we are determined to come as close to that goal
+as technology allows us as long as there's a decent business case [TODO: phrasing].
 
 In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
 and had limited support for the right-to-left Hebrew and Arabic scripts. 
@@ -257,33 +261,46 @@ iText will of course fail to do shaping operations with the Latin text,
 but it will correctly make the र (ra) into the combining diacritic form it assumes in consonant clusters.
 
 However, this becomes more problematic when mixing two alphabets that both require pdfCalligraph logic.
+You are also less likely to find fonts that provide full support for the alphabets you need.
 Therefore, it is generally wiser to separate the contents, when they appear in a single paragraph,
-into a number of Text layout objects. This can even be automated:
+into a number of Text layout objects. This can be automated with some basic logic:
 
 ```java
-Map<UnicodeScript, PdfFont> fonts = new EnumMap<>(UnicodeScript.class);
-String fontFolder = "C:/Windows/Fonts/";
-fonts.put(UnicodeScript.LATIN, PdfFontFactory.createFont("/path/to/latinFont.ttf", PdfEncodings.IDENTITY_H, true));
-fonts.put(UnicodeScript.TAMIL, PdfFontFactory.createFont("/path/to/tamilFont.ttf", PdfEncodings.IDENTITY_H, true));
-
+// example input mixing Latin and Tamil
 String input = "Translation: \u0BAE\u0BC1\u0BA9\u0BCD\u0BA9\u0BC7\u0BB1\u0BCD\u0BB1\u0BAE\u0BCD means 'improvement' !";
 
-Paragraph para = new Paragraph("");
+// import java.lang.Character.UnicodeScript
+/**
+ * The current implementation requires non-null entries to be present in the <code>fonts</code> variable.
+ */
+Paragraph makeSplitParagraph(String input) throws IOException {
+    // initializations
+    Paragraph para = new Paragraph("");
+    StringBuilder build = new StringBuilder();
+    Map<UnicodeScript, PdfFont> fonts = new EnumMap<>(UnicodeScript.class);
+    fonts.put(UnicodeScript.LATIN, PdfFontFactory.createFont("/path/to/latinFont.ttf", PdfEncodings.IDENTITY_H, true));
+    fonts.put(UnicodeScript.TAMIL, PdfFontFactory.createFont("/path/to/tamilFont.ttf", PdfEncodings.IDENTITY_H, true));
+    // fonts.put(script, font);
+	
+    // find out what script to start with
+    UnicodeScript currentScript = UnicodeScript.of(input.charAt(0));
+    for (char i : input.toCharArray()) {
+        UnicodeScript localScript = UnicodeScript.of(i);
+        // if the alphabet switches, stash current work in a Text & start building a new String
+        if (!localScript.equals(currentScript) && !localScript.equals(UnicodeScript.COMMON)) {
+            Text text = new Text(build.toString())
+                    .setFont(fonts.get(currentScript));
+            para.add(text);
+            build = new StringBuilder();
+            currentScript = localScript;
+        }
+        build.append(i);
+    }
+    // the last bit of text was built by the algorithm but not stashed in a Text
+    Text finalText = new Text(build.toString())
+            .setFont(fonts.get(currentScript));
+    para.add(finalText);
 
-StringBuilder build = new StringBuilder();
-UnicodeScript script = UnicodeScript.of(input.charAt(0));
-for (char unicodePoint : input.toCharArray()) {
-	if (UnicodeScript.of(unicodePoint).equals(script) || UnicodeScript.of(unicodePoint).equals(UnicodeScript.COMMON)) {
-		build.append(unicodePoint);
-	} else {
-		para.add(new Text(build.toString()).setFont(fonts.get(script)));
-		build = new StringBuilder();
-		build.append(unicodePoint);
-		script = UnicodeScript.of(unicodePoint);
-	}
+    return para;
 }
-para.add(new Text(build.toString()).setFont(fonts.get(script)));
-
-doc.add(para);
-doc.close();
 ```
