@@ -199,9 +199,71 @@ In a PDF document, the exact glyphs that make up a visual representation must be
 the Unicode locations of the original characters - typical for most other formats that can provide visual rendering -
 are not enough.
 
-As an example, the word Sanskrit, in Devanagari, is saved in Unicode byte stream as follows:
+As an example, the word "Sanskrit" is written in Hindi as follows with the Devanagari alphabet as Sanskrt:
 
+![Correct Devanagari (Hindi) representation of the word Samskrtam](./typography/sanskrit%20devanagari%20good%20sanskrt.svg)
 
+However, it is saved in Unicode byte stream as follows:
+
+<table
+ style='table-layout:fixed;width:366pt'>
+ <tr>
+  <td style='height:36.75pt;width:48pt'>character</td>
+  <td style='width:70pt'>default meaning</td>
+  <td style='width:68pt'>Unicode point</td>
+  <td style='width:191pt'>comments</td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2360;</td>
+  <td>sa</td>
+  <td>0938</td>
+  <td></td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2306;</td>
+  <td>m</td>
+  <td>0902</td>
+  <td>nasalisation (diacritic)</td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2360;</td>
+  <td>sa</td>
+  <td>0938</td>
+  <td></td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2381;</td>
+  <td>halant</td>
+  <td>094D</td>
+  <td>drops inherent a of previous consonant</td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2325;</td>
+  <td>ka</td>
+  <td>0915</td>
+  <td></td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2371;</td>
+  <td>r</td>
+  <td>0943</td>
+  <td>vocalic r (diacritic) replaces inherent a</td>
+ </tr>
+ <tr style='height:31.5pt'>
+  <td style='height:31.5pt'>&#2340;</td>
+  <td>ta</td>
+  <td>0924</td>
+  <td></td>
+ </tr>
+</table>
+
+When this string of Unicode points is fed to a PDF creator, the output will look like this:
+
+![Incorrect Devanagari (Hindi) representation of the word Samskrtam](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
+
+The PDF format is able to resolve the diacritics as belonging with the glyph they pertain to,
+but it cannot do the complex substitution of sa + halant + ka.
+It also places the vocalic r diacritic at an incorrect position.
 
 ## Support
 
