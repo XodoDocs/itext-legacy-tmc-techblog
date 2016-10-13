@@ -20,8 +20,20 @@ the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those
 
 ## A bit of encoding history
 
-In order to represent data in a digital way, 
+In order to represent textual data in a digital way, it is necessary to store its constituents in a certain, binary compatible way. 
+Several systems were devised for representing data in a binary format even long before the digital revolution, 
+the best known of which are Morse code and Braille writing. 
+At the dawn of the computer age, computer manufacturers took inspiration from this principle 
+to use encodings that have generally consisted of a fixed number of bits.
+
+The most prominent of these early encoding systems is ASCII, 
+a seven bit scheme that encodes upper and lower case Latin letters, numbers, punctuation marks, etc.
+However, it does not cover diacritics and accents, other writing systems than Latin, 
+or any symbols beyond a few basic mathematical signs.
+
 ASCII -> Unicode (code points, code blocks, alternates)
+
+A font is a collection of mappings between encoded characters, and vector paths that provide a visual representation.
 
 ## A bit of writing history
 
@@ -45,7 +57,7 @@ Arabic is a writing system used for a large number of languages in the greater M
 It is most prominently known from its usage for the Semitic language Arabic, 
 and from that language's close association with Islam, since most religious Muslim literature is written in Arabic.
 As a result, many other non-Semitic language communities in and around the culturally Arabic/Muslim sphere of 
-influence have also adopted the Arabic script, like Farsi (Iran), Pashto (Afghanistan),
+influence have also adopted the Arabic script, for Farsi (Iran), Pashto (Afghanistan),
 Mandinka (Senegal, Gambia), Malay (Malaysia, Indonesia, ...), etc.
 Some of these communities have introduced new letters for the alphabet, 
 often based on the existent ones, to account for sounds and features not found in the original Arabic language.
@@ -57,8 +69,10 @@ The missing information about the presence and quality of short vowels must be f
 hence, it is usually necessary for the user to actually know the language that is written,
 in order to be able to fully pronounce the written text.
 
-Standard Arabic has 28 characters, but there are only 16 base forms: a number of the characters are dotted variants of others.
-These basic modification dots, called i'jam, have been all but mandatory in writing since at least the 11th century.
+Standard Arabic has 28 characters, but there are only 16 base forms:
+a number of the characters are dotted variants of others.
+These basic modification dots, called i'jam, are not native to the alphabet
+but have been all but mandatory in writing since at least the 11th century.
 
 ![i'jam distinguishes between otherwise identical forms (from Wikipedia.org)](./ijam.png)
 
@@ -97,13 +111,13 @@ that define unique Unicode points for all contextual appearances (isolated, init
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
+All Brahmic alphabets are written from left to right, and have as a defining feature
+that the characters can change shape or switch position depending on context.
 They are abugidas, i.e. writing systems in which consonants are written with an implied vowel,
 and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
-All Brahmic alphabets are written from left to right, and have as a defining feature
-that the characters can change shape in a number of contexts.
 
 The Brahmic family is very large and diverse, with over 100 existing writing systems. Some are used for a
-single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, for Hindi, Marathi, Nepali),
+single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, for Hindi, Marathi, Nepali, etc.),
 and others only in specific contexts (e.g. Baybayin, only for ritualistic uses of Tagalog).
 The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' alphabet associated with it.
 
@@ -160,7 +174,7 @@ They use the same technique of halant, but the mutations will be markedly differ
 
 ![Kannada effect of halant](./typography/halant%20kannada.svg)
 
-Some scripts will also do more repositioning logic for some vowels, rather than substitutions.
+Some scripts will also do more repositioning logic for some vowels, rather than using glyph substitutions or diacritics.
 
 ![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
 
@@ -182,13 +196,24 @@ but we strive to be a truly global company. As such, we are determined to come a
 as technology allows us as long as there's a decent business case [TODO: phrasing].
 
 In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
-and had limited support for the right-to-left Hebrew and Arabic scripts. 
-With iText 7, we took the next step and went on to create a module that could support the elusive Brahmic scripts, 
-which are used mostly in the Indian subcontinent.
+and had limited support for the right-to-left Hebrew and Arabic scripts.
+When we made attempts to go further, technical limitations,
+caused by sometimes seemingly unrelated design decisions, hampered our efforts to implement this in iText 5.
+Because of iText 5's implicit promise to not break backwards compatibility,
+expanding support for Hebrew and Arabic was impossible: we would have needed to make
+significant changes in a number of APIs to support these on all API levels.
+
+For the Brahmic alphabets, we needed the information provided by OpenType font features;
+it turned out to be impossible in iText 5 to leverage these and support Brahmic scripts.
+
+When we wrote iText 7, redesigning it from the ground up,
+we took care to avoid these problems in order to provide support for all font features,
+on whichever level of abstraction in the API a user chooses.
+We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
 ## Java limitations
 
-iText 7
+iText 7 is built with Java 7. The current implementation of pdfCalligraph depends on the enum class java.lang.Character.UnicodeScript
 
 ## PDF limitations
 
