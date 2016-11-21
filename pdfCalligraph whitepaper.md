@@ -33,7 +33,9 @@ or any symbols beyond a few basic mathematical signs.
 
 ASCII -> Unicode (code points, code blocks, alternates)
 
-A font is a collection of mappings between encoded characters, and vector paths that provide a visual representation.
+A font is a collection of mappings that links characters in a certain encoding with glyphs, the actual visual representation of a character. A glyph is a collection of vector paths that together form a shape, as follows:
+
+![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
 
 ## A bit of writing history
 
