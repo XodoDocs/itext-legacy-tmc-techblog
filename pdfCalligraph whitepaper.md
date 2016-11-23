@@ -10,20 +10,21 @@ In this position paper, we first provide a number of cursory introductions:
 we'll start out by exploring the murky history of encoding standards for digital text, 
 and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
 Afterwards, we will discuss the problems those writing systems pose in the PDF standard, 
-the solutions provided to these problems by iText 7's add-on pdfCalligraph, and of course also a hands-on user guide.
+the solutions provided to these problems by iText 7's add-on pdfCalligraph,
+and, of course, a hands-on user guide as well.
 
 # Technical overview
 
 We will not be sharing revolutionary insights in this section, 
 so if you are comfortable with your knowledge about character encodings, 
-the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip those sections.
+the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip these sections.
 
 ## A bit of encoding history
 
-In order to represent textual data in a digital way, it is necessary to store its constituents in a certain, binary compatible way. 
+For digital representation of textual data, it is necessary to store its constituents in a binary compatible way. 
 Several systems were devised for representing data in a binary format even long before the digital revolution, 
 the best known of which are Morse code and Braille writing. 
-At the dawn of the computer age, computer manufacturers took inspiration from this principle 
+At the dawn of the computer age, computer manufacturers took inspiration from these systems 
 to use encodings that have generally consisted of a fixed number of bits.
 
 The most prominent of these early encoding systems is ASCII, 
@@ -43,9 +44,9 @@ Over the last 5000+ years, humanity has created a cornucopia of writing systems.
 After an extended initial period of protowriting, when people tried to convey 
 concepts and/or words by drawing images, a number of more abstract systems evolved. 
 One of the most influential writing systems was the script developed 
-and exported by the seafaring trade nation of Phoenicia. From it evolved, 
-after extended periods of time, alphabets like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
-and the Aramaic abjad and its descendants (Arabic, Hebrew, Syriac, etc). 
+and exported by the seafaring trade nation of Phoenicia.
+After extended periods of time, alphabets like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
+and the Aramaic abjad and its descendants (Arabic, Hebrew, Syriac, etc) evolved from the Phoenician script. 
 Although this is a matter of scientific debate, it is possible that the Phoenician alphabet is also 
 an ancestor of the entire Brahmic family of scripts, which contains Kannada, Thai, Telugu, 
 and over a hundred other writing systems used primarily in South-East Asia and the Indian subcontinent.
@@ -56,11 +57,11 @@ has descendants used throughout the rest of East Asia in the Chinese-Japanese-Ko
 ## A very brief introduction to the Arabic script
 
 Arabic is a writing system used for a large number of languages in the greater Middle East.
-It is most prominently known from its usage for the Semitic language Arabic, 
+It is most prominently known from its usage for the Semitic language Arabic
 and from that language's close association with Islam, since most religious Muslim literature is written in Arabic.
-As a result, many other non-Semitic language communities in and around the culturally Arabic/Muslim sphere of 
-influence have also adopted the Arabic script, for Farsi (Iran), Pashto (Afghanistan),
-Mandinka (Senegal, Gambia), Malay (Malaysia, Indonesia, ...), etc.
+As a result, many other non-Semitic communities in and around the culturally Arabic/Muslim sphere of 
+influence have also adopted the Arabic script to represent their local languages Farsi (Iran), Pashto (Afghanistan),
+Mandinka (Senegal, Gambia), Malay (Malaysia, Indonesia), etc.
 Some of these communities have introduced new letters for the alphabet, 
 often based on the existent ones, to account for sounds and features not found in the original Arabic language.
 
@@ -113,7 +114,7 @@ that define unique Unicode points for all contextual appearances (isolated, init
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
-All Brahmic alphabets are written from left to right, and have as a defining feature
+All Brahmic alphabets are written from left to right, and their defining feature is
 that the characters can change shape or switch position depending on context.
 They are abugidas, i.e. writing systems in which consonants are written with an implied vowel,
 and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
@@ -124,9 +125,9 @@ and others only in specific contexts (e.g. Baybayin, only for ritualistic uses o
 The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' alphabet associated with it.
 
 The Brahmic scripts historically diverged into a Northern and a Southern branch.
-In a very broad generalization, Northern Brahmic scripts are used for the Indo-European languages prevalent
-in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages, and for
-Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
+Very broadly, Northern Brahmic scripts are used for the Indo-European languages prevalent
+in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages,
+and for Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
 ### Northern Brahmi
 
@@ -144,7 +145,7 @@ one would first input the consonant and then the vowel, but they will be reverse
 
 Another common occurrence is the use of half-characters in consonant clusters i.e.
 affixing a modified version of the first letter to an unchanged form of the second.
-When typing consonant clusters, a diacritic called the *halant* must be inserted in the byte sequence
+When typing consonant clusters, a diacritic called the halant must be inserted in the byte sequence
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
 Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
@@ -201,7 +202,7 @@ In earlier versions of iText, we were already able to render Chinese, Japanese, 
 and had limited support for the right-to-left Hebrew and Arabic scripts.
 When we made attempts to go further, technical limitations,
 caused by sometimes seemingly unrelated design decisions, hampered our efforts to implement this in iText 5.
-Because of iText 5's implicit promise to not break backwards compatibility,
+Because of iText 5's implicit promise not to break backwards compatibility,
 expanding support for Hebrew and Arabic was impossible: we would have needed to make
 significant changes in a number of APIs to support these on all API levels.
 
@@ -284,7 +285,8 @@ However, it is saved in Unicode byte stream as follows:
  </tr>
 </table>
 
-When this string of Unicode points is fed to a PDF creator, the output will look like this:
+When this string of Unicode points is fed to a PDF creator that doesn't leverage OTF features,
+the output will look like this:
 
 ![Incorrect Devanagari (Hindi) representation of the word Samskrtam](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
 
@@ -344,13 +346,13 @@ arabicPdf.add(new Paragraph("\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u
 arabicPdf.close();
 ```
 
-iText will only attempt to apply advanced shaping in a text on the characters that constitute a majority
+iText will only attempt to apply advanced shaping in a text on the characters in the script that constitutes a majority
 [footnote: technically, the plurality https://en.wikipedia.org/wiki/Plurality_(voting) ] 
 of characters of that text. This can be overridden by explicitly setting the script for a layout element.
 This is done as follows:
 
 ```java
-PdfFont f = PdfFontFactory.createFont(FilePath.getFont("/path/to/unicodeFont.ttf"));
+PdfFont f = PdfFontFactory.createFont(PdfFontFactory.createFont("/path/to/unicodeFont.ttf", PdfEncodings.IDENTITY_H, true));
 Paragraph mixed = new Paragraph("The concept of \u0915\u0930\u094D\u092E (karma) is at least as old as the Vedic texts.");
 mixed.setFont(f);
 
@@ -363,8 +365,9 @@ but it will correctly make the र (ra) into the combining diacritic form it ass
 However, this becomes more problematic when mixing two alphabets that both require pdfCalligraph logic.
 You are also less likely to find fonts that provide full support for the alphabets you need.
 Therefore, it is generally wiser to separate the contents, when they appear in a single paragraph,
-into a number of Text layout objects. This can be automated with some basic logic:
+into a number of Text layout objects. This can be automated with basic logic:
 
+TODO: see how FontSelector turns out
 ```java
 // example input mixing Latin and Tamil
 String input = "Translation: \u0BAE\u0BC1\u0BA9\u0BCD\u0BA9\u0BC7\u0BB1\u0BCD\u0BB1\u0BAE\u0BCD means 'improvement' !";
