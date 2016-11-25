@@ -58,7 +58,7 @@ as would happen if it were stored in ASCII encoding.
 Unicode aims to be a standard that captures all use cases regarding writing,
 including any writing system that has ever been used. In order to keep an oversight over the situation,
 characters are grouped in Unicode ranges, which are signified by hexadecimal numbers.
-For example, Cyrillic letters are stored with character IDs range 0x400 to 0x4FF.
+For example, the basic Cyrillic letters are stored with character IDs range 0x400 to 0x4FF.
 
 A font is a collection of mappings that links characters in a certain encoding with glyphs,
 the actual visual representation of a character. Most fonts nowadays use the Unicode encoding to specify character IDs.
@@ -323,7 +323,7 @@ However, it is saved in Unicode byte stream as follows:
 When this string of Unicode points is fed to a PDF creator that doesn't leverage OTF features,
 the output will look like this:
 
-![Incorrect Devanagari (Hindi) representation of the word Samskrtam](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
+![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
 
 The PDF format is able to resolve the diacritics as belonging with the glyph they pertain to,
 but it cannot do the complex substitution of sa + halant + ka.
