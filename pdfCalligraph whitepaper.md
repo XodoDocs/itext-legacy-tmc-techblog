@@ -29,12 +29,30 @@ to use encodings that have generally consisted of a fixed number of bits.
 
 The most prominent of these early encoding systems is ASCII, 
 a seven bit scheme that encodes upper and lower case Latin letters, numbers, punctuation marks, etc.
-However, it does not cover diacritics and accents, other writing systems than Latin, 
-or any symbols beyond a few basic mathematical signs.
+However, it has only 128 (2^7) places and as such does not cover diacritics and accents,
+other writing systems than Latin, or any symbols beyond a few basic mathematical signs.
 
-ASCII -> Unicode (code points, code blocks, alternates)
+A number of more extended systems have been developed, most prominently the concept of a code page,
+which maps characters to byte numbers, .
+Any advanced system has a multitude of these code pages, usually grouped for a certain language or script, 
+e.g. Cyrillic, Turkish, or Vietnamese.
+The Windows-West-European-Latin, for instance, encodes ASCII in the first 7 bits
+and uses the 8th bit to define 128 extra characters that signify modified Latin characters like É, æ, ð, ñ, ü, etc.
+However, these systems are not interoperable and none of them have achieved dominance at any time.
+The eventual response to this lack of a common and independent encoding was the development of the Unicode standard,
+which has become the de facto standard for systems that aren't encumbered by a legacy encoding depending on code pages,
+and is steadily taking over the ones that are.
 
-A font is a collection of mappings that links characters in a certain encoding with glyphs, the actual visual representation of a character. A glyph is a collection of vector paths that together form a shape, as follows:
+Unicode aims to provide a unique code point for every possible character.
+It is an encoding of variable length, meaning that if a byte in a Unicode text contains certain bit flags,
+the next byte or bytes should be interpreted as part of a multi-byte sequence that represents one character.
+If none of these flags are set, then the byte is considered to fully identify a character.
+The 1-byte part of the Unicode standard is identical to ASCII.
+That allows simple ASCII text to be stored in Unicode with the exact same filesize
+as would happen if it were stored in ASCII encoding.
+
+A font is a collection of mappings that links characters in a certain encoding with glyphs,
+the actual visual representation of a character. A glyph is a collection of vector paths that together form a shape, as follows:
 
 ![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
 
@@ -143,7 +161,7 @@ one would first input the consonant and then the vowel, but they will be reverse
 
 ![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
 
-Another common occurrence is the use of half-characters in consonant clusters i.e.
+Another common feature is the use of half-characters in consonant clusters i.e.
 affixing a modified version of the first letter to an unchanged form of the second.
 When typing consonant clusters, a diacritic called the halant must be inserted in the byte sequence
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
@@ -184,9 +202,9 @@ Some scripts will also do more repositioning logic for some vowels, rather than 
 
 ## A bit of font history
 
-TTF & OTF
+TODO: TTF & OTF
 
-# Using pdfCalligraph
+# pdfCalligraph and the PDF format
 
 ## A bit of iText history
 
@@ -195,8 +213,8 @@ and it was only designed to handle left-to-right alphabetic scripts.
 However, the writing systems of the world can be much more complex and varied 
 than just a sequence of letters with no interaction. 
 Supporting every type of writing system that humanity has developed is a tall order, 
-but we strive to be a truly global company. As such, we are determined to come as close to that goal
-as technology allows us as long as there's a decent business case [TODO: phrasing].
+but we strive to be a truly global company. As such, we are determined to respond to customer requests
+asking for any writing system.
 
 In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
 and had limited support for the right-to-left Hebrew and Arabic scripts.
@@ -207,16 +225,23 @@ expanding support for Hebrew and Arabic was impossible: we would have needed to 
 significant changes in a number of APIs to support these on all API levels.
 
 For the Brahmic alphabets, we needed the information provided by OpenType font features;
-it turned out to be impossible in iText 5 to leverage these and support Brahmic scripts.
+it turned out to be impossible in iText 5 to leverage these without drastic breaks in the APIs.
 
 When we wrote iText 7, redesigning it from the ground up,
 we took care to avoid these problems in order to provide support for all font features,
 on whichever level of abstraction in the API a user chooses.
 We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
-## Java limitations
+## Technical limitations
 
-iText 7 is built with Java 7. The current implementation of pdfCalligraph depends on the enum class java.lang.Character.UnicodeScript
+### Java
+
+iText 7 is built with Java 7. The current implementation of pdfCalligraph depends on the enum class `java.lang.Character.UnicodeScript`, which is only available from Java 7 onwards. iText 7 of course leverages some of the other syntax features that were new in this release, so users will have no option
+to build from source code for older versions, and will have to build their own application on Java 7 or newer.
+
+### .NET Framework
+
+iText 7 is built with .NET Framework version 4.0. It leverages a number of concepts that preclude backporting, such as LINQ and Concurrent Collections.
 
 ## PDF limitations
 
@@ -227,9 +252,9 @@ In a PDF document, the exact glyphs that make up a visual representation must be
 the Unicode locations of the original characters - typical for most other formats that can provide visual rendering -
 are not enough.
 
-As an example, the word "Sanskrit" is written in Hindi as follows with the Devanagari alphabet as Sanskrt:
+As an example, the word "Sanskrit" is written in Hindi as follows with the Devanagari alphabet:
 
-![Correct Devanagari (Hindi) representation of the word Samskrtam](./typography/sanskrit%20devanagari%20good%20sanskrt.svg)
+![Correct Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20good%20sanskrt.svg)
 
 However, it is saved in Unicode byte stream as follows:
 
@@ -309,6 +334,10 @@ The second release, version 1.0.1, expanded this support to:
 * Gurmukhi, used for writing Punjabi
 * Kannada
 
+pdfCalligraph 1.0.2, as of yet unreleased, will also support:
+* Odia/Oriya
+* TODO
+
 ## Using pdfCalligraph
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
@@ -316,17 +345,17 @@ make sure your valid license file is loaded,
 and iText 7 will automatically go into the pdfCalligraph code when text instructions are encountered 
 that contain Indic texts, or a script that is written from right to left.
 
-The iText layout module will automatically look for the pdfCalligraph module on the classpath 
+The iText layout module will automatically look for the pdfCalligraph module in its dependencies
 if Indic/Arabic text is encountered by the Renderer Framework. If pdfCalligraph is available, iText will call its functionality 
 to provide the correct glyph shapes to write to the PDF file. iText will not attempt any advanced shaping operations 
-if the pdfCalligraph module is not loaded on the classpath.
+if the pdfCalligraph module is not loaded on the classpath/as a binary.
 
-The exact dependencies to load are:
+Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 . The exact dependencies you need are:
 
 * the pdfCalligraph library itself
 * the license key library
 
-pdfCalligraph exposes a number of APIs so that it can be reached from iText Core,
+pdfCalligraph exposes a number of APIs so that it can be reached from the iText Core code,
 but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
 
 This code will just work:
@@ -337,7 +366,7 @@ LicenseKey.loadLicenseFile("/path/to/license.xml");
 Document arabicPdf = new Document(new PdfDocument(new PdfWriter("/path/to/output.pdf")));
 
 // create a font, and make it the default for the document
-PdfFont f = PdfFontFactory.createFont(FilePath.getFont("/path/to/arabicFont.ttf"));
+PdfFont f = PdfFontFactory.createFont("/path/to/arabicFont.ttf");
 arabicPdf.setFont(f);
 
 // add content: السلام عليكم (as-salaamu 'aleykum - peace be upon you)
@@ -346,16 +375,17 @@ arabicPdf.add(new Paragraph("\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u
 arabicPdf.close();
 ```
 
-iText will only attempt to apply advanced shaping in a text on the characters in the script that constitutes a majority
+iText will only attempt to apply advanced shaping in a text on the characters in the alphabet that constitutes a majority
 [footnote: technically, the plurality https://en.wikipedia.org/wiki/Plurality_(voting) ] 
 of characters of that text. This can be overridden by explicitly setting the script for a layout element.
 This is done as follows:
 
 ```java
-PdfFont f = PdfFontFactory.createFont(PdfFontFactory.createFont("/path/to/unicodeFont.ttf", PdfEncodings.IDENTITY_H, true));
-Paragraph mixed = new Paragraph("The concept of \u0915\u0930\u094D\u092E (karma) is at least as old as the Vedic texts.");
-mixed.setFont(f);
+PdfFont f = PdfFontFactory.createFont("/path/to/unicodeFont.ttf", PdfEncodings.IDENTITY_H, true);
+String input = "The concept of \u0915\u0930\u094D\u092E (karma) is at least as old as the Vedic texts.";
 
+Paragraph mixed = new Paragraph(input);
+mixed.setFont(f);
 mixed.setProperty(Property.FONT_SCRIPT, Character.UnicodeScript.DEVANAGARI);
 ```
 
@@ -367,43 +397,6 @@ You are also less likely to find fonts that provide full support for the alphabe
 Therefore, it is generally wiser to separate the contents, when they appear in a single paragraph,
 into a number of Text layout objects. This can be automated with basic logic:
 
-TODO: see how FontSelector turns out
 ```java
-// example input mixing Latin and Tamil
-String input = "Translation: \u0BAE\u0BC1\u0BA9\u0BCD\u0BA9\u0BC7\u0BB1\u0BCD\u0BB1\u0BAE\u0BCD means 'improvement' !";
-
-// import java.lang.Character.UnicodeScript
-/**
- * The current implementation requires non-null entries to be present in the <code>fonts</code> variable.
- */
-Paragraph makeSplitParagraph(String input) throws IOException {
-    // initializations
-    Paragraph para = new Paragraph("");
-    StringBuilder build = new StringBuilder();
-    Map<UnicodeScript, PdfFont> fonts = new EnumMap<>(UnicodeScript.class);
-    fonts.put(UnicodeScript.LATIN, PdfFontFactory.createFont("/path/to/latinFont.ttf", PdfEncodings.IDENTITY_H, true));
-    fonts.put(UnicodeScript.TAMIL, PdfFontFactory.createFont("/path/to/tamilFont.ttf", PdfEncodings.IDENTITY_H, true));
-    // fonts.put(script, font);
-	
-    // find out what script to start with
-    UnicodeScript currentScript = UnicodeScript.of(input.charAt(0));
-    for (char i : input.toCharArray()) {
-        UnicodeScript localScript = UnicodeScript.of(i);
-        // if the alphabet switches, stash current work in a Text & start building a new String
-        if (!localScript.equals(currentScript) && !localScript.equals(UnicodeScript.COMMON)) {
-            Text text = new Text(build.toString())
-                    .setFont(fonts.get(currentScript));
-            para.add(text);
-            build = new StringBuilder();
-            currentScript = localScript;
-        }
-        build.append(i);
-    }
-    // the last bit of text was built by the algorithm but not stashed in a Text
-    Text finalText = new Text(build.toString())
-            .setFont(fonts.get(currentScript));
-    para.add(finalText);
-
-    return para;
-}
+TODO: see how FontSelector turns out
 ```
