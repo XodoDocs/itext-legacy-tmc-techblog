@@ -29,17 +29,22 @@ to use encodings that have generally consisted of a fixed number of bits.
 
 The most prominent of these early encoding systems is ASCII, 
 a seven bit scheme that encodes upper and lower case Latin letters, numbers, punctuation marks, etc.
-However, it has only 128 (2^7) places and as such does not cover diacritics and accents,
+However, it has only 2<sup>7</sup> = 128 places and as such does not cover diacritics and accents,
 other writing systems than Latin, or any symbols beyond a few basic mathematical signs.
 
-A number of more extended systems have been developed, most prominently the concept of a code page,
-which maps characters to byte numbers, .
+A number of more extended systems have been developed to solve this, most prominently the concept of a code page,
+which maps all possible single-byte sequences to a certain set of characters.
+Theoretically, these 
 Any advanced system has a multitude of these code pages, usually grouped for a certain language or script, 
 e.g. Cyrillic, Turkish, or Vietnamese.
-The Windows-West-European-Latin, for instance, encodes ASCII in the first 7 bits
+The Windows-West-European-Latin, for instance, encodes ASCII in the space of the first 7 bits
 and uses the 8th bit to define 128 extra characters that signify modified Latin characters like É, æ, ð, ñ, ü, etc.
-However, these systems are not interoperable and none of them have achieved dominance at any time.
-The eventual response to this lack of a common and independent encoding was the development of the Unicode standard,
+
+However, there are multiple competing standards, developed independently by companies like IBM, SAP, and Microsoft;
+these systems are not interoperable, and none of them have achieved dominance at any time.
+Files using codepages are not required to specify the code page that is used for their content,
+so any file created with a different code page than the one you expect may look like garbage.
+The eventual response to this lack of a common and independent encoding was the development of Unicode,
 which has become the de facto standard for systems that aren't encumbered by a legacy encoding depending on code pages,
 and is steadily taking over the ones that are.
 
@@ -50,9 +55,14 @@ If none of these flags are set, then the byte is considered to fully identify a 
 The 1-byte part of the Unicode standard is identical to ASCII.
 That allows simple ASCII text to be stored in Unicode with the exact same filesize
 as would happen if it were stored in ASCII encoding.
+Unicode aims to be a standard that captures all use cases regarding writing,
+including any writing system that has ever been used. In order to keep an oversight over the situation,
+characters are grouped in Unicode ranges, which are signified by hexadecimal numbers.
+For example, Cyrillic letters are stored with character IDs range 0x400 to 0x4FF.
 
 A font is a collection of mappings that links characters in a certain encoding with glyphs,
-the actual visual representation of a character. A glyph is a collection of vector paths that together form a shape, as follows:
+the actual visual representation of a character. Most fonts nowadays use the Unicode encoding to specify character IDs.
+A glyph is a collection of vector curves that together form a shape, as follows:
 
 ![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
 
@@ -78,14 +88,14 @@ Arabic is a writing system used for a large number of languages in the greater M
 It is most prominently known from its usage for the Semitic language Arabic
 and from that language's close association with Islam, since most religious Muslim literature is written in Arabic.
 As a result, many other non-Semitic communities in and around the culturally Arabic/Muslim sphere of 
-influence have also adopted the Arabic script to represent their local languages Farsi (Iran), Pashto (Afghanistan),
+influence have also adopted the Arabic script to represent their local languages, like Farsi (Iran), Pashto (Afghanistan),
 Mandinka (Senegal, Gambia), Malay (Malaysia, Indonesia), etc.
 Some of these communities have introduced new letters for the alphabet, 
 often based on the existent ones, to account for sounds and features not found in the original Arabic language.
 
 Arabic is an abjad, meaning that, in principle, only the consonants of a given word will be written. 
 Like most other abjads, it is 'impure' in that the long vowels (/a:/, /i:/, /u:/) are also written, 
-the latter two with the same character that is also used for /j/ and /w/. 
+the latter two with the same characters that are also used for /j/ and /w/. 
 The missing information about the presence and quality of short vowels must be filled in by the reader; 
 hence, it is usually necessary for the user to actually know the language that is written,
 in order to be able to fully pronounce the written text.
@@ -336,7 +346,7 @@ The second release, version 1.0.1, expanded this support to:
 
 pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 * Odia/Oriya
-* TODO
+* TODO: decide on more scripts
 
 ## Using pdfCalligraph
 
