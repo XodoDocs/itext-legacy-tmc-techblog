@@ -346,9 +346,14 @@ The second release, version 1.0.1, expanded this support to:
 
 pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 * Odia/Oriya
-* TODO: decide on more scripts
+* Telugu
+* Bengali
+* Malayalam
+* Gujarati
 
 ## Using pdfCalligraph
+
+### configuration
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
 make sure your valid license file is loaded, 
@@ -356,14 +361,16 @@ and iText 7 will automatically go into the pdfCalligraph code when text instruct
 that contain Indic texts, or a script that is written from right to left.
 
 The iText layout module will automatically look for the pdfCalligraph module in its dependencies
-if Indic/Arabic text is encountered by the Renderer Framework. If pdfCalligraph is available, iText will call its functionality 
+if Brahmic or Arabic text is encountered by the Renderer Framework. If pdfCalligraph is available, iText will call its functionality 
 to provide the correct glyph shapes to write to the PDF file. iText will not attempt any advanced shaping operations 
-if the pdfCalligraph module is not loaded on the classpath/as a binary.
+if the pdfCalligraph module is not loaded as a binary.
 
-Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 . The exact dependencies you need are:
+Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 . The exact modules you need are:
 
 * the pdfCalligraph library itself
 * the license key library
+
+### using the high-level API
 
 pdfCalligraph exposes a number of APIs so that it can be reached from the iText Core code,
 but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
@@ -409,4 +416,55 @@ into a number of Text layout objects. This can be automated with basic logic:
 
 ```java
 TODO: see how FontSelector turns out
+```
+
+### using the low-level API
+
+Users who are using the low-level API can also leverage OTF features.
+Below is the default way of adding content to specific coordinates.
+However, this will give incorrect results for complex alphabets.
+
+```java
+// initializations
+int x, y, fontsize;
+String text;
+PdfCanvas canvas = new PdfCanvas(pdfDocument.getLastPage());
+
+PdfFont font = PdfFontFactory.createFont("/path/to/font.ttf", PdfEncodings.IDENTITY_H);
+
+canvas.saveState()
+        .beginText()
+        .moveText(x, y)
+        .setFontAndSize(font, fontsize)
+        .showText(text) // String argument
+        .endText()
+        .restoreState();
+```
+
+In order to leverage OpenType features, you need a `GlyphLine`,
+which contains the font's glyph information for each of the Unicode characters in your String.
+Then, you need to allow the Shaper class to modify that GlyphLine,
+and pass the result to the PdfCanvas#showText overload which accepts a GlyphLine argument.
+
+```java
+// initializations
+int x, y, fontsize;
+String text;
+PdfCanvas canvas = new PdfCanvas(pdfDocument.getLastPage());
+
+// once for every font
+TrueTypeFont ttf = new TrueTypeFont("/path/to/font.ttf");
+PdfFont font = PdfFontFactory.createFont(ttf, PdfEncodings.IDENTITY_H);
+
+// once for every line of text
+GlyphLine glyphLine = font.createGlyphLine(text);
+Shaper.applyLigaFeature(ttf, glyphLine, null);
+
+canvas.saveState()
+        .beginText()
+        .moveText(x, y)
+        .setFontAndSize(font, fontsize)
+        .showText(glyphLine) // GlyphLine argument
+        .endText()
+        .restoreState();
 ```
