@@ -60,11 +60,38 @@ including any writing system that has ever been used. In order to keep an oversi
 characters are grouped in Unicode ranges, which are signified by hexadecimal numbers.
 For example, the basic Cyrillic letters are stored with character IDs range 0x400 to 0x4FF.
 
+## A bit of font history
+
 A font is a collection of mappings that links characters in a certain encoding with glyphs,
 the actual visual representation of a character. Most fonts nowadays use the Unicode encoding to specify character IDs.
 A glyph is a collection of vector curves that together form a shape, as follows:
 
 ![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
+
+As usual, there are a number of formats, the most relevant of which here are TrueType and its virtual successor OpenType.
+
+```TODO: TrueType```
+The TrueType format was originally designed by Apple as a competitor for Type 1 fonts, at the time a proprietary specification owned by Adobe.
+In 1991, Microsoft started using TrueType as its standard font format. For a long time,
+TrueType was the most common font format on both Mac OS and MS Windows systems, but both companies, Apple as well as Microsoft,
+added their own proprietary extensions, and soon they had their own versions and interpretations of (what once was) the standard.
+When looking for a commercial font, users had to be careful to buy a font that could be used on their system.
+To resolve the platform dependency of TrueType fonts, Microsoft started developing a new font format. Microsoft was joined by Adobe,
+and support for Adobe's Type 1 fonts was added. In 1996, a new font format was born.
+The glyphs in an OpenType font can be defined using either TrueType or Type 1 technology.
+
+
+OpenType adds a very versatile system to the TrueType specification called OpenType features.
+It will define how the standard glyph for a certain character should be replaced by another glyph under certain custom circumstances,
+most commonly when they are written in the vicinity of specific other characters.
+This type of information is not necessarily information inherent in the characters (Unicode points),
+but must be defined on the level of the font.
+e.g. a Latin font may define ligatures for the sequence 'fi', but this is in no way necessary for it to be correct.
+
+TrueType is supported by the PDF format, but unfortunately there is no way to leverage OpenType features in PDF.
+A PDF document is not dynamic in this way: it only knows glyphs and their positioning,
+and the correct glyph IDs at the correct positions must be passed to it by the application that creates the document.
+This is not a trivial effort because there are many types of rules and features, recombining or repositioning only specific characters in specific combinations.
 
 ## A bit of writing history
 
@@ -208,11 +235,6 @@ They use the same technique of halant, but the mutations will be markedly differ
 Some scripts will also do more repositioning logic for some vowels, rather than using glyph substitutions or diacritics.
 
 ![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
-
-
-## A bit of font history
-
-TODO: TTF & OTF
 
 # pdfCalligraph and the PDF format
 
