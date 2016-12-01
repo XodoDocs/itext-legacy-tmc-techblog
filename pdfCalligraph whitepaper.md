@@ -21,6 +21,8 @@ the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip these
 
 ## A bit of encoding history
 
+### Standards and deviations
+
 For digital representation of textual data, it is necessary to store its constituents in a binary compatible way. 
 Several systems were devised for representing data in a binary format even long before the digital revolution, 
 the best known of which are Morse code and Braille writing. 
@@ -33,32 +35,47 @@ However, it has only 2<sup>7</sup> = 128 places and as such does not cover diacr
 other writing systems than Latin, or any symbols beyond a few basic mathematical signs.
 
 A number of more extended systems have been developed to solve this, most prominently the concept of a code page,
-which maps all possible single-byte sequences to a certain set of characters.
-Theoretically, these 
-Any advanced system has a multitude of these code pages, usually grouped for a certain language or script, 
+which maps all possible 256 bit sequences in a single byte to a certain set of characters.
+Theoretically, there is no requirement for any code page to be consistent with alphabetic orders,
+or even consistency as to which types of characters are encoded (letters, numbers, symbols, etc),
+but most code pages do comply with a certain implied standard regarding internal consistency.
+
+Any international or specialized system has a multitude of these code pages, usually grouped for a certain language or script, 
 e.g. Cyrillic, Turkish, or Vietnamese.
-The Windows-West-European-Latin, for instance, encodes ASCII in the space of the first 7 bits
+The Windows-West-European-Latin code page, for instance, encodes ASCII in the space of the first 7 bits
 and uses the 8th bit to define 128 extra characters that signify modified Latin characters like É, æ, ð, ñ, ü, etc.
 
 However, there are multiple competing standards, developed independently by companies like IBM, SAP, and Microsoft;
 these systems are not interoperable, and none of them have achieved dominance at any time.
 Files using codepages are not required to specify the code page that is used for their content,
 so any file created with a different code page than the one you expect may look like garbage.
+
+### Unicode 
+
 The eventual response to this lack of a common and independent encoding was the development of Unicode,
 which has become the de facto standard for systems that aren't encumbered by a legacy encoding depending on code pages,
 and is steadily taking over the ones that are.
 
-Unicode aims to provide a unique code point for every possible character.
-It is an encoding of variable length, meaning that if a byte in a Unicode text contains certain bit flags,
+Unicode aims to provide a unique code point for every possible character, including emoji and extinct alphabets.
+These code points are conventionally numbered in a hexadecimal format.
+In order to keep an oversight over which code point is used for which writing systems,
+characters are grouped in Unicode ranges.
+
+* 0x0400 - 0x052F Cyrillic (304 code points)
+* 0x0900 - 0x097F Devanagari (128 code points)
+* 0x1400 - 0x167F Canadian Aboriginal Syllabary (640 code points)
+
+It is an encoding of variable length, meaning that if a bit sequence (usually 1 or 2 bytes) in a Unicode text contains certain bit flags,
 the next byte or bytes should be interpreted as part of a multi-byte sequence that represents one character.
-If none of these flags are set, then the byte is considered to fully identify a character.
-The 1-byte part of the Unicode standard is identical to ASCII.
+If none of these flags are set, then the original sequence is considered to fully identify a character.
+
+There are several encoding schemes, the best known of which are UTF-8 and UTF-16, which requires at least 2 bytes per character.
+UTF-16 is more efficient for text that uses characters on positions 0x0800 and up e.g. all Brahmic scripts and Chinese.
+For any text which is predominantly Arabic or Hebrew, there is very little difference between either system.
+
+UTF-8 is more efficient for any text that contains Latin text, because the first 128 positions of UTF-8 are identical to ASCII.
 That allows simple ASCII text to be stored in Unicode with the exact same filesize
 as would happen if it were stored in ASCII encoding.
-Unicode aims to be a standard that captures all use cases regarding writing,
-including any writing system that has ever been used. In order to keep an oversight over the situation,
-characters are grouped in Unicode ranges, which are signified by hexadecimal numbers.
-For example, the basic Cyrillic letters are stored with character IDs range 0x400 to 0x4FF.
 
 ## A bit of font history
 
@@ -75,16 +92,17 @@ In 1991, Microsoft started using TrueType as its standard font format. For a lon
 TrueType was the most common font format on both Mac OS and MS Windows systems, but both companies, Apple as well as Microsoft,
 added their own proprietary extensions, and soon they had their own versions and interpretations of (what once was) the standard.
 When looking for a commercial font, users had to be careful to buy a font that could be used on their system.
-To resolve the platform dependency of TrueType fonts, Microsoft started developing a new font format. Microsoft was joined by Adobe,
-and support for Adobe's Type 1 fonts was added. In 1996, a new font format was born.
-The glyphs in an OpenType font can be defined using either TrueType or Type 1 technology.
+To resolve the platform dependency of TrueType fonts, Microsoft started developing a new font format called OpenType as a successor to TrueType.
+Microsoft was joined by Adobe, and support for Adobe's Type 1 fonts was added:
+the glyphs in an OpenType font can now be defined using either TrueType or Type 1 technology.
 
 OpenType adds a very versatile system to the TrueType specification called OpenType features.
-It will define how the standard glyph for a certain character should be replaced by another glyph under certain custom circumstances,
+Features define in what way the standard glyph for a certain character should be moved or replaced by another glyph under certain circumstances,
 most commonly when they are written in the vicinity of specific other characters.
 This type of information is not necessarily information inherent in the characters (Unicode points),
 but must be defined on the level of the font.
-e.g. a Latin font may define ligatures for the sequence 'fi', but this is in no way necessary for it to be correct.
+It is possible for a font to choose to define ligatures that aren't mandatory or even commonly used,
+e.g. a Latin font may define ligatures for the sequence 'fi', but this is in no way necessary for it to be correctly read.
 
 TrueType is supported by the PDF format, but unfortunately there is no way to leverage OpenType features in PDF.
 A PDF document is not dynamic in this way: it only knows glyphs and their positioning,
@@ -101,7 +119,7 @@ and exported by the seafaring trade nation of Phoenicia.
 After extended periods of time, alphabets like Greek and its descendants (Latin, Cyrillic, Runes, etc), 
 and the Aramaic abjad and its descendants (Arabic, Hebrew, Syriac, etc) evolved from the Phoenician script. 
 Although this is a matter of scientific debate, it is possible that the Phoenician alphabet is also 
-an ancestor of the entire Brahmic family of scripts, which contains Kannada, Thai, Telugu, 
+an ancestor of the entire Brahmic family of scripts, which contains Gujarati, Thai, Telugu, 
 and over a hundred other writing systems used primarily in South-East Asia and the Indian subcontinent.
 
 The other highly influential writing system that is probably an original invention, the Han script, 
@@ -155,13 +173,18 @@ It is possible to write fully vocalized Arabic, with all phonetic information av
 through the use of diacritics. This is mostly used for students who are learning Arabic,
 and for texts where phonetic ambiguity must be avoided (e.g. the Qur'an).
 The phonetic diacritics as a group are commonly known as tashkil;
-its most-used members are the harakat (short /a/, /i/, /u/), and the sukun which denotes absence of a vowel.
+its most-used members are the harakat diacritics for short /a/, /i/, and /u/, and the sukun which denotes absence of a vowel.
 
 In the Unicode standard, the Arabic script is encoded into a number of ranges of code points:
 * The base forms for both Standard Arabic and a number of derived alphabets in Asia are located in U+0600–U+06FF (Arabic).
 * Supplemental characters, mostly for African and European languages, are in U+0750–U+077F (Arabic Supplement) and U+08A0–U+08FF (Arabic Extended-A)
 * Two ranges, U+FB50–U+FDFF (Arabic Pres. Forms-A) and U+FE70–U+FEFF (Arabic Pres. Forms-B),
 that define unique Unicode points for all contextual appearances (isolated, initial, medial, final) of Arabic glyphs
+
+This last range implies that Arabic might not need OpenType features for determining the necessary glyphs.
+That is correct in a sense, and that is also the reason that iText 5 was able to correctly show Arabic.
+However, it is much more error-proof to leverage the OpenType features for optional font divergences,
+for glyphs that signify formulaic expressions, and for text extraction.
 
 ## A very brief introduction to the Brahmic scripts
 
@@ -246,8 +269,8 @@ Supporting every type of writing system that humanity has developed is a tall or
 but we strive to be a truly global company. As such, we are determined to respond to customer requests
 asking for any writing system.
 
-In earlier versions of iText, we were already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
-and had limited support for the right-to-left Hebrew and Arabic scripts.
+In earlier versions of iText, the library was already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
+and it had limited support for the right-to-left Hebrew and Arabic scripts.
 When we made attempts to go further, technical limitations,
 caused by sometimes seemingly unrelated design decisions, hampered our efforts to implement this in iText 5.
 Because of iText 5's implicit promise not to break backwards compatibility,
@@ -259,19 +282,19 @@ it turned out to be impossible in iText 5 to leverage these without drastic brea
 
 When we wrote iText 7, redesigning it from the ground up,
 we took care to avoid these problems in order to provide support for all font features,
-on whichever level of abstraction in the API a user chooses.
+on whichever level of API abstraction a user chooses.
 We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
 ## Technical limitations
 
 ### Java
 
-iText 7 is built with Java 7. The current implementation of pdfCalligraph depends on the enum class `java.lang.Character.UnicodeScript`, which is only available from Java 7 onwards. iText 7 of course leverages some of the other syntax features that were new in this release, so users will have no option
+iText 7 is built with Java 7. The current implementation of pdfCalligraph depends on the enum class `java.lang.Character.UnicodeScript`, which is only available from Java 7 onwards. iText 7 of course uses some of the other syntax features that were new in this release, so users will have no option
 to build from source code for older versions, and will have to build their own application on Java 7 or newer.
 
 ### .NET Framework
 
-iText 7 is built with .NET Framework version 4.0. It leverages a number of concepts that preclude backporting, such as LINQ and Concurrent Collections.
+iText 7 is built with .NET Framework version 4.0. It uses a number of concepts that preclude backporting, such as LINQ and Concurrent Collections.
 
 ## PDF limitations
 
@@ -360,16 +383,16 @@ Due to the complexities that can arise in certain glyph clusters, it may be impo
 In this case, it is possible in PDF syntax to specify the correct Unicode code point(s) that are being shown by the glyphs,
 by leveraging the PDF marked content attribute /ActualText.
 This attribute can be picked up by a PDF viewer for a text extraction process (e.g. copy-pasting contents) or searching for specific text;
-without this, it is impossible to retrieve the contents of the file, even though
+without this, it is impossible to retrieve the contents of the file correctly.
 
 ## Support
 
 The initial release of pdfCalligraph provided support for the following scripts:
 
 * Arabic, except tashkil
-* Hebrew (right-to-left)
 * Devanagari, used for Hindi, Marathi, Sindhi, etc
 * Tamil
+* Hebrew - only requires pdfCalligraph for right-to-left writing
 
 The second release, version 1.0.1, expanded this support to:
 
@@ -389,7 +412,7 @@ The Thai writing system does not contain any transformations in glyph shapes, so
 
 ## Using pdfCalligraph
 
-### configuration
+### Configuration
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
 make sure your valid license file is loaded, 
@@ -406,7 +429,7 @@ Instructions for loading dependencies can be found on http://developers.itextpdf
 * the pdfCalligraph library itself
 * the license key library
 
-### using the high-level API
+### Using the high-level API
 
 pdfCalligraph exposes a number of APIs so that it can be reached from the iText Core code,
 but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
@@ -454,7 +477,7 @@ into a number of Text layout objects. This can be automated with basic logic:
 TODO: see how FontSelector turns out
 ```
 
-### using the low-level API
+### Using the low-level API
 
 Users who are using the low-level API can also leverage OTF features.
 Below is the default way of adding content to specific coordinates.
@@ -503,4 +526,10 @@ canvas.saveState()
         .showText(glyphLine) // GlyphLine argument
         .endText()
         .restoreState();
+```
+
+Users who want to leverage optional ligatures in Latin text through the low-level API can do the exact same thing for their text. The only difference is that they should call another method from Shaper:
+
+```
+Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ```
