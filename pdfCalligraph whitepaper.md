@@ -70,7 +70,6 @@ A glyph is a collection of vector curves that together form a shape, as follows:
 
 As usual, there are a number of formats, the most relevant of which here are TrueType and its virtual successor OpenType.
 
-```TODO: TrueType```
 The TrueType format was originally designed by Apple as a competitor for Type 1 fonts, at the time a proprietary specification owned by Adobe.
 In 1991, Microsoft started using TrueType as its standard font format. For a long time,
 TrueType was the most common font format on both Mac OS and MS Windows systems, but both companies, Apple as well as Microsoft,
@@ -79,7 +78,6 @@ When looking for a commercial font, users had to be careful to buy a font that c
 To resolve the platform dependency of TrueType fonts, Microsoft started developing a new font format. Microsoft was joined by Adobe,
 and support for Adobe's Type 1 fonts was added. In 1996, a new font format was born.
 The glyphs in an OpenType font can be defined using either TrueType or Type 1 technology.
-
 
 OpenType adds a very versatile system to the TrueType specification called OpenType features.
 It will define how the standard glyph for a certain character should be replaced by another glyph under certain custom circumstances,
@@ -342,14 +340,27 @@ However, it is saved in Unicode byte stream as follows:
  </tr>
 </table>
 
-When this string of Unicode points is fed to a PDF creator that doesn't leverage OTF features,
+When this string of Unicode points is fed to a PDF creator application that doesn't leverage OTF features,
 the output will look like this:
 
 ![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
 
 The PDF format is able to resolve the diacritics as belonging with the glyph they pertain to,
 but it cannot do the complex substitution of sa + halant + ka.
-It also places the vocalic r diacritic at an incorrect position.
+It also places the vocalic r diacritic at an incorrect position relative to its parent glyph.
+
+### Text extraction and searchability
+
+A PDF document does not necessarily know which Unicode characters are represented by the glyphs it has stored.
+This is not a problem for rendering the document with a viewer, but may make it harder to extract text.
+A font in a PDF file can have an optional ToUnicode dictionary, which will map glyph IDs to Unicode characters or sequences.
+However, this mapping is necessarily a one-to-many relation, and cannot handle some of the complexities of Brahmic alphabets.
+
+Due to the complexities that can arise in certain glyph clusters, it may be impossible to retrieve the actual Unicode sequence.
+In this case, it is possible in PDF syntax to specify the correct Unicode code point(s) that are being shown by the glyphs,
+by leveraging the PDF marked content attribute /ActualText.
+This attribute can be picked up by a PDF viewer for a text extraction process (e.g. copy-pasting contents) or searching for specific text;
+without this, it is impossible to retrieve the contents of the file, even though
 
 ## Support
 
@@ -372,6 +383,9 @@ pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 * Bengali
 * Malayalam
 * Gujarati
+* Thai
+
+The Thai writing system does not contain any transformations in glyph shapes, so it only requires pdfCalligraph functionality for diacritics.
 
 ## Using pdfCalligraph
 
@@ -480,7 +494,7 @@ PdfFont font = PdfFontFactory.createFont(ttf, PdfEncodings.IDENTITY_H);
 
 // once for every line of text
 GlyphLine glyphLine = font.createGlyphLine(text);
-Shaper.applyLigaFeature(ttf, glyphLine, null);
+Shaper.applyOtfScript(ttf, glyphLine, null);
 
 canvas.saveState()
         .beginText()
