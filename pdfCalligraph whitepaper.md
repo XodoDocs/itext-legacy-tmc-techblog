@@ -474,7 +474,7 @@ Therefore, it is generally wiser to separate the contents, when they appear in a
 into a number of Text layout objects. This can be automated with basic logic:
 
 ```java
-TODO: see how FontSelector turns out
+TODO: see what FontSelector code sample should look like
 ```
 
 ### Using the low-level API
