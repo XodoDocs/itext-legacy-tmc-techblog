@@ -181,10 +181,11 @@ In the Unicode standard, the Arabic script is encoded into a number of ranges of
 * Two ranges, U+FB50–U+FDFF (Arabic Pres. Forms-A) and U+FE70–U+FEFF (Arabic Pres. Forms-B),
 that define unique Unicode points for all contextual appearances (isolated, initial, medial, final) of Arabic glyphs
 
-This last range implies that Arabic might not need OpenType features for determining the necessary glyphs.
-That is correct in a sense, and that is also the reason that iText 5 was able to correctly show Arabic.
+This last range may lead you to think that Arabic might not need OpenType features for determining the appropriate glyphs.
+That is correct in a sense, and that is also the reason that iText 5 was able to correctly show non-vocalized Arabic.
 However, it is much more error-proof to leverage the OpenType features for optional font divergences,
-for glyphs that signify formulaic expressions, and for text extraction.
+for glyphs that signify formulaic expressions, and for making a document better suited to text extraction.
+You will also need OpenType features to properly show the tashkil in more complex situations.
 
 ## A very brief introduction to the Brahmic scripts
 
@@ -505,10 +506,17 @@ which contains the font's glyph information for each of the Unicode characters i
 Then, you need to allow the Shaper class to modify that GlyphLine,
 and pass the result to the PdfCanvas#showText overload which accepts a GlyphLine argument.
 
+The API for the Shaper class is subject to modifications because pdfCalligraph is still a young product,
+and because it was originally not meant to be used by client applications.
+For those reasons, the entire class is marked as @Deprecated or [Obsolete],
+so that users know that they should not expect backwards compatibility or consistency in functionality.
+Below is a code sample that will work as of iText 7.0.1 and pdfCalligraph 1.0.2.
+
 ```java
 // initializations
 int x, y, fontsize;
 String text;
+Character.UnicodeScript script = Character.UnicodeScript.TELUGU; // replace with the alphabet of your choice
 PdfCanvas canvas = new PdfCanvas(pdfDocument.getLastPage());
 
 // once for every font
@@ -517,7 +525,7 @@ PdfFont font = PdfFontFactory.createFont(ttf, PdfEncodings.IDENTITY_H);
 
 // once for every line of text
 GlyphLine glyphLine = font.createGlyphLine(text);
-Shaper.applyOtfScript(ttf, glyphLine, null);
+Shaper.applyOtfScript(ttf, glyphLine, script);
 
 canvas.saveState()
         .beginText()
@@ -530,6 +538,6 @@ canvas.saveState()
 
 Users who want to leverage optional ligatures in Latin text through the low-level API can do the exact same thing for their text. The only difference is that they should call another method from Shaper:
 
-```
+```java
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ```
