@@ -48,7 +48,7 @@ and uses the 8th bit to define 128 extra characters that signify modified Latin 
 However, there are multiple competing standards, developed independently by companies like IBM, SAP, and Microsoft;
 these systems are not interoperable, and none of them have achieved dominance at any time.
 Files using codepages are not required to specify the code page that is used for their content,
-so any file created with a different code page than the one you expect may look like garbage.
+so any file created with a different code page than the one your operating system expects may look like garbage.
 
 ### Unicode 
 
