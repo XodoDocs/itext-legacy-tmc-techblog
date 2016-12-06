@@ -435,7 +435,7 @@ Instructions for loading dependencies can be found on http://developers.itextpdf
 pdfCalligraph exposes a number of APIs so that it can be reached from the iText Core code,
 but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
 
-This code will just work:
+This code will just work - note that we don't even have to specify which writing system is being used:
 
 ```java
 // initial actions
