@@ -541,3 +541,8 @@ Users who want to leverage optional ligatures in Latin text through the low-leve
 ```java
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ```
+
+```
+TODO: kerning (incl explanation ?)
+TODO: example in Latin text (Foglihten ?)
+```
