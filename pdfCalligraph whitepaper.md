@@ -480,6 +480,22 @@ into a number of Text layout objects. This can be automated with basic logic:
 TODO: see what FontSelector code sample should look like
 ```
 
+It is also trivial to enable kerning, the OpenType feature which lets fonts define custom rules
+for repositioning glyphs in Latin text to make it look more stylized. You can simply specify 
+
+```java
+PdfFont f = PdfFontFactory.createFont("/path/to/kernedFont.ttf", PdfEncodings.IDENTITY_H, true);
+String input = "WAVE";
+
+Paragraph kerned = new Paragraph(input);
+kerned.setFont(f);
+kerned.setProperty(Property.FONT_KERNING, FontKerning.YES);
+```
+
+![Latin text 'wave' without kerning](./wave%20unkerned.svg)
+![Latin text 'wave' with kerning](./wave%20kerned.svg)
+
+
 ### Using the low-level API
 
 Users who are using the low-level API can also leverage OTF features by using the `Shaper`.
@@ -543,14 +559,14 @@ Users who want to leverage optional ligatures in Latin text through the low-leve
 
 ```java
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
-
-TODO: example image of optional ligature in Latin text with a Free font
 ```
 
-The same thing goes for kerning, the OpenType feature which lets fonts define custom rules
-for repositioning glyphs in Latin text to make it look more stylized.
+![Latin word elegant, not ligaturized](./typography/elegant%20latin%20without.svg)
+![Latin word elegant, ligaturized](./typography/elegant%20latin%20with.svg)
+
+
+If you want to enable kerning with the low-level API, you can simply call the `applyKerning` method with similar parameters as before:
+
 ```java
 Shaper.applyKerning(ttf, glyphLine);
-
-TODO: example image of kerning in Latin text with a Free font
 ```
