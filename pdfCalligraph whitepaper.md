@@ -4,14 +4,14 @@ pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any
 when writing textual content to a PDF file. Its main function is to correctly render complex writing systems 
 such as the right-to-left Hebrew and Arabic scripts, 
 and the various writing systems of the Indian subcontinent and its surroundings. 
-In addition, it can also handle kerning and other optional features that can be provided by certain fonts in other writing systems.
+In addition, it can also handle kerning and other optional features that can be provided by certain fonts for other alphabets.
 
 In this position paper, we first provide a number of cursory introductions:
 we'll start out by exploring the murky history of encoding standards for digital text, 
 and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
 Afterwards, we will discuss the problems those writing systems pose in the PDF standard, 
-the solutions provided to these problems by iText 7's add-on pdfCalligraph,
-and, of course, a hands-on user guide as well.
+and the solutions provided to these problems by iText 7's add-on pdfCalligraph.
+Of course, <a href="#using">a hands-on user guide</a> as well.
 
 # Technical overview
 
@@ -48,7 +48,8 @@ and uses the 8th bit to define 128 extra characters that signify modified Latin 
 However, there are multiple competing standards, developed independently by companies like IBM, SAP, and Microsoft;
 these systems are not interoperable, and none of them have achieved dominance at any time.
 Files using codepages are not required to specify the code page that is used for their content,
-so any file created with a different code page than the one your operating system expects may look like garbage.
+so any file created with a different code page than the one your operating system expects,
+may contain wrongly parsed characters or even look like complete garbage.
 
 ### Unicode 
 
@@ -79,8 +80,8 @@ as would happen if it were stored in ASCII encoding.
 
 ## A bit of font history
 
-A font is a collection of mappings that links characters in a certain encoding with glyphs,
-the actual visual representation of a character. Most fonts nowadays use the Unicode encoding to specify character IDs.
+A font is a collection of mappings that links character IDs in a certain encoding with glyphs,
+the actual visual representation of a character. Most fonts nowadays use the Unicode encoding standard to specify character IDs.
 A glyph is a collection of vector curves that together form a shape, as follows:
 
 ![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
@@ -96,7 +97,7 @@ To resolve the platform dependency of TrueType fonts, Microsoft started developi
 Microsoft was joined by Adobe, and support for Adobe's Type 1 fonts was added:
 the glyphs in an OpenType font can now be defined using either TrueType or Type 1 technology.
 
-OpenType adds a very versatile system to the TrueType specification called OpenType features.
+OpenType adds a very versatile system called OpenType features to the TrueType specification.
 Features define in what way the standard glyph for a certain character should be moved or replaced by another glyph under certain circumstances,
 most commonly when they are written in the vicinity of specific other characters.
 This type of information is not necessarily information inherent in the characters (Unicode points),
@@ -194,7 +195,7 @@ the Brahmic scripts are a large family of writing systems used primarily in Indi
 All Brahmic alphabets are written from left to right, and their defining feature is
 that the characters can change shape or switch position depending on context.
 They are abugidas, i.e. writing systems in which consonants are written with an implied vowel,
-and only deviations from that implied vowel (usually a short /a/ or schwa) are marked.
+usually a short /a/ or schwa, and only deviations from that implied vowel are marked.
 
 The Brahmic family is very large and diverse, with over 100 existing writing systems. Some are used for a
 single language (e.g. Telugu), others for dozens of languages (e.g. Devanagari, for Hindi, Marathi, Nepali, etc.),
@@ -202,8 +203,8 @@ and others only in specific contexts (e.g. Baybayin, only for ritualistic uses o
 The Sanskrit language, on the other hand, can be written in many scripts, and has no 'native' alphabet associated with it.
 
 The Brahmic scripts historically diverged into a Northern and a Southern branch.
-Very broadly, Northern Brahmic scripts are used for the Indo-European languages prevalent
-in Northern India, whereas Southern Brahmic scripts are used in Southern India for Dravidian languages,
+Very broadly, Northern Brahmi scripts are used for the Indo-European languages prevalent
+in Northern India, whereas Southern Brahmi scripts are used in Southern India for Dravidian languages,
 and for Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
 ### Northern Brahmi
@@ -216,13 +217,14 @@ In Devanagari, one of the more prominent alphabets of the Northern Brahmi branch
 an implied vowel /a/ is not expressed in writing (#1), while other vowels take the shape of various diacritics (#2-5).
 #5 is a special case, because the short /i/ diacritic is positioned to the left of its consonant,
 even though it follows it in the byte string. When typing a language written in Devanagari,
-one would first input the consonant and then the vowel, but they will be reversed by a good text editor in any visual representation.
+one would first input the consonant and then the vowel,
+but they will be reversed by a text editor that leverages OpenType featurs in any visual representation.
 
 ![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
 
-Another common feature is the use of half-characters in consonant clusters i.e.
-affixing a modified version of the first letter to an unchanged form of the second.
-When typing consonant clusters, a diacritic called the halant must be inserted in the byte sequence
+Another common feature is the use of half-characters in consonant clusters,
+which means to affix a modified version of the first letter to an unchanged form of the second.
+When typing consonant clusters, a diacritic called the halant must be inserted into the byte sequence
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
 Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
@@ -234,7 +236,7 @@ As you can see, line #7 contains the right character completely,
 and also everything from the left character up until the long vertical bar. This form is known as a “half character”.
 
 The interesting thing is that #7 and #8 are composed of the exact same characters,
-only in a different order which has a drastic effect on the eventual visual realization.
+only in a different order, which has a drastic effect on the eventual visual realization.
 The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
 
 ### Southern Brahmi
@@ -264,7 +266,7 @@ Some scripts will also do more repositioning logic for some vowels, rather than 
 
 The iText library was originally written in the context of Western European languages, 
 and it was only designed to handle left-to-right alphabetic scripts. 
-However, the writing systems of the world can be much more complex and varied 
+However, we have seen that the writing systems of the world can be much more complex and varied 
 than just a sequence of letters with no interaction. 
 Supporting every type of writing system that humanity has developed is a tall order, 
 but we strive to be a truly global company. As such, we are determined to respond to customer requests
@@ -286,7 +288,7 @@ we took care to avoid these problems in order to provide support for all font fe
 on whichever level of API abstraction a user chooses.
 We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
-## Technical limitations
+## Platform limitations
 
 ### Java
 
@@ -377,8 +379,8 @@ It also places the vocalic r diacritic at an incorrect position relative to its 
 
 A PDF document does not necessarily know which Unicode characters are represented by the glyphs it has stored.
 This is not a problem for rendering the document with a viewer, but may make it harder to extract text.
-A font in a PDF file can have an optional ToUnicode dictionary, which will map glyph IDs to Unicode characters or sequences.
-However, this mapping is necessarily a one-to-many relation, and cannot handle some of the complexities of Brahmic alphabets.
+A font in a PDF file can have a ToUnicode dictionary, which will map glyph IDs to Unicode characters or sequences.
+However, this mapping is optional, and it's necessarily a one-to-many relation so it cannot handle some of the complexities of Brahmic alphabets, which would require a many-to-many relation.
 
 Due to the complexities that can arise in certain glyph clusters, it may be impossible to retrieve the actual Unicode sequence.
 In this case, it is possible in PDF syntax to specify the correct Unicode code point(s) that are being shown by the glyphs,
@@ -411,8 +413,8 @@ pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 
 The Thai writing system does not contain any transformations in glyph shapes, so it only requires pdfCalligraph functionality for diacritics.
 
+<a name="using"></a>
 ## Using pdfCalligraph
-
 ### Configuration
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
@@ -480,7 +482,12 @@ TODO: see what FontSelector code sample should look like
 
 ### Using the low-level API
 
-Users who are using the low-level API can also leverage OTF features.
+Users who are using the low-level API can also leverage OTF features by using the `Shaper`.
+The API for the `Shaper` class is subject to modifications because pdfCalligraph is still a young product,
+and because it was originally not meant to be used by client applications.
+For those reasons, the entire class is marked as `@Deprecated` or `[Obsolete]`,
+so that users know that they should not yet expect backwards compatibility or consistency in the API or functionality.
+
 Below is the default way of adding content to specific coordinates.
 However, this will give incorrect results for complex alphabets.
 
@@ -503,13 +510,9 @@ canvas.saveState()
 
 In order to leverage OpenType features, you need a `GlyphLine`,
 which contains the font's glyph information for each of the Unicode characters in your String.
-Then, you need to allow the Shaper class to modify that GlyphLine,
-and pass the result to the PdfCanvas#showText overload which accepts a GlyphLine argument.
+Then, you need to allow the `Shaper` class to modify that `GlyphLine`,
+and pass the result to the `PdfCanvas#showText` overload which accepts a GlyphLine argument.
 
-The API for the Shaper class is subject to modifications because pdfCalligraph is still a young product,
-and because it was originally not meant to be used by client applications.
-For those reasons, the entire class is marked as @Deprecated or [Obsolete],
-so that users know that they should not expect backwards compatibility or consistency in functionality.
 Below is a code sample that will work as of iText 7.0.1 and pdfCalligraph 1.0.2.
 
 ```java
@@ -540,9 +543,14 @@ Users who want to leverage optional ligatures in Latin text through the low-leve
 
 ```java
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
+
+TODO: example image of optional ligature in Latin text with a Free font
 ```
 
-```
-TODO: kerning (incl explanation ?)
-TODO: example in Latin text (Foglihten ?)
+The same thing goes for kerning, the OpenType feature which lets fonts define custom rules
+for repositioning glyphs in Latin text to make it look more stylized.
+```java
+Shaper.applyKerning(ttf, glyphLine);
+
+TODO: example image of kerning in Latin text with a Free font
 ```
