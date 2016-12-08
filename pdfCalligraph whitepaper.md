@@ -11,7 +11,8 @@ we'll start out by exploring the murky history of encoding standards for digital
 and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
 Afterwards, we will discuss the problems those writing systems pose in the PDF standard, 
 and the solutions provided to these problems by iText 7's add-on pdfCalligraph.
-Of course, <a href="#using">a hands-on user guide</a> as well.
+
+Of course, this all serves as background information and theoretical exposition to the <a href="#using">hands-on user guide</a>.
 
 # Technical overview
 
