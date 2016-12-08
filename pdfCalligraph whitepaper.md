@@ -481,7 +481,8 @@ TODO: see what FontSelector code sample should look like
 ```
 
 It is also trivial to enable kerning, the OpenType feature which lets fonts define custom rules
-for repositioning glyphs in Latin text to make it look more stylized. You can simply specify 
+for repositioning glyphs in Latin text to make it look more stylized.
+You can simply specify that the text you're adding must be kerned, and pdfCalligraph will do this under the hood.
 
 ```java
 PdfFont f = PdfFontFactory.createFont("/path/to/kernedFont.ttf", PdfEncodings.IDENTITY_H, true);
