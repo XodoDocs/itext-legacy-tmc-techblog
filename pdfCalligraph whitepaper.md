@@ -231,9 +231,9 @@ Editors will interpret the occurrence of halant as a sign that the preceding let
 
 ![Devanagari effect of halant](./typography/halant%20devanagari.svg)
 
-If the character accompanied by the halant is followed by a space, then the character is shown with an accent-like diacritic below (#8).
-If it is not followed by a space, then a half character is rendered (#7).
-As you can see, line #7 contains the right character completely, 
+If the character accompanied by the halant is followed by a space, then the character is shown with an accent-like diacritic below (#7).
+If it is not followed by a space, then a half character is rendered (#8).
+As you can see, line #8 contains the right character completely, 
 and also everything from the left character up until the long vertical bar. This form is known as a “half character”.
 
 The interesting thing is that #7 and #8 are composed of the exact same characters,
