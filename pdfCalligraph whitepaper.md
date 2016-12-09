@@ -18,7 +18,7 @@ Of course, this all serves as background information and theoretical exposition 
 
 We will not be sharing revolutionary insights in this section, 
 so if you are comfortable with your knowledge about character encodings, 
-the Arabic alphabet, and/or the Brahmic scripts, you can feel free to skip these sections.
+the Arabic alphabet, and/or the Brahmic scripts, feel free to skip these sections.
 
 ## A bit of encoding history
 
@@ -420,13 +420,19 @@ The Thai writing system does not contain any transformations in glyph shapes, so
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
 make sure your valid license file is loaded, 
-and iText 7 will automatically go into the pdfCalligraph code when text instructions are encountered 
+and iText 7 will automatically use the pdfCalligraph code when text instructions are encountered 
 that contain Indic texts, or a script that is written from right to left.
 
 The iText layout module will automatically look for the pdfCalligraph module in its dependencies
-if Brahmic or Arabic text is encountered by the Renderer Framework. If pdfCalligraph is available, iText will call its functionality 
-to provide the correct glyph shapes to write to the PDF file. iText will not attempt any advanced shaping operations 
-if the pdfCalligraph module is not loaded as a binary.
+if Brahmic or Arabic text is encountered by the Renderer Framework.
+If pdfCalligraph is available, iText will call its functionality
+to provide the correct glyph shapes to write to the PDF file.
+However, the typography logic consumes resources even for documents that don't need any shaping operations.
+This would affect all users of the document creation software in iText,
+including those who only use iText for text in writing systems that don't need OpenType,
+like Latin or Cyrillic or Japanese.
+Hence, in order to reduce overhead, iText will not attempt any advanced shaping operations
+if the pdfCalligraph module is not loaded as a binary dependency.
 
 Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 . The exact modules you need are:
 
@@ -572,3 +578,13 @@ If you want to enable kerning with the low-level API, you can simply call the `a
 ```java
 Shaper.applyKerning(ttf, glyphLine);
 ```
+
+# Colophon
+
+The fonts used for the examples are:
+* FoglihtenNo07 for Latin text
+* Arial Unicode MS for Arabic text
+* specialized Noto Sans fonts for the texts in the Brahmic scripts
+
+Image of number 2 was taken from the FontForge visualisation of the glyph metrics of LiberationSerif-Regular
+Arabic tabular images were taken from Wikipedia
