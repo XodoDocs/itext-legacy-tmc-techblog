@@ -154,7 +154,11 @@ but have been all but mandatory in writing since at least the 11th century.
 
 Like the other Semitic abjads, Arabic is written from right to left, and does not have a distinction between upper and lower case. 
 It is in all circumstances written cursively, making extensive use of ligatures to join letters together into words. 
-As a result, all characters have several appearances, depending on whether or not they're being adjoined to the previous and/or next letter in the word.
+As a result, all characters have several appearances,
+depending on whether or not they're being adjoined to the previous and/or next letter in the word.
+The positions within a letter cluster are called isolated, initial, medial, and final.
+A few of the letters cannot be joined to any following letter;
+hence they have only two distinct forms, the isolated/initial form and the medial/final form.
 
 ![contextual variation of characters (from Wikipedia.org)](./mutations.png)
 
@@ -166,9 +170,10 @@ However, in actual writing, the graphical representation shows marked difference
 
 ![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
 
-The rightmost letter, alif, is unchanged, because by rule it does not join with any subsequent characters.
-The leftmost three letters are joined to one another,
-to the point where the character in the medial position is unrecognizable compared to its base form, 
+The rightmost letter, أ (alif with hamza), stands alone because by rule it does not join with any subsequent characters;
+it is thus in its isolated form. The leftmost three letters are joined to one another in one cluster,
+where the characters take up their contextual initial, medial, and final positions.
+For foreign audiences, the character in the medial position is unrecognizable compared to its base form,
 save for the double dot underneath it.
 
 It is possible to write fully vocalized Arabic, with all phonetic information available,
