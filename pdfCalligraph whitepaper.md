@@ -167,14 +167,14 @@ This concept is easy to illustrate with a hands-on example. The Arabic word 'ani
 ![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
 
 However, in actual writing, the graphical representation shows marked differences. 
-
-![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
-
 The rightmost letter, أ (alif with hamza), stands alone because by rule it does not join with any subsequent characters;
 it is thus in its isolated form. The leftmost three letters are joined to one another in one cluster,
 where the characters take up their contextual initial, medial, and final positions.
 For foreign audiences, the character in the medial position is unrecognizable compared to its base form,
 save for the double dot underneath it.
+
+![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
+
 
 It is possible to write fully vocalized Arabic, with all phonetic information available,
 through the use of diacritics. This is mostly used for students who are learning Arabic,
