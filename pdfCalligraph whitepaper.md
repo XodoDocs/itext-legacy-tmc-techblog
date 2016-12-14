@@ -394,6 +394,10 @@ by leveraging the PDF marked content attribute /ActualText.
 This attribute can be picked up by a PDF viewer for a text extraction process (e.g. copy-pasting contents) or searching for specific text;
 without this, it is impossible to retrieve the contents of the file correctly.
 
+Even though the /ActualText marker is necessary to properly extract some of the more complex content,
+it is not used often by PDF creation software. Because of this and the garbage-in-garbage-out principle,
+there is usually only a slim chance that you will be able to correctly extract text written with a Brahmic alphabet.
+
 ## Support
 
 The initial release of pdfCalligraph provided support for the following scripts:
@@ -448,6 +452,7 @@ Instructions for loading dependencies can be found on http://developers.itextpdf
 
 pdfCalligraph exposes a number of APIs so that it can be reached from the iText Core code,
 but these APIs do not have to be called by code in applications that leverage pdfCalligraph.
+Even very complex operations like deciding whether the glyphs need /ActualText as metadata will be done out of the box.
 
 This code will just work - note that we don't even have to specify which writing system is being used:
 
@@ -506,6 +511,7 @@ kerned.setProperty(Property.FONT_KERNING, FontKerning.YES);
 ```
 
 ![Latin text 'wave' without kerning](./wave%20unkerned.svg)
+
 ![Latin text 'wave' with kerning](./wave%20kerned.svg)
 
 
