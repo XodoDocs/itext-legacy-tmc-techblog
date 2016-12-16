@@ -217,7 +217,7 @@ and for Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asi
 
 Many scripts of the Northern branch show the grouping of characters into words with the characteristic horizontal bar.
 
-![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
+![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.emf)
 
 In Devanagari, one of the more prominent alphabets of the Northern Brahmi branch,
 an implied vowel /a/ is not expressed in writing (#1), while other vowels take the shape of various diacritics (#2-5).
@@ -226,7 +226,7 @@ even though it follows it in the byte string. When typing a language written in 
 one would first input the consonant and then the vowel,
 but they will be reversed by a text editor that leverages OpenType featurs in any visual representation.
 
-![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
+![Devanagari t combined with various vowels](./typography/vowels%20devanagari.emf)
 
 Another common feature is the use of half-characters in consonant clusters,
 which means to affix a modified version of the first letter to an unchanged form of the second.
@@ -234,7 +234,7 @@ When typing consonant clusters, a diacritic called the halant must be inserted i
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
 Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
-![Devanagari effect of halant](./typography/halant%20devanagari.svg)
+![Devanagari effect of halant](./typography/halant%20devanagari.emf)
 
 If the character accompanied by the halant is followed by a space, then the character is shown with an accent-like diacritic below (#7).
 If it is not followed by a space, then a half character is rendered (#8).
@@ -249,22 +249,22 @@ The reason for this is that the halant is used in both cases, but at a different
 
 The Southern branch shows more diversity but, in general, will show the characters as more isolated:
 
-![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
+![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.emf)
 
 Some vowels will change the shape of the accompanying consonants, rather than being simple diacritical marks:
 
-![Kannada s combined with various vowels](./typography/vowels%20kannada.svg)
+![Kannada s combined with various vowels](./typography/vowels%20kannada.emf)
 
 Southern Brahmi also has more of a tendency to blend clustering characters into unique forms
 rather than affixing one to the other. If one of the characters is kept unchanged,
 it will usually be the first one, whereas Northern Brahmi scripts will usually preserve the second one.
 They use the same technique of halant, but the mutations will be markedly different.
 
-![Kannada effect of halant](./typography/halant%20kannada.svg)
+![Kannada effect of halant](./typography/halant%20kannada.emf)
 
 Some scripts will also do more repositioning logic for some vowels, rather than using glyph substitutions or diacritics.
 
-![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
+![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.emf)
 
 # pdfCalligraph and the PDF format
 
@@ -316,7 +316,7 @@ are not enough.
 
 As an example, the word "Sanskrit" is written in Hindi as follows with the Devanagari alphabet:
 
-![Correct Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20good%20sanskrt.svg)
+![Correct Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20good%20sanskrt.emf)
 
 However, it is saved in Unicode byte stream as follows:
 
@@ -375,7 +375,7 @@ However, it is saved in Unicode byte stream as follows:
 When this string of Unicode points is fed to a PDF creator application that doesn't leverage OTF features,
 the output will look like this:
 
-![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
+![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20bad%20sanskrt.emf)
 
 The PDF format is able to resolve the diacritics as belonging with the glyph they pertain to,
 but it cannot do the complex substitution of sa + halant + ka.
@@ -510,9 +510,9 @@ kerned.setFont(f);
 kerned.setProperty(Property.FONT_KERNING, FontKerning.YES);
 ```
 
-![Latin text 'wave' without kerning](./typography/wave%20unkerned.svg)
+![Latin text 'wave' without kerning](./typography/wave%20unkerned.emf)
 
-![Latin text 'wave' with kerning](./typography/wave%20kerned.svg)
+![Latin text 'wave' with kerning](./typography/wave%20kerned.emf)
 
 
 ### Using the low-level API
@@ -580,8 +580,8 @@ Users who want to leverage optional ligatures in Latin text through the low-leve
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ```
 
-![Latin word elegant, not ligaturized](./typography/elegant%20latin%20without.svg)
-![Latin word elegant, ligaturized](./typography/elegant%20latin%20with.svg)
+![Latin word elegant, not ligaturized](./typography/elegant%20latin%20without.emf)
+![Latin word elegant, ligaturized](./typography/elegant%20latin%20with.emf)
 
 
 If you want to enable kerning with the low-level API, you can simply call the `applyKerning` method with similar parameters as before:
