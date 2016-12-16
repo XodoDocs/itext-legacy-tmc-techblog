@@ -424,7 +424,9 @@ pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 The Thai writing system does not contain any transformations in glyph shapes, so it only requires pdfCalligraph functionality for diacritics.
 
 <a name="using"></a>
+
 ## Using pdfCalligraph
+
 ### Configuration
 
 Using pdfCalligraph is exceedingly easy: you just load the correct binaries into your project, 
