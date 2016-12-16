@@ -164,7 +164,7 @@ hence they have only two distinct forms, the isolated/initial form and the media
 
 This concept is easy to illustrate with a hands-on example. The Arabic word 'aniq (meaning elegant) is written with the following letters:
 
-![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
+![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.emf)
 
 However, in actual writing, the graphical representation shows marked differences. 
 The rightmost letter, أ (alif with hamza), stands alone because by rule it does not join with any subsequent characters;
@@ -173,7 +173,7 @@ where the characters take up their contextual initial, medial, and final positio
 For foreign audiences, the character in the medial position is unrecognizable compared to its base form,
 save for the double dot underneath it.
 
-![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
+![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.emf)
 
 
 It is possible to write fully vocalized Arabic, with all phonetic information available,
@@ -510,9 +510,9 @@ kerned.setFont(f);
 kerned.setProperty(Property.FONT_KERNING, FontKerning.YES);
 ```
 
-![Latin text 'wave' without kerning](./wave%20unkerned.svg)
+![Latin text 'wave' without kerning](./typography/wave%20unkerned.svg)
 
-![Latin text 'wave' with kerning](./wave%20kerned.svg)
+![Latin text 'wave' with kerning](./typography/wave%20kerned.svg)
 
 
 ### Using the low-level API
