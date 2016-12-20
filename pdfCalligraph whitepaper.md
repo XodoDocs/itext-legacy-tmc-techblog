@@ -24,7 +24,7 @@ the Arabic alphabet, and/or the Brahmic scripts, feel free to skip these section
 
 ### Standards and deviations
 
-For digital representation of textual data, it is necessary to store its constituents in a binary compatible way. 
+For digital representation of textual data, it is necessary to store its letters in a binary compatible way. 
 Several systems were devised for representing data in a binary format even long before the digital revolution, 
 the best known of which are Morse code and Braille writing. 
 At the dawn of the computer age, computer manufacturers took inspiration from these systems 
@@ -36,7 +36,7 @@ However, it has only 2<sup>7</sup> = 128 places and as such does not cover diacr
 other writing systems than Latin, or any symbols beyond a few basic mathematical signs.
 
 A number of more extended systems have been developed to solve this, most prominently the concept of a code page,
-which maps all possible 256 bit sequences in a single byte to a certain set of characters.
+which maps all of a single byte's possible 256 bit sequences to a certain set of characters.
 Theoretically, there is no requirement for any code page to be consistent with alphabetic orders,
 or even consistency as to which types of characters are encoded (letters, numbers, symbols, etc),
 but most code pages do comply with a certain implied standard regarding internal consistency.
@@ -44,7 +44,7 @@ but most code pages do comply with a certain implied standard regarding internal
 Any international or specialized system has a multitude of these code pages, usually grouped for a certain language or script, 
 e.g. Cyrillic, Turkish, or Vietnamese.
 The Windows-West-European-Latin code page, for instance, encodes ASCII in the space of the first 7 bits
-and uses the 8th bit to define 128 extra characters that signify modified Latin characters like É, æ, ð, ñ, ü, etc.
+and uses the 8th bit to define 128 extra positions that signify modified Latin characters like É, æ, ð, ñ, ü, etc.
 
 However, there are multiple competing standards, developed independently by companies like IBM, SAP, and Microsoft;
 these systems are not interoperable, and none of them have achieved dominance at any time.
@@ -58,7 +58,7 @@ The eventual response to this lack of a common and independent encoding was the 
 which has become the de facto standard for systems that aren't encumbered by a legacy encoding depending on code pages,
 and is steadily taking over the ones that are.
 
-Unicode aims to provide a unique code point for every possible character, including emoji and extinct alphabets.
+Unicode aims to provide a unique code point for every possible character, including even emoji and extinct alphabets.
 These code points are conventionally numbered in a hexadecimal format.
 In order to keep an oversight over which code point is used for which writing systems,
 characters are grouped in Unicode ranges.
@@ -68,22 +68,35 @@ characters are grouped in Unicode ranges.
 * 0x1400 - 0x167F Canadian Aboriginal Syllabary (640 code points)
 
 It is an encoding of variable length, meaning that if a bit sequence (usually 1 or 2 bytes) in a Unicode text contains certain bit flags,
-the next byte or bytes should be interpreted as part of a multi-byte sequence that represents one character.
+the next byte or bytes should be interpreted as part of a multi-byte sequence that represents a single character.
 If none of these flags are set, then the original sequence is considered to fully identify a character.
 
-There are several encoding schemes, the best known of which are UTF-8 and UTF-16, which requires at least 2 bytes per character.
-UTF-16 is more efficient for text that uses characters on positions 0x0800 and up e.g. all Brahmic scripts and Chinese.
-For any text which is predominantly Arabic or Hebrew, there is very little difference between either system.
+There are several encoding schemes, the best known of which are UTF-8 and UTF-16.
+UTF-16 requires at least 2 bytes per character, and is more efficient for text
+that uses characters on positions 0x0800 and up e.g. all Brahmic scripts and Chinese.
+UTF-16 is the encoding that is used in Java and C# String objects when using the Unicode notation `\u0630`.
 
 UTF-8 is more efficient for any text that contains Latin text, because the first 128 positions of UTF-8 are identical to ASCII.
 That allows simple ASCII text to be stored in Unicode with the exact same filesize
 as would happen if it were stored in ASCII encoding.
 
+There is very little difference between either system for any text which is predominantly written in these alphabets:
+Arabic, Hebrew, Greek, Armenian, and Cyrillic.
+
 ## A bit of font history
 
 A font is a collection of mappings that links character IDs in a certain encoding with glyphs,
-the actual visual representation of a character. Most fonts nowadays use the Unicode encoding standard to specify character IDs.
-A glyph is a collection of vector curves that together form a shape, as follows:
+the actual visual representation of a character.
+Most fonts nowadays use the Unicode encoding standard to specify character IDs.
+A glyph is a collection of vector curves
+which will be interpreted by any program that does visual rendering of characters.
+
+Vectors in general, and Bézier curves specifically, provide a very efficient way to store complex curves
+by requiring only a small number of two-dimensional coordinates to fully describe a curve:
+
+![Sample cubic Bézier curve, requiring 4 coordinate points](./Bezier%20curve.png)
+
+Below is a visual representation of the combination of a number of vector curves into a glyph shape:
 
 ![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
 
@@ -154,7 +167,7 @@ but have been all but mandatory in writing since at least the 11th century.
 
 Like the other Semitic abjads, Arabic is written from right to left, and does not have a distinction between upper and lower case. 
 It is in all circumstances written cursively, making extensive use of ligatures to join letters together into words. 
-As a result, all characters have several appearances,
+As a result, all characters have several appearances, sometimes drastically different from one another,
 depending on whether or not they're being adjoined to the previous and/or next letter in the word.
 The positions within a letter cluster are called isolated, initial, medial, and final.
 A few of the letters cannot be joined to any following letter;
@@ -463,6 +476,9 @@ This code will just work - note that we don't even have to specify which writing
 LicenseKey.loadLicenseFile("/path/to/license.xml");
 Document arabicPdf = new Document(new PdfDocument(new PdfWriter("/path/to/output.pdf")));
 
+// Arabic text starts near the top right corner of the page
+arabicPdf.setTextAlignment(TextAlignment.RIGHT);
+
 // create a font, and make it the default for the document
 PdfFont f = PdfFontFactory.createFont("/path/to/arabicFont.ttf");
 arabicPdf.setFont(f);
@@ -488,7 +504,7 @@ mixed.setProperty(Property.FONT_SCRIPT, Character.UnicodeScript.DEVANAGARI);
 ```
 
 iText will of course fail to do shaping operations with the Latin text,
-but it will correctly make the र (ra) into the combining diacritic form it assumes in consonant clusters.
+but it will correctly convert the र (ra) into the combining diacritic form it assumes in consonant clusters.
 
 However, this becomes more problematic when mixing two alphabets that both require pdfCalligraph logic.
 You are also less likely to find fonts that provide full support for the alphabets you need.
@@ -565,7 +581,7 @@ PdfFont font = PdfFontFactory.createFont(ttf, PdfEncodings.IDENTITY_H);
 
 // once for every line of text
 GlyphLine glyphLine = font.createGlyphLine(text);
-Shaper.applyOtfScript(ttf, glyphLine, script);
+Shaper.applyOtfScript(ttf, glyphLine, script); // this call will mutate the glyphLine
 
 canvas.saveState()
         .beginText()
@@ -576,7 +592,16 @@ canvas.saveState()
         .restoreState();
 ```
 
-Users who want to leverage optional ligatures in Latin text through the low-level API can do the exact same thing for their text. The only difference is that they should call another method from Shaper:
+If you want to enable kerning with the low-level API, you can simply call the `applyKerning` method with similar parameters as before:
+
+```java
+Shaper.applyKerning(ttf, glyphLine);
+```
+
+Users who want to leverage optional ligatures in Latin text through the low-level API
+can do the exact same thing for their text.
+The only differences are that this cannot currently be done with the high-level API,
+and that they should call another method from Shaper:
 
 ```java
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
@@ -585,13 +610,6 @@ Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ![Latin word elegant, not ligaturized](./typography/elegant%20latin%20without.svg)
 ![Latin word elegant, ligaturized](./typography/elegant%20latin%20with.svg)
 
-
-If you want to enable kerning with the low-level API, you can simply call the `applyKerning` method with similar parameters as before:
-
-```java
-Shaper.applyKerning(ttf, glyphLine);
-```
-
 # Colophon
 
 The fonts used for the examples are:
@@ -599,5 +617,6 @@ The fonts used for the examples are:
 * Arial Unicode MS for Arabic text
 * specialized Noto Sans fonts for the texts in the Brahmic scripts
 
-Image of number 2 was taken from the FontForge visualisation of the glyph metrics of LiberationSerif-Regular
-Arabic tabular images were taken from Wikipedia
+* Image of number 2 was taken from the FontForge visualisation of the glyph metrics of LiberationSerif-Regular
+* Arabic tabular images were taken from Wikipedia
+* Bézier curve example was taken from http://falcon80.com/HTMLCanvas/BasicShapes/Bezier%20Curves.html
