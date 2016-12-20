@@ -94,7 +94,7 @@ which will be interpreted by any program that does visual rendering of character
 Vectors in general, and Bézier curves specifically, provide a very efficient way to store complex curves
 by requiring only a small number of two-dimensional coordinates to fully describe a curve:
 
-![Sample cubic Bézier curve, requiring 4 coordinate points](./Bezier%20curve.png)
+![Sample cubic Bézier curve, requiring 4 coordinate points](./Bezier%20Curve.png)
 
 Below is a visual representation of the combination of a number of vector curves into a glyph shape:
 
