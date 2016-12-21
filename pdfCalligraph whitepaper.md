@@ -1,50 +1,35 @@
 # Introduction
 
-Your business is global, shouldn’t your documents be, too?  The PDF format has not supported all languages,
-but now, with the help of pdfCalligraph, we are on our way to  globalization of PDF.
+Your business is global, shouldn’t your documents be, too?
+The PDF format does not make it easy to support certain alphabets,
+but now, with the help of iText and pdfCalligraph, we are on our way to truly making PDF a global format.
 
 The iText library was originally written in the context of Western European languages,
 and it was only designed to handle left-to-right alphabetic scripts.
-However, we have seen that the writing systems of the world can be much more complex and varied
+However, the writing systems of the world can be much more complex and varied
 than just a sequence of letters with no interaction.
 Supporting every type of writing system that humanity has developed is a tall order,
 but we strive to be a truly global company.
-As such, we are determined to respond to customer requestsasking for any writing system.
+As such, we are determined to respond to customer requests asking for any writing system.
 In response to this, we have begun our journey into advanced typography with pdfCalligraph.
 
-
-pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations 
+pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations
 when writing textual content to a PDF file. Its main function is to correctly render complex writing systems 
-such as the right-to-left Hebrew and Arabic scripts, 
-and the various writing systems of the Indian subcontinent and its surroundings. 
+such as the right-to-left Hebrew and Arabic scripts,
+and the various writing systems of the Indian subcontinent and its surroundings.
 In addition, it can also handle kerning and other optional features that can be provided by certain fonts for other alphabets.
-
-In earlier versions of iText, the library was already able to render Chinese,
-Japanese, and Korean (CJK) glyphs in PDF documents,
-and it had limited support for the right-to-left Hebrew and Arabic scripts.
-When we made attempts to go further, technical limitations,
-caused by sometimes seemingly unrelated design decisions, hampered our efforts to implement this in iText 5.
-Because of iText 5's implicit promise not to break backwards compatibility,
-expanding support for Hebrew and Arabic was impossible:
-we would have needed to make significant changes in a number of APIs to support these on all API levels.
-
-When we wrote iText 7, redesigning it from the ground up, we took care to avoid these problems
-in order to provide support for all font features, on whichever level of API abstraction a user chooses.
-We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
 In this position paper, we first provide a number of cursory introductions:
 we'll start out by exploring the murky history of encoding standards for digital text, 
 and then go into some detail about how the Arabic and Brahmic alphabets are structured. 
 Afterwards, we will discuss the problems those writing systems pose in the PDF standard, 
-and the solutions provided to these problems by iText 7's add-on pdfCalligraph.
-
-Of course, this all serves as background information and theoretical exposition to the <a href="#using">hands-on user guide</a>.
+and the solutions to these problems provided by iText 7's add-on pdfCalligraph.
 
 # Technical overview
 
 This section will cover background information about character encodings, the Arabic alphabet and Brahmic scripts.
 If you have a solid background in these, then you can skip to the technical overview of pdfCalligraph,
-which begins at page **X**.
+which begins at page <a href="#using">**X**</a>.
 
 ## A brief history of encodings
 
@@ -221,6 +206,8 @@ and for texts where phonetic ambiguity must be avoided (e.g. the Qur'an).
 The phonetic diacritics as a group are commonly known as tashkil;
 its most-used members are the harakat diacritics for short /a/, /i/, and /u/, and the sukun which denotes absence of a vowel.
 
+### Encoding Arabic
+
 In the Unicode standard, the Arabic script is encoded into a number of ranges of code points:
 * The base forms for both Standard Arabic and a number of derived alphabets in Asia are located in U+0600–U+06FF (Arabic).
 * Supplemental characters, mostly for African and European languages, are in U+0750–U+077F (Arabic Supplement) and U+08A0–U+08FF (Arabic Extended-A)
@@ -304,6 +291,21 @@ They use the same technique of halant, but the mutations will be markedly differ
 Some scripts will also do more repositioning logic for some vowels, rather than using glyph substitutions or diacritics.
 
 ![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
+
+### Encoding Brahmic scripts
+
+As you've probably guessed by now, fonts need to make heavy use of OpenType features
+in order to implement any of the Brahmic scripts.
+Every Brahmic script has got its own dedicated Unicode range:
+
+* 0x0900 - 0x097F Devanagari (128 code points)
+* 0x0980 - 0x09FF Bengali (128 code points)
+* 0x0A00 - 0x0A7F Gurmukhi (128 code points)
+* 0x0A80 - 0x0AFF Bengali (128 code points)
+
+Unlike for Arabic, contextual forms are not stored at dedicated code points.
+Only the base forms of the glyphs have a Unicode point,
+and all contextual mutations and moving operations are implemented as OpenType features.
 
 # pdfCalligraph and the PDF format
 
@@ -456,6 +458,8 @@ The Thai writing system does not contain any transformations in glyph shapes,
 so it only requires pdfCalligraph functionality to correctly render diacritics.
 
 <a name="using"></a>
+
+
 
 ## Using pdfCalligraph
 
@@ -633,6 +637,7 @@ Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 # Colophon
 
 The fonts used for the examples are:
+
 * FoglihtenNo07 for Latin text
 * Arial Unicode MS for Arabic text
 * specialized Noto Sans fonts for the texts in the Brahmic scripts
