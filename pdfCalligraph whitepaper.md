@@ -296,7 +296,7 @@ Some scripts will also do more repositioning logic for some vowels, rather than 
 
 As you've probably guessed by now, fonts need to make heavy use of OpenType features
 in order to implement any of the Brahmic scripts.
-Every Brahmic script has got its own dedicated Unicode range:
+Every Brahmic script has got its own dedicated Unicode range. Below are a few examples:
 
 * 0x0900 - 0x097F Devanagari (128 code points)
 * 0x0980 - 0x09FF Bengali (128 code points)
@@ -321,7 +321,6 @@ significant changes in a number of APIs to support these on all API levels.
 
 For the Brahmic alphabets, we needed the information provided by OpenType font features;
 it turned out to be impossible in iText 5 to leverage these without drastic breaks in the APIs.
-
 When we wrote iText 7, redesigning it from the ground up,
 we took care to avoid these problems in order to provide support for all font features,
 on whichever level of API abstraction a user chooses.
