@@ -209,6 +209,7 @@ its most-used members are the harakat diacritics for short /a/, /i/, and /u/, an
 ### Encoding Arabic
 
 In the Unicode standard, the Arabic script is encoded into a number of ranges of code points:
+
 * The base forms for both Standard Arabic and a number of derived alphabets in Asia are located in U+0600–U+06FF (Arabic).
 * Supplemental characters, mostly for African and European languages, are in U+0750–U+077F (Arabic Supplement) and U+08A0–U+08FF (Arabic Extended-A)
 * Two ranges, U+FB50–U+FDFF (Arabic Pres. Forms-A) and U+FE70–U+FEFF (Arabic Pres. Forms-B),
@@ -446,6 +447,7 @@ The second release, version 1.0.1, expanded this support to:
 * Kannada
 
 pdfCalligraph 1.0.2, as of yet unreleased, will also support:
+
 * Odia/Oriya
 * Telugu
 * Bengali
