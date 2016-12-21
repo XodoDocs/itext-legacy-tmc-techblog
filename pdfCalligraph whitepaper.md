@@ -1,10 +1,36 @@
 # Introduction
 
+Your business is global, shouldn’t your documents be, too?  The PDF format has not supported all languages,
+but now, with the help of pdfCalligraph, we are on our way to  globalization of PDF.
+
+The iText library was originally written in the context of Western European languages,
+and it was only designed to handle left-to-right alphabetic scripts.
+However, we have seen that the writing systems of the world can be much more complex and varied
+than just a sequence of letters with no interaction.
+Supporting every type of writing system that humanity has developed is a tall order,
+but we strive to be a truly global company.
+As such, we are determined to respond to customer requestsasking for any writing system.
+In response to this, we have begun our journey into advanced typography with pdfCalligraph.
+
+
 pdfCalligraph is an add-on module for iText 7, designed to seamlessly handle any kind of advanced shaping operations 
 when writing textual content to a PDF file. Its main function is to correctly render complex writing systems 
 such as the right-to-left Hebrew and Arabic scripts, 
 and the various writing systems of the Indian subcontinent and its surroundings. 
 In addition, it can also handle kerning and other optional features that can be provided by certain fonts for other alphabets.
+
+In earlier versions of iText, the library was already able to render Chinese,
+Japanese, and Korean (CJK) glyphs in PDF documents,
+and it had limited support for the right-to-left Hebrew and Arabic scripts.
+When we made attempts to go further, technical limitations,
+caused by sometimes seemingly unrelated design decisions, hampered our efforts to implement this in iText 5.
+Because of iText 5's implicit promise not to break backwards compatibility,
+expanding support for Hebrew and Arabic was impossible:
+we would have needed to make significant changes in a number of APIs to support these on all API levels.
+
+When we wrote iText 7, redesigning it from the ground up, we took care to avoid these problems
+in order to provide support for all font features, on whichever level of API abstraction a user chooses.
+We also took the next step and went on to create pdfCalligraph, a module that supports the elusive Brahmic scripts.
 
 In this position paper, we first provide a number of cursory introductions:
 we'll start out by exploring the murky history of encoding standards for digital text, 
@@ -16,11 +42,11 @@ Of course, this all serves as background information and theoretical exposition 
 
 # Technical overview
 
-We will not be sharing revolutionary insights in this section, 
-so if you are comfortable with your knowledge about character encodings, 
-the Arabic alphabet, and/or the Brahmic scripts, feel free to skip these sections.
+This section will cover background information about character encodings, the Arabic alphabet and Brahmic scripts.
+If you have a solid background in these, then you can skip to the technical overview of pdfCalligraph,
+which begins at page **X**.
 
-## A bit of encoding history
+## A brief history of encodings
 
 ### Standards and deviations
 
@@ -83,7 +109,7 @@ as would happen if it were stored in ASCII encoding.
 There is very little difference between either system for any text which is predominantly written in these alphabets:
 Arabic, Hebrew, Greek, Armenian, and Cyrillic.
 
-## A bit of font history
+## A brief history of fonts
 
 A font is a collection of mappings that links character IDs in a certain encoding with glyphs,
 the actual visual representation of a character.
@@ -124,7 +150,7 @@ A PDF document is not dynamic in this way: it only knows glyphs and their positi
 and the correct glyph IDs at the correct positions must be passed to it by the application that creates the document.
 This is not a trivial effort because there are many types of rules and features, recombining or repositioning only specific characters in specific combinations.
 
-## A bit of writing history
+## A brief history of writing
 
 Over the last 5000+ years, humanity has created a cornucopia of writing systems. 
 After an extended initial period of protowriting, when people tried to convey 
@@ -140,7 +166,7 @@ and over a hundred other writing systems used primarily in South-East Asia and t
 The other highly influential writing system that is probably an original invention, the Han script, 
 has descendants used throughout the rest of East Asia in the Chinese-Japanese-Korean spheres of influence.
 
-## A very brief introduction to the Arabic script
+### A very brief introduction to the Arabic script
 
 Arabic is a writing system used for a large number of languages in the greater Middle East.
 It is most prominently known from its usage for the Semitic language Arabic
@@ -207,7 +233,7 @@ However, it is much more error-proof to leverage the OpenType features for optio
 for glyphs that signify formulaic expressions, and for making a document better suited to text extraction.
 You will also need OpenType features to properly show the tashkil in more complex situations.
 
-## A very brief introduction to the Brahmic scripts
+### A very brief introduction to the Brahmic scripts
 
 So named because of their descent from the ancient alphabet called Brahmi,
 the Brahmic scripts are a large family of writing systems used primarily in India and South-East Asia.
@@ -226,7 +252,7 @@ Very broadly, Northern Brahmi scripts are used for the Indo-European languages p
 in Northern India, whereas Southern Brahmi scripts are used in Southern India for Dravidian languages,
 and for Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asia.
 
-### Northern Brahmi
+#### Northern Brahmi
 
 Many scripts of the Northern branch show the grouping of characters into words with the characteristic horizontal bar.
 
@@ -258,7 +284,7 @@ The interesting thing is that #7 and #8 are composed of the exact same character
 only in a different order, which has a drastic effect on the eventual visual realization.
 The reason for this is that the halant is used in both cases, but at a different position in the byte stream. 
 
-### Southern Brahmi
+#### Southern Brahmi
 
 The Southern branch shows more diversity but, in general, will show the characters as more isolated:
 
@@ -281,15 +307,7 @@ Some scripts will also do more repositioning logic for some vowels, rather than 
 
 # pdfCalligraph and the PDF format
 
-## A bit of iText history
-
-The iText library was originally written in the context of Western European languages, 
-and it was only designed to handle left-to-right alphabetic scripts. 
-However, we have seen that the writing systems of the world can be much more complex and varied 
-than just a sequence of letters with no interaction. 
-Supporting every type of writing system that humanity has developed is a tall order, 
-but we strive to be a truly global company. As such, we are determined to respond to customer requests
-asking for any writing system.
+## A brief history of iText
 
 In earlier versions of iText, the library was already able to render Chinese, Japanese, and Korean (CJK) glyphs in PDF documents, 
 and it had limited support for the right-to-left Hebrew and Arabic scripts.
@@ -434,7 +452,8 @@ pdfCalligraph 1.0.2, as of yet unreleased, will also support:
 * Gujarati
 * Thai
 
-The Thai writing system does not contain any transformations in glyph shapes, so it only requires pdfCalligraph functionality for diacritics.
+The Thai writing system does not contain any transformations in glyph shapes,
+so it only requires pdfCalligraph functionality to correctly render diacritics.
 
 <a name="using"></a>
 
@@ -458,7 +477,8 @@ like Latin or Cyrillic or Japanese.
 Hence, in order to reduce overhead, iText will not attempt any advanced shaping operations
 if the pdfCalligraph module is not loaded as a binary dependency.
 
-Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 . The exact modules you need are:
+Instructions for loading dependencies can be found on http://developers.itextpdf.com/itext-7 .
+The exact modules you need are:
 
 * the pdfCalligraph library itself
 * the license key library
