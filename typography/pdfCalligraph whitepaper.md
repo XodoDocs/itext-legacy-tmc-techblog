@@ -105,11 +105,11 @@ which will be interpreted by any program that does visual rendering of character
 Vectors in general, and Bézier curves specifically, provide a very efficient way to store complex curves
 by requiring only a small number of two-dimensional coordinates to fully describe a curve:
 
-![Sample cubic Bézier curve, requiring 4 coordinate points](./Bezier%20Curve.png)
+![Sample cubic Bézier curve, requiring 4 coordinate points](./png/Bezier%20Curve.png)
 
 Below is a visual representation of the combination of a number of vector curves into a glyph shape:
 
-![Glyph vectors of the number 2 in the font Liberation Serif Regular](./glyph%20two%20liberation%20serif.png)
+![Glyph vectors of the number 2 in the font Liberation Serif Regular](./png/glyph%20two%20liberation%20serif.png)
 
 As usual, there are a number of formats, the most relevant of which here are TrueType and its virtual successor OpenType.
 
@@ -174,7 +174,7 @@ a number of the characters are dotted variants of others.
 These basic modification dots, called i'jam, are not native to the alphabet
 but have been all but mandatory in writing since at least the 11th century.
 
-![i'jam distinguishes between otherwise identical forms (from Wikipedia.org)](./ijam.png)
+![i'jam distinguishes between otherwise identical forms (from Wikipedia.org)](./png/ijam.png)
 
 Like the other Semitic abjads, Arabic is written from right to left, and does not have a distinction between upper and lower case. 
 It is in all circumstances written cursively, making extensive use of ligatures to join letters together into words. 
@@ -184,11 +184,11 @@ The positions within a letter cluster are called isolated, initial, medial, and 
 A few of the letters cannot be joined to any following letter;
 hence they have only two distinct forms, the isolated/initial form and the medial/final form.
 
-![contextual variation of characters (from Wikipedia.org)](./mutations.png)
+![contextual variation of characters (from Wikipedia.org)](./png/mutations.png)
 
 This concept is easy to illustrate with a hands-on example. The Arabic word 'aniq (meaning elegant) is written with the following letters:
 
-![Arabic word 'aniq, not ligaturized](./typography/elegant%20arabic%20bad%20aniq.svg)
+![Arabic word 'aniq, not ligaturized](./svg/elegant%20arabic%20bad%20aniq.svg)
 
 However, in actual writing, the graphical representation shows marked differences. 
 The rightmost letter, أ (alif with hamza), stands alone because by rule it does not join with any subsequent characters;
@@ -197,7 +197,7 @@ where the characters take up their contextual initial, medial, and final positio
 For foreign audiences, the character in the medial position is unrecognizable compared to its base form,
 save for the double dot underneath it.
 
-![Arabic word 'aniq, properly ligaturized](./typography/elegant%20arabic%20good%20aniq.svg)
+![Arabic word 'aniq, properly ligaturized](./svg/elegant%20arabic%20good%20aniq.svg)
 
 
 It is possible to write fully vocalized Arabic, with all phonetic information available,
@@ -244,7 +244,7 @@ and for Tai, Austro-Asiatic, and Austronesian languages in larger South-East Asi
 
 Many scripts of the Northern branch show the grouping of characters into words with the characteristic horizontal bar.
 
-![Punjabi word kirapaalu (Gurmukhi alphabet)](./typography/elegant%20gurmukhi%20good%20kirapaalu.svg)
+![Punjabi word kirapaalu (Gurmukhi alphabet)](./svg/elegant%20gurmukhi%20good%20kirapaalu.svg)
 
 In Devanagari, one of the more prominent alphabets of the Northern Brahmi branch,
 an implied vowel /a/ is not expressed in writing (#1), while other vowels take the shape of various diacritics (#2-5).
@@ -253,7 +253,7 @@ even though it follows it in the byte string. When typing a language written in 
 one would first input the consonant and then the vowel,
 but they will be reversed by a text editor that leverages OpenType featurs in any visual representation.
 
-![Devanagari t combined with various vowels](./typography/vowels%20devanagari.svg)
+![Devanagari t combined with various vowels](./svg/vowels%20devanagari.svg)
 
 Another common feature is the use of half-characters in consonant clusters,
 which means to affix a modified version of the first letter to an unchanged form of the second.
@@ -261,7 +261,7 @@ When typing consonant clusters, a diacritic called the halant must be inserted i
 to make it clear that the first consonant must not be pronounced with its inherent vowel.
 Editors will interpret the occurrence of halant as a sign that the preceding letter must be rendered as a half-character.
 
-![Devanagari effect of halant](./typography/halant%20devanagari.svg)
+![Devanagari effect of halant](./svg/halant%20devanagari.svg)
 
 If the character accompanied by the halant is followed by a space, then the character is shown with an accent-like diacritic below (#7).
 If it is not followed by a space, then a half character is rendered (#8).
@@ -276,22 +276,22 @@ The reason for this is that the halant is used in both cases, but at a different
 
 The Southern branch shows more diversity but, in general, will show the characters as more isolated:
 
-![Tamil word nerttiyana](./typography/elegant%20tamil%20good%20nerttiyana.svg)
+![Tamil word nerttiyana](./svg/elegant%20tamil%20good%20nerttiyana.svg)
 
 Some vowels will change the shape of the accompanying consonants, rather than being simple diacritical marks:
 
-![Kannada s combined with various vowels](./typography/vowels%20kannada.svg)
+![Kannada s combined with various vowels](./svg/vowels%20kannada.svg)
 
 Southern Brahmi also has more of a tendency to blend clustering characters into unique forms
 rather than affixing one to the other. If one of the characters is kept unchanged,
 it will usually be the first one, whereas Northern Brahmi scripts will usually preserve the second one.
 They use the same technique of halant, but the mutations will be markedly different.
 
-![Kannada effect of halant](./typography/halant%20kannada.svg)
+![Kannada effect of halant](./svg/halant%20kannada.svg)
 
 Some scripts will also do more repositioning logic for some vowels, rather than using glyph substitutions or diacritics.
 
-![Tamil k combined with various vowels, stressing repositioning](./typography/vowels%20tamil.svg)
+![Tamil k combined with various vowels, stressing repositioning](./svg/vowels%20tamil.svg)
 
 ### Encoding Brahmic scripts
 
@@ -349,7 +349,7 @@ are not enough.
 
 As an example, the word "Sanskrit" is written in Hindi as follows with the Devanagari alphabet:
 
-![Correct Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20good%20sanskrt.svg)
+![Correct Devanagari (Hindi) representation of the word Sanskrt](./svg/sanskrit%20devanagari%20good%20sanskrt.svg)
 
 However, it is saved in a Unicode byte stream as follows:
 
@@ -408,7 +408,7 @@ However, it is saved in a Unicode byte stream as follows:
 When this string of Unicode points is fed to a PDF creator application that doesn't leverage OTF features,
 the output will look like this:
 
-![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./typography/sanskrit%20devanagari%20bad%20sanskrt.svg)
+![Incorrect Devanagari (Hindi) representation of the word Sanskrt](./svg/sanskrit%20devanagari%20bad%20sanskrt.svg)
 
 The PDF format is able to resolve the diacritics as belonging with the glyph they pertain to,
 but it cannot do the complex substitution of sa + halant + ka.
@@ -553,9 +553,9 @@ kerned.setFont(f);
 kerned.setProperty(Property.FONT_KERNING, FontKerning.YES);
 ```
 
-![Latin text 'wave' without kerning](./typography/wave%20unkerned.svg)
+![Latin text 'wave' without kerning](./svg/wave%20unkerned.svg)
 
-![Latin text 'wave' with kerning](./typography/wave%20kerned.svg)
+![Latin text 'wave' with kerning](./svg/wave%20kerned.svg)
 
 
 ### Using the low-level API
@@ -632,8 +632,8 @@ and that they should call another method from Shaper:
 Shaper.applyLigaFeature(ttf, glyphLine, null); // instead of .applyOtfScript()
 ```
 
-![Latin word elegant, not ligaturized](./typography/elegant%20latin%20without.svg)
-![Latin word elegant, ligaturized](./typography/elegant%20latin%20with.svg)
+![Latin word elegant, not ligaturized](./svg/elegant%20latin%20without.svg)
+![Latin word elegant, ligaturized](./svg/elegant%20latin%20with.svg)
 
 # Colophon
 
