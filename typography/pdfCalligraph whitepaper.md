@@ -251,7 +251,7 @@ an implied vowel /a/ is not expressed in writing (#1), while other vowels take t
 #5 is a special case, because the short /i/ diacritic is positioned to the left of its consonant,
 even though it follows it in the byte string. When typing a language written in Devanagari,
 one would first input the consonant and then the vowel,
-but they will be reversed by a text editor that leverages OpenType featurs in any visual representation.
+but they will be reversed by a text editor that leverages OpenType features in any visual representation.
 
 ![Devanagari t combined with various vowels](./svg/vowels%20devanagari.svg)
 
