@@ -531,13 +531,41 @@ mixed.setProperty(Property.FONT_SCRIPT, Character.UnicodeScript.DEVANAGARI);
 iText will of course fail to do shaping operations with the Latin text,
 but it will correctly convert the र (ra) into the combining diacritic form it assumes in consonant clusters.
 
-However, this becomes more problematic when mixing two alphabets that both require pdfCalligraph logic.
-You are also less likely to find fonts that provide full support for the alphabets you need.
-Therefore, it is generally wiser to separate the contents, when they appear in a single paragraph,
-into a number of Text layout objects. This can be automated with basic logic:
+However, this becomes problematic when mixing two or more alphabets that require pdfCalligraph logic.
+You can only set one `font script` property per layout object in iText,
+so this technique only allows you to show one alphabet with correct orthography.
+You are also less likely to find fonts that provide full support for all the alphabets you need.
+
+Since version 7.0.2, iText provides a solution for this problem with the `FontProvider` class.
+It is an evolution of the `FontSelector` from iText 5, which allowed users to define fallback fonts
+in case the default font didn't contain a glyph definition for some characters.
+
+This same problem is solved in iText 7 with the `FontProvider`, but in addition to this,
+pdfCalligraph will automatically apply the relevant OpenType features available in the fonts that are chosen.
+
+Below is a brief code sample that demonstrates the concept:
 
 ```java
-TODO: see what FontSelector code sample should look like
+// initial actions
+LicenseKey.loadLicenseFile("/path/to/license.xml");
+Document mixedDoc = new Document(new PdfDocument(new PdfWriter("/path/to/output.pdf")));
+
+// create a repository of fonts and let the document use it
+FontSet set = new FontSet();
+set.addFont("/path/to/ArabicFont.ttf");
+set.addFont("/path/to/LatinFont.ttf");
+set.addFont("/path/to/GurmukhiFont.ttf");
+mixedDoc.setFontProvider(new FontProvider(fontSet));
+
+// set the default document font to the family name of one of the entries in the FontSet
+mixedDoc.setProperty(Property.FONT, "MyFontFamilyName");
+
+// "Punjabi, پنجابی, ਪੰਜਾਬੀ"
+// The word Punjabi, written in the Latin, Arabic, and Gurmukhi alphabets
+String content = "Punjabi, \u067E\u0646\u062C\u0627\u0628\u06CC, \u0A2A\u0A70\u0A1C\u0A3E\u0A2C\u0A40";
+mixedDoc.add(new Paragraph(content));
+
+mixedDoc.close();
 ```
 
 It is also trivial to enable kerning, the OpenType feature which lets fonts define custom rules
