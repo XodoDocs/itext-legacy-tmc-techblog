@@ -1,0 +1,21 @@
+p{
+    background-color: lightgreen;
+}
+
+@media screen and (max-width:720px){
+    p{
+        background-color: lightblue;
+    }
+}
+
+@media print{
+    div{
+        background-color: gray;
+    }
+    p {
+        background-color: gray;
+        color: red;
+    }
+}
+
+

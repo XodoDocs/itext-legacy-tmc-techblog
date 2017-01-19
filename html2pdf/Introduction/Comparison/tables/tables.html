@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+</head>
+<body>
+<h1>Basic table test</h1>
+<h2>Default table no styles</h2>
+<table>
+    <tbody>
+    <tr>
+        <td>Simple Cell 1.1</td>
+        <td>Simple Cell 1.2</td>
+        <td>Simple Cell 1.3</td>
+    </tr>
+    <tr>
+        <td>Simple Cell 2.1</td>
+        <td>Simple Cell 2.2</td>
+        <td>Simple Cell 2.3</td>
+    </tr>
+    </tbody>
+</table>
+<h2>Table with style border:2px solid black</h2>
+<table style="border: 2px solid black;">
+    <tbody>
+    <tr>
+        <td style="border: 2px solid black;">Simple Cell 1.1</td>
+        <td style="border: 2px solid black;">Simple Cell 1.2</td>
+        <td style="border: 2px solid black;">Simple Cell 1.3</td>
+    </tr>
+    <tr>
+        <td style="border: 2px solid black;">Simple Cell 2.1</td>
+        <td style="border: 2px solid black;">Simple Cell 2.2</td>
+        <td style="border: 2px solid black;">Simple Cell 2.3</td>
+    </tr>
+    </tbody>
+</table>
+<h2>Table with style border-collapse:collapse</h2>
+<table style="border: 2px solid black; border-collapse: collapse;">
+    <tbody>
+    <tr>
+        <td style="border: 2px solid black;">Simple Cell 1.1</td>
+        <td style="border: 2px solid black;">Simple Cell 1.2</td>
+        <td style="border: 2px solid black;">Simple Cell 1.3</td>
+    </tr>
+    <tr>
+        <td style="border: 2px solid black;">Simple Cell 2.1</td>
+        <td style="border: 2px solid black;">Simple Cell 2.2</td>
+        <td style="border: 2px solid black;">Simple Cell 2.3</td>
+    </tr>
+    </tbody>
+</table>
+<h2>Table with attribute border="5" and style border-collapse:collapse and empty cell</h2>
+<table style="border-collapse: collapse;" border="5">
+    <tbody>
+    <tr>
+        <td>Simple Cell 1.1</td>
+        <td style="border: 5px red solid;">Red border cell</td>
+    </tr>
+    <tr>
+        <td>Simple Cell 2.1</td>
+        <td>Simple Cell 2.2</td>
+        <td>Simple Cell 2.3</td>
+    </tr>
+    </tbody>
+</table>
+<h1 style="page-break-before: always;">Complex tables</h1>
+<h2>Complex 1: borders and colors</h2>
+<ol style="list-style-type: upper-roman;">
+    <li>Table with styles:</li>
+    <ul>
+        <li>border-spacing: 30px</li>
+        <li>border-width: 15px</li>
+        <li>background-color</li>
+        <li>different color borders</li>
+    </ul>
+    <li>Rows and cells with styles:</li>
+    <ul>
+        <li>border-width</li>
+        <li>background-color</li>
+        <li>different color borders</li>
+    </ul>
+    <li>(This is an ordered list with nested unordered lists, by the way.)</li>
+</ol>
+<table style="border-spacing: 30px; border-style: solid; border-left-color: blue; border-width: 15px; border-right-color: yellow; background-color: #a0a0a0;">
+    <tbody>
+    <tr style="background-color: #f0f0f0;">
+        <td style="border-style: solid; border-left-color: blue; border-width: 5px; border-right-color: yellow;">Cell 1.1 with various border colors</td>
+        <td style="border-style: solid; border-color: green; border-width: 3px;">Cell 1.2<ol style="list-style: upper-latin outside;">
+            <li>ListItem 1</li>
+            <li>ListItem 2</li>
+        </ol>WithOneLaaaaaaaaargeWord</td>
+        <td style="border-style: solid; border-color: yellow; border-width: 3px;">Cell 1.3 containing just normal words to fill the contents of this cell.</td>
+        <td style="border-style: solid; border-color: yellow; border-width: 3px;">Cell 1.4 containing just normal words to fill the contents of this cell.</td>
+    </tr>
+    <tr>
+        <td style="border-style: solid; border-color: green; border-width: 10px;">Cell 2.1 with 10px green border</td>
+        <td style="border-style: solid; border-color: green; border-width: 20px;">Cell 2.2<ol style="list-style: upper-latin outside;">
+            <li>Green border</li>
+            <li>20px</li>
+        </ol>WithOneLaaaaaaaaargeWord</td>
+        <td style="border-style: solid; border-color: green; border-width: 3px;">Cell 3 containing just normal words to fill the contents of this cell.</td>
+        <td style="border-style: solid; border-color: yellow; border-width: 3px;">Cell 3 containing just normal words to fill the contents of this cell.</td>
+    </tr>
+    </tbody>
+</table>
+<h2 style="page-break-before: always;">Complex 2: header, footer, caption and alignment</h2>
+<p>Table with styles:</p>
+<ul>
+    <li>repeat-header:yes</li>
+    <li>repeat-footer:yes</li>
+    <li>margin:50px</li>
+</ul>
+<p><strong>Note:</strong> repeat-header and repeat-footer are NOT real CSS attributes, but only work in combination with this XMLWorker. These two styles are used by iText to repeat headers and footers of large tables that are split over several pages.</p>
+<p>Different row types:</p>
+<ul>
+    <li>header</li>
+    <li>body</li>
+    <li>footer</li>
+    <li>caption</li>
+</ul>
+<p>Cells with styles</p>
+<ul>
+    <li>padding</li>
+    <li>text-align</li>
+    <li>vertical-align</li>
+</ul>
+<table style="margin: 10px; repeat-header: yes; repeat-footer: yes; border: 1px solid black;"><caption style="caption-side: bottom;">This is the caption of this table</caption>
+    <tfoot>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Footer 1,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 1,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 1,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 1,4</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Footer 2,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 2,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 2,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Footer 2,4</td>
+    </tr>
+    </tfoot>
+    <thead>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Header 1,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 1,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 1,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 1,4</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Header 2,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 2,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 2,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Header 2,4</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,1<br />Let's<br /><br />push<br /><br />Row 3<br /><br />to the<br /><br />next<br /><br />page</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,2 with some content</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,3 with some content</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,4 with some content</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Cell 2,1<br />I'll<br />help.<br /><br />Push!<br /><br />PUSH!</td>
+        <td style="padding: 5px; border: 1px solid black; vertical-align: top;">Cell 2,2 I'm at the top!</td>
+        <td style="padding: 5px; border: 1px solid black; vertical-align: bottom;">Cell 2,3 I'm down :(</td>
+        <td style="padding: 5px; border: 1px solid black; vertical-align: top; text-align: right;">Cell 2,4<br />Weirdo's<br />I'll hide up here</td>
+    </tr>
+    <tr>
+        <td style="padding: 25px; border: 1px solid black;">Cell 3,1 with larger padding</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 3,2</td>
+        <td style="padding: 5px; border: 1px solid black; text-align: center;">Cell 3,3<br />Centered</td>
+        <td style="padding: 5px; border: 1px solid black; text-align: right;">Cell 3,4<br />I'm always right</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Cell 4,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 4,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 4,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 4,4</td>
+    </tr>
+    </tbody>
+</table>
+<h2 style="page-break-before: always;">Complex 3: colspan and rowspan</h2>
+<p>Cells with attributes:</p>
+<ul>
+    <li>rowspan</li>
+    <li>colspan</li>
+</ul>
+<table style="margin: 10px; border: 1px solid black;">
+    <tbody>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,2</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,4</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 1,5</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;" colspan="2">Cell 2,1 and 2,2<br />(colspan 2)</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 2,3</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 2,4</td>
+        <td style="padding: 5px; border: 1px solid black;" rowspan="3">Cell 2,5<br />3,5 and 4,5<br />(rowspan 3)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">Cell 3,1</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 3,2</td>
+        <td style="padding: 5px; border: 1px solid black;" rowspan="2">Cell 3,3 and 4,3<br />(rowspan 2)</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 3,4</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;" rowspan="2" colspan="2">Cell 4,1 4,2<br /> 5,1 5,2<br />(colspan 2,<br />rowspan 2)</td>
+        <td style="padding: 5px; border: 1px solid black;">Cell 4,4</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;" colspan="3">Cell 5,3 5,4 and 5,5<br />(colspan 3)</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,30 @@
+Html2Pdf Blog post ideas
+
+Introduction:
+Main use case statement
+Show code most users will use
+Very simple example: show html, css and output
+Brief high-level explanation on how it works-->conversion to JSoup document, conversion from JSoup-elements to iText layout elements --> iText works its magic
+
+Introduction:
+- XmlWorker has existed for iText5 for a while
+- Limited support for css and certain tags
+- Due to the way it was written, extending XmlWorker would require rewriting a lot of iText5 code, especially around lay-outing
+- iText7 is just that, a complete rewrite
+- The renderer-layout object framework for itext7 is better suited for parsing html and css
+- Code for calling the functionality is still very simple (Provide diagram):
+
+{code:java}
+ConverterProperties converterProperties = new ConverterProperties().setBaseUri(resoureLoc);
+HtmlConverter.convertToPdf(new FileInputStream(htmlSource), new FileOutputStream(pdfDest), converterProperties);
+{code}
+
+- Show very simple example (maybe setup a webpage? The html is ugly though)
+
+
+Introduction
+When we released iText 7 in <insert release month>, it did not support al features provided in iText5 yet. Amongst the features that did not make initial release was the ability to transform html and css content into a pdf document. In iText5, we had limited support for this through XmlWorker. But the number of tags and css declarations that XmlWorker supports is limited to the set of most frequently used tags and properties. This focus was as much a choice as it was a necessity: the rendering framework in iText5 grew organically over the years and it was build with the static page and drawing concept of the pdf specification in mind, not the free-flowing ways of the browsers intended to paint html on your screen.
+
+Now, it is time to unveil <Html2Pdf official product name, my money's on PdfCoil>, the newer, sleeker XmlWorker, build using iText7. iText7 is a from the ground-up rewrite of iText5, intended to provide the same functionality but with a more robust, more easily extendable foundation. The renderer-framework in particular received some attention, and now functions by building a tree of renderers and their child-renderers, and traversing it bottom-up to perform the final lay-out operations. This approach is much more suitable to dealing with html to pdf conversion than the old model in iText5, and allows us to implement future support for tags more easily <add example of a tag or css declaration that wasn't supported by XmlWorker but is by Html2Pdf>.
+
+
