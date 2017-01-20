@@ -17,9 +17,9 @@ This blog post will give you an overview of how HTML2PDF maps the HTML model ont
 
 ## A technical overview of the mapping process
 
-### ITagWorker
+### ITagWorker, ITagWorkerFactory, and ITagWorkerFactoryRepository
 
-tagworkers css appliers
+ITagWorker is the interface we use to create and modify the iText layout objects. 
 
 insert graphic on how TagWorkers work
 
@@ -75,4 +75,4 @@ explain different methods to implement
 
 ## outro
 
-summarize
+summarize, yupla
