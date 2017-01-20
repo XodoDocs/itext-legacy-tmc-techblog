@@ -1,15 +1,17 @@
 # HTML 2 PDF :: How HTML tags are mapped onto iText layout objects
 
 
-## intro
+## iText Layout objects
 
-talk about iText layout and compare it to html
+iText has had a document model for a long time. This model allows developers to quickly grasp how to use iText without having to know much about the PDF specification. The model we use closely resembles HTML. This is because the model both HTML and iText use is based on how documents are formed. These models are designed using concepts that most people can easily understand. Most people have a basic idea of what a paragraph is and what a table does. iText uses objects such as these to simplify the creation of PDF documents and HTML uses similar objects to let you construct HTML files. If you look at both models then you'll see that there are a lot of similarities. There are so many similarities that during the design process of the iText 7 layout module we took a few ideas and implemented these into the iText model, e.g. based on the p-tag's nesting behavior it is not possible to nest Paragraph objects in iText. 
 
-explicitly mention that we made certain decisions similar to how html is structure (nested paragraphs e.g.)
+The similarities between HTML and iText objects means that the object models can easily be mapped onto one another. There are a few tags in HTML that don't make sense in the context of PDF, but most correspond to an iText equivalent. This table gives you a brief overview of the default mapping we provided:
 
-mention different mappings since not every HTML tag has a PDF/iText equivalent
+<TODO: insert tag mapping table>
 
-include table that shows interesting mappings
+As you can see not everything maps perfectly. <TODO: pick one of the things that don't map and elaborate why not and how we fixed it>
+
+This blog post will give you an overview of how HTML2PDF maps the HTML model onto the iText model and how you can influence this process.
 
 
 
