@@ -15,15 +15,43 @@ This blog post will give you an overview of how HTML2PDF maps the HTML model ont
 
 
 
-## technical explanation
+## A technical overview of the mapping process
+
+### ITagWorker
+
+tagworkers css appliers
+
+insert graphic on how TagWorkers work
+
+brief explanation on how they work
+
+### mapping flow
 
 show where the mapping happens in the entire process
 
+<TODO: include Sam's flow diagram>
+
 4 steps to parse all nodes
 
-include Sam's diagram
+1. Create the Layout object
 
-use example to demonstrate the 4 steps
+add text
+
+2. Process the children if any
+
+add text (push current to stack)
+
+3. Apply the CSS
+
+add text
+
+4. Return to the parent layout object
+
+add text
+
+
+use example to demonstrate the 4 steps. use flow created by Samuel, the stack diagram.
+
 
 
 ## customizing the mapping
