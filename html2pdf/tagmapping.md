@@ -9,59 +9,56 @@ Having so much so similarities between HTML and iText objects means that the obj
 
 <TODO: insert tag mapping table>
 A - ATagWorker
-Articler - DivTagWorker
+Article - DivTagWorker
 BDI - SpanTagWorker
 BDO - SpanTagWorker
 <TODO: insert tag mapping table>
 
-We tried to map every HTML tag that makes in a PDF file to an iText layout object. This is easy for some object, a span is still a span, but for other objects we really had to look at them abstractly and decide that they were a modified version of what we already implemented. We decided, for instance, that an article tag is a div element.
-
-As you can see not everything maps perfectly. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div because an article is a div under a different name. As you can also see, some tags were not included because they don't make sense in a PDF.
+We tried to map every HTML tag that makes in a PDF file to an iText layout object. This is easy for some objects, a span is still a span, but for other objects we had to decide that they were a modified version of what we already implemented. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div because when you squint your eyes an article is a div under a different name. Also, some tags were not included because they don't make sense in a PDF, e.g. Audio.
 
 This blog post will give you an overview of how HTML2PDF maps the HTML model onto the iText model and how you can influence this process.
 
 
-
 ## A technical overview of the mapping process
 
-### ITagWorker, ITagWorkerFactory, and ITagWorkerFactoryRepository
+Let's take a look at how the mapping process is handled. In the diagram "Processing nodes" you can see how HTML2PDF works.
 
-ITagWorker is the interface we use to create and modify the iText layout objects. It is important to know that for each tag the HtmlProcessor encounters, by default a new TagWorker instance will be created. 
+<INSERT DIAGRAM>
+
+There are 4 steps that HTML2PDF goes through to make an iText layout object: 
+
+1. Create the layout object
+2. Process children 
+3. Apply the CSS
+4. Return to the parent layout object
+
+1. Create the layout object
+The first step is the most obvious one: If an HTML tag corresponds to an iText Layout object then at one point you have to make an iText Layout object. This is done through the ITagWorker interface. We'll dive into the TagWorkers later on in this post.
+
+2. Process children
+HTML2PDF processes the tags depth-firt, meaning that if this tag has any child tags it will loop over all the child tags and go through this flow again with the child tags before finishing the flow for the current tag. Meaning that if a child tag has more children, it will go over them as well, and so on.
+
+3. Apply the CSS
+Aftr processing the child tags, HTML2PDF will apply the CSS to the iText Layout object. This is done through CSS Appliers.
+
+4. Return to parent
+The Layout object is now complete. It contains its child elements and its CSS is also applied. This object will now be returned to its parent tag for further handling.
+
+TODO use example to demonstrate the 4 steps. use flow created by Samuel, the stack diagram.
+
+
+### ITagWorker, ITagWorkerAssemblers, and ITagWorkerFactory
+
+The actual processing of the HTML tags into iText objects happens in the ITagWorker implementations. We've provided a standard implementation for every HTML tag we support. 
+
+It is important to know that for each tag the HtmlProcessor encounters, by default a new TagWorker instance will be created. 
 
 insert graphic on how TagWorkers work
 
 brief explanation on how they work
 
-### mapping flow
 
-show where the mapping happens in the entire process
-
-<TODO: include Sam's flow diagram>
-
-4 steps to parse all nodes
-
-1. Create the Layout object
-
-add text
-
-2. Process the children if any
-
-add text (push current to stack)
-
-3. Apply the CSS
-
-add text
-
-4. Return to the parent layout object
-
-add text
-
-
-use example to demonstrate the 4 steps. use flow created by Samuel, the stack diagram.
-
-
-
-## customizing the mapping
+### customizing the mapping
 
 intro on why to customize the mapping
 
@@ -71,7 +68,7 @@ talk about better use cases: lead up to custom tagworkers
 
 
 
-### custom tagworkers
+custom tagworkers
 
 intro sample
 
