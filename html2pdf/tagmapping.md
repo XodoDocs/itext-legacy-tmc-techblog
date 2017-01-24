@@ -9,6 +9,7 @@ Having so much so similarities between HTML and iText objects means that the obj
 
 <TODO: insert tag mapping table>
 A - ATagWorker
+Articler - DivTagWorker
 BDI - SpanTagWorker
 BDO - SpanTagWorker
 <TODO: insert tag mapping table>
@@ -25,7 +26,7 @@ This blog post will give you an overview of how HTML2PDF maps the HTML model ont
 
 ### ITagWorker, ITagWorkerFactory, and ITagWorkerFactoryRepository
 
-ITagWorker is the interface we use to create and modify the iText layout objects. 
+ITagWorker is the interface we use to create and modify the iText layout objects. It is important to know that for each tag the HtmlProcessor encounters, by default a new TagWorker instance will be created. 
 
 insert graphic on how TagWorkers work
 
