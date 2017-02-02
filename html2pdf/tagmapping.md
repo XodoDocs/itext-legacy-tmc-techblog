@@ -44,12 +44,12 @@ Aftr processing the child tags, HTML2PDF will apply the CSS to the iText Layout 
 4. Return to parent
 The Layout object is now complete. It contains its child elements and its CSS is also applied. This object will now be returned to its parent tag for further handling.
 
-TODO use example to demonstrate the 4 steps. use flow created by Samuel, the stack diagram.
+TODO use example to demonstrate the 4 steps. Possibly use flow created by Samuel, the stack diagram.
 
 
 ### ITagWorker, ITagWorkerAssemblers, and ITagWorkerFactory
 
-The actual processing of the HTML tags into iText objects happens in the ITagWorker implementations. We've provided a standard implementation for every HTML tag we support. 
+The actual processing of the HTML tags into iText objects happens in the ITagWorker implementations. We've provided a standard implementation for every HTML tag we support. We tried to make it extensible as possible.
 
 It is important to know that for each tag the HtmlProcessor encounters, by default a new TagWorker instance will be created. 
 
@@ -60,21 +60,174 @@ brief explanation on how they work
 
 ### customizing the mapping
 
-intro on why to customize the mapping
+TODO :intro on why to customize the mapping
 
-show example on how to map a random tagworker onto a random tags
+There's a few options to customize the mapping:
 
-talk about better use cases: lead up to custom tagworkers
+1. You can implement the ITagWorkerFactory interface
+2. You can extend the DefaultTagWorkerFactory and override the getCustomTagWorker method
+
+We always advise you to use the second option. This option allows you to take advantage of our own internal mapping we made. It also allows you to remap existing tags onto other ITagWorkers as the getCustomTagWorker method has priority over our internal mapping. The following code sample maps everything onto a SpanTagWorker.
+
+```
+public class CustomTagWorkerFactory extends DefaultTagWorkerFactory {
+
+    @Override
+    public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context) {
+        return new SpanTagWorker(tag, context);
+    }
+}
+```
+
+Don't try this at home! There are more useful things to do with a custom mapping.
 
 
 
 custom tagworkers
 
-intro sample
+Let's say that in our converted PDF files we want to insert a QR Code based on the data in our database. You could insert this data into the HTML in a custom tag:
 
-show code to implement a custom tagworker
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QRCode Example</title>
+    <link rel="stylesheet" type="text/css" href="qrcode.css"/>
+</head>
+<body>
+<p>QR Code below,Q </p>
+<qr charset="Cp437" errorcorrection="Q">
+With great power comes great current squared times resistance
+</qr>
 
-explain different methods to implement
+<p>QR Code below, L</p>
+<qr charset="Cp437" errorcorrection="L">
+    With great power comes great current squared times resistance
+</qr>
+</body>
+</html>
+```
+
+In order for this tag to be picked we'll need to write a TagWorker. This class will parse and process the information inside the tag and its attributes.
+
+QRCodeTagWorker
+```
+public class QRCodeTagWorker implements ITagWorker {
+    private static String[] allowedErrorCorrection = {"L","M","Q","H"};
+    private static String[] allowedCharset = {"Cp437","Shift_JIS","ISO-8859-1","ISO-8859-16"};
+    private BarcodeQRCode qrCode;
+    private Image qrCodeAsImage;
+
+    public QRCodeTagWorker(IElementNode element, ProcessorContext context){
+        //Retrieve all necessary properties to create the barcode
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        //Character set
+        String charset = element.getAttribute("charset");
+        if(checkCharacterSet(charset )){
+            hints.put(EncodeHintType.CHARACTER_SET, charset);
+        }
+        //Error-correction level
+        String errorCorrection = element.getAttribute("errorcorrection");
+        if(checkErrorCorrectionAllowed(errorCorrection)){
+            ErrorCorrectionLevel errorCorrectionLevel = getErrorCorrectionLevel(errorCorrection);
+            hints.put(EncodeHintType.ERROR_CORRECTION, errorCorrectionLevel);
+        }
+        //Create the QR-code
+        qrCode = new BarcodeQRCode("placeholder",hints);
+
+    }
+
+    @Override
+    public void processEnd(IElementNode element, ProcessorContext context) {
+        //Transform barcode into image
+        qrCodeAsImage = new Image(qrCode.createFormXObject(context.getPdfDocument()));
+
+    }
+
+    @Override
+    public boolean processContent(String content, ProcessorContext context) {
+        //Add content to the barcode
+        qrCode.setCode(content);
+        return true;
+    }
+
+    @Override
+    public boolean processTagChild(ITagWorker childTagWorker, ProcessorContext context) {
+        return false;
+    }
+
+    @Override
+    public IPropertyContainer getElementResult() {
+
+        return qrCodeAsImage;
+    }
+
+    private static boolean checkErrorCorrectionAllowed(String toCheck){
+        for(int i = 0; i<allowedErrorCorrection.length;i++){
+            if(toCheck.toUpperCase().equals(allowedErrorCorrection[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean checkCharacterSet(String toCheck){
+        for(int i = 0; i<allowedCharset.length;i++){
+            if(toCheck.equals(allowedCharset[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static ErrorCorrectionLevel getErrorCorrectionLevel(String level){
+        switch(level) {
+            case "L":
+                return ErrorCorrectionLevel.L;
+            case "M":
+                return ErrorCorrectionLevel.M;
+            case "Q":
+                return ErrorCorrectionLevel.Q;
+            case "H":
+                return ErrorCorrectionLevel.H;
+        }
+        return null;
+
+    }
+}
+```
+
+Because HTML2PDF doesn't know about the QRCodeTagWorker, we'll need to plug it in into our custom DefaultTagWorkerFactory implementation:
+```
+public class CustomTagWorkerFactory extends DefaultTagWorkerFactory {
+
+    @Override
+    public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context) {
+        if ( "qr".equalsIgnoreCase(tag.name()) ) {
+            return new QRCodeTagWorker(tag, context);
+        }
+
+        return null;
+    }
+}
+```
+
+Now, all we need to do it register this into the HTML2PDF workflow:
+
+```
+ConverterProperties converterProperties = new ConverterProperties();
+converterProperties.setTagWorkerFactory(new CustomTagWorkerFactory());
+
+HtmlConverter.convertToPdf(
+        new FileInputStream("C:\\Temp\\qr\\qrcode.html"),
+        new FileOutputStream("C:\\Temp\\qr\\out.pdf"),
+        converterProperties);
+```
+
+Run this code sample and you'll get the following output:
+
+TODO INSERT IMAGE OF PDF FILE
 
 
 ## outro
