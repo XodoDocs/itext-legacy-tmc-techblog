@@ -22,6 +22,8 @@ Like XmlWorker, it is still possible for the user to define their own, custom wa
 In the second phase, HtmlWorker walks through the tree in a depth-first manner. Each tag is processed in 2 steps: A first processing step when the tag is encountered for the first time in the walk, and a final step after all of its children have been processed. How each tag is processed depends on which TagWorker class and CssApplier class it is mapped to. During the processing the tagWorker creates an iText layout object, then processes every child, applies css using the CssApplier instance and finally returns the lay-out object to its parent. The process is visualized in figure <flow> and figure <node process flow>. 
 
 ##Short Comparison to XmlWorker
+When comparing Html2Pdf to our old solution XmlWorker in terms of output and support, Html2Pdf can be seen as XmlWorker++. It has a much better support for a wider array of html tags and css properties. The foundation of iText7 is alos better suited to any updates, changes and patches down the road. While there will not be a lot of difference in output when processing simple html and css, XmlWorker quickly stumbles when confronted with more complex schemes or certain Css properties. Examples of areas where Html2Pdf beats XmlWorker: Borders on non-table elements (and i nquality on table elements as well), handling of Arabic and other right-to-left scripts, support of responsive design through media queries, ...
+
 In general: Html2Pdf == XmlWorker+
 For simple html, output will not differ too much between XmlWorker and <Html2Pdf>.
 <Html2Pdf> supports more css properties, on more tags. Example: borders on divs, paragraphs, etc.
