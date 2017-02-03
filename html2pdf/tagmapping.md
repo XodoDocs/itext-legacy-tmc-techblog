@@ -220,4 +220,10 @@ TODO INSERT IMAGE OF PDF FILE
 
 ## outro
 
-summarize, yupla
+Now that we've reached the end of this blog post, let's take a look at what we've learned of how HTML2PDF:
+
+- The layout model has a lot of similarities to the HTML model, so mapping is relatively easy.
+- HTML2PDF iterates over the HTML structure depth-first to create its iText layout structure.
+- You can extend or customize the mapping using ITagWorkers and ITagWorkerFactory
+
+~Michaël.
