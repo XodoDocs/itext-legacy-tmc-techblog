@@ -10,6 +10,8 @@ I will attempt to explain why you may need to use the config options, and how to
 The default way to use html2pdf is either one of two basic one-line code samples:
 
 ```java
+// "input.html" is the source (input) file
+// "output.pfd" is the target (output) file
 HtmlConverter.convertToPdf(new File("input.html"), new File("output.pdf"));
 ```
 
