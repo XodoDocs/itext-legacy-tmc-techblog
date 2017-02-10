@@ -52,7 +52,14 @@ So e.g. `<img src="static/img/logo.png"/>` and `<img src="/static/img/logo.png"/
 
 ### mediaDeviceDescription
 
-You can specify the kind of viewport your original file was designed for.
+The viewport is the user's visible area of a web page.
+The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
+Before tablets and mobile phones, web pages were designed only for computer screens, and it was common for web pages to have a static design and a fixed size.
+Then, when we started surfing the internet using tablets and mobile phones, fixed size web pages were too large to fit the viewport. To fix this, browsers on those devices scaled down the entire web page to fit the screen.
+This was not perfect!! But a quick fix.
+HTML5 introduced a method to let web designers take control over the viewport, through the `<meta>` tag.
+
+With html2pdf, you can specify the kind of viewport your original file was designed for.
 
 ### tagWorkerFactory
 
