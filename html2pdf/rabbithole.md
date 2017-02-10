@@ -85,6 +85,8 @@ public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context)
 }
 ```
 
+One particular usecase might be to add dynamic content to your pdf, such as barcodes, whilst defining only ´<qrcode>SKU</qrcode>´ in the source html, rather than specifying the entire image.
+
 ### cssApplierFactory
 
 The exact same customization strategy can be implemented for CSS properties.
