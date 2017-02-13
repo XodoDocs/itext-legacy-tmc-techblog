@@ -11,7 +11,7 @@ The default way to use html2pdf is either one of two basic one-line code samples
 
 ```java
 // "input.html" is the source (input) file
-// "output.pfd" is the target (output) file
+// "output.pdf" is the target (output) file
 HtmlConverter.convertToPdf(new File("input.html"), new File("output.pdf"));
 ```
 
@@ -30,7 +30,8 @@ static void convertToPdf(InputStream htmlStream, PdfDocument pdfDocument, Conver
 
 ## ConverterProperties
 
-Even though the first two parameters may differ, there is always the optional third parameter `ConverterProperties`.
+Even though the first two parameters may differ in any of the method overloads,
+there is always the optional third parameter `ConverterProperties`.
 This parameter contains the basic configuration options that most users will probably be satisfied with.
 We will now elaborate on these options so that you can configure your html2pdf code.
 
@@ -54,12 +55,17 @@ So e.g. `<img src="static/img/logo.png"/>` and `<img src="/static/img/logo.png"/
 
 The viewport is the user's visible area of a web page.
 The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
-Before tablets and mobile phones, web pages were designed only for computer screens, and it was common for web pages to have a static design and a fixed size.
-Then, when we started surfing the internet using tablets and mobile phones, fixed size web pages were too large to fit the viewport. To fix this, browsers on those devices scaled down the entire web page to fit the screen.
-This was not perfect!! But a quick fix.
+Before tablets and mobile phones, web pages were designed only for computer screens,
+and it was common for web pages to have a static design and a fixed size.
+Then, when we started surfing the internet using tablets and mobile phones,
+fixed size web pages were too large to fit the viewport.
+Initially, browsers on those devices scaled down the entire web page to fit the screen.
+This was a quick fix that had lots of drawbacks. As a response to this problem,
 HTML5 introduced a method to let web designers take control over the viewport, through the `<meta>` tag.
 
-With html2pdf, you can specify the kind of viewport your original file was designed for.
+With html2pdf, you can specify the kind of viewport your original file was designed for,
+when it isn't specified by a `<meta>` element.
+// TODO: which one overrides the other ?
 
 ### tagWorkerFactory
 
@@ -85,7 +91,9 @@ public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context)
 }
 ```
 
-One particular usecase might be to add dynamic content to your pdf, such as barcodes, whilst defining only ´<qrcode>SKU</qrcode>´ in the source html, rather than specifying the entire image.
+One particular usecase might be to add dynamic content to your pdf, such as barcodes: in that case,
+you can define only `<qrcode>SKU</qrcode>` in the source html, rather than specifying the entire image.
+Your custom TagWorker then creates the QR code using the iText APIs and adds it to the document.
 
 ### cssApplierFactory
 
