@@ -13,7 +13,7 @@ You can use pdfXFA to fill XFA Forms. To fill a form we'll need a few things:
 - XFA Form
 - XML stream containing the data
 
-Filling an XFA form can be done using the following code:
+Filling an XFA form can be done using the following code:  
 
 {code}  
 InputStream pdf = new FileInputStream("path/to/file.pdf");  
@@ -25,6 +25,19 @@ XFAFiller xfaFiller = new XFAFiller();
 xfaFiller.fillXfa(pdf, xfa, out);  
 {code}  
 
+There's a few overloaded methods for this functionality. Use the one that fits best for your use case.
+
 ## flatten  
+You can use pdfXFA to flatten your files. You can use our XFAFlattener convenience class to do so. 
+
+{code}  
+final FileInputStream xfaInputStream = new FileInputStream("path/to/data.xml");  
+final FileOutputStream pdfOutputStream = new FileOutputStream("path/to/output.pdf");  
+
+final XFAFlattener xfaFlattener = new XFAFlattener();  
+xfaFlattener.flatten(xfaInputStream, pdfOutputStream, properties);  
+{code}  
 
 ### flattenproperties  
+
+Several properties can be set.
