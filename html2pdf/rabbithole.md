@@ -1,9 +1,11 @@
-# html2pdf: down the rabbit hole
+# html2pdf: config options
 
 ## Introduction
 
-Depending on your use case, you may need to provide some configuration to html2pdf. In this post,
-I will attempt to explain why you may need to use the config options, and how to use them.
+iText 7's new add-on html2pdf is a tool that aims to greatly simplify HTML to PDF conversion.
+This is a straightforward and uniform use case, so many users will get satisfactory results with the one-line code sample below.
+For more complex usage, you may need to provide some configuration to html2pdf.
+In this post, I will attempt to explain why you may need to use the config options, and how to use them.
 
 ## Basics
 
@@ -30,10 +32,10 @@ static void convertToPdf(InputStream htmlStream, PdfDocument pdfDocument, Conver
 
 ## ConverterProperties
 
-Even though the first two parameters may differ in any of the method overloads,
-there is always the optional third parameter `ConverterProperties`.
-This parameter contains the basic configuration options that most users will probably be satisfied with.
-We will now elaborate on these options so that you can configure your html2pdf code.
+Through the various method overloads, you can specify a certain set of input parameter types,
+but there is always the optional third parameter `ConverterProperties`.
+This parameter contains the basic configuration options that allow users to customize handling of the input data in various ways.
+We will now elaborate on these options so that you can configure your html2pdf code for optimal results.
 
 ### baseUri
 
@@ -41,15 +43,16 @@ If the HTML file requires any external resources, such as a standalone CSS file 
 then html2pdf file needs to know where these are located.
 That location may either be a URI on the local file system or online.
 
-By default, it will use the same location as the input file,
-if you use the overload of `convertToPdf` with a File parameter.
-If you use the direct HTML String parameter, then the default will be the folder where the code is executed.
+Html2pdf will try to use a reasonable default value in case you don't specify a baseUri.
+If you use a String parameter to pass your HTML, then the default value will be the folder where the code is executed.
+If you use the overload of `convertToPdf` with a File parameter, it will use the same location as the input file.
 
-If neither of these applies for you, then you will need to define the default resource location root.
+If neither of these defaults is right for you, then you will need to define the default resource location root.
 Then, any references in the HTML file will start from that path to find the resource.
 It is possible to use the `../` syntax to go up in the directory tree,
-but for other purposes, the specified folder acts as the root location.
-So e.g. `<img src="static/img/logo.png"/>` and `<img src="/static/img/logo.png"/>` will both refer to the same file.
+but for other purposes, the specified URI acts as the root folder for determining paths.
+So e.g. `<img src="static/img/logo.png"/>` and `<img src="/static/img/logo.png"/>` will both refer to the same file,
+relative to the baseUri folder you specified or to the default value.
 
 ### mediaDeviceDescription
 
@@ -65,19 +68,24 @@ HTML5 introduced a method to let web designers take control over the viewport, t
 
 With html2pdf, you can specify the kind of viewport your original file was designed for,
 when it isn't specified by a `<meta>` element.
-// TODO: which one overrides the other ?
 
+```java
+// TODO: example
+ConverterProperties props = new ConverterProperties();
+props.setMediaDeviceDescription(new MediaDeviceDescription(MediaType.PRINT));
+```
 ### tagWorkerFactory
 
 If you want to define custom rules for existing HTML tags,
-like handling them in a nonstandard way or as a no-op, or even implement your own tags,
 then you can create a bespoke ITagWorker implementation that will execute logic defined by you.
+The most common use cases are to handle a tag in a nonstandard way or as a no-op,
+but you can also implement a custom tag for specific purposes.
 After you implement this interface or extend an existing implementation,
 you still need to register it with html2pdf so that it knows what to call.
 
 This can easily be achieved by extending `DefaultTagWorkerFactory` and overriding the following method:
 
-```
+```java
 public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context) {
     if (tag.name().equalsIgnoreCase("custom")) {
         return new CustomTagWorker(); // implements ITagWorker
@@ -91,9 +99,10 @@ public ITagWorker getCustomTagWorker(IElementNode tag, ProcessorContext context)
 }
 ```
 
-One particular usecase might be to add dynamic content to your pdf, such as barcodes: in that case,
-you can define only `<qrcode>SKU</qrcode>` in the source html, rather than specifying the entire image.
-Your custom TagWorker then creates the QR code using the iText APIs and adds it to the document.
+One particular use case might be to add dynamic content to your pdf, such as barcodes: in that case,
+you can define `<qrcode>http://www.example.com</qrcode>` in the source HTML,
+rather than having to generate an image separately.
+Your custom TagWorker then leverages the iText APIs to create the QR code, and adds it to the document.
 
 ### cssApplierFactory
 
@@ -122,8 +131,10 @@ a `byte[]`, or an iText `FontProgram` object.
 The boolean arguments for the default constructor are (true, true, false).
 You can of course also add fonts one by one on custom locations.
 
-```
+```java
+ConverterProperties props = new ConverterProperties();
 FontProvider dfp = new DefaultFontProvider(true, false, false);
 dfp.addFont("/path/to/MyFont.ttf");
-new ConverterProperties().setFontProvider(dfp);
+props.setFontProvider(dfp);
+HtmlConverter.convertToPdf("<p>contents</p>", new FileOutputStream("output.pdf"), props);
 ```
