@@ -5,3 +5,4 @@
 *.orig
 
 # End of https://www.gitignore.io/api/git
+*.docx
