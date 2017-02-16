@@ -54,30 +54,6 @@ but for other purposes, the specified URI acts as the root folder for determinin
 So e.g. `<img src="static/img/logo.png"/>` and `<img src="/static/img/logo.png"/>` will both refer to the same file,
 relative to the baseUri folder you specified or to the default value.
 
-### mediaDeviceDescription
-
-// TODO: this is apparently taken directly from https://www.w3schools.com/css/css_rwd_viewport.asp
-// what about copyright etc ??
-// also, is the viewport bit relevant for media devices ?
-
-The viewport is the user's visible area of a web page.
-The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
-Before tablets and mobile phones, web pages were designed only for computer screens,
-and it was common for web pages to have a static design and a fixed size.
-Then, when we started surfing the internet using tablets and mobile phones,
-fixed size web pages were too large to fit the viewport.
-Initially, browsers on those devices scaled down the entire web page to fit the screen,
-but this was a quick fix that had lots of drawbacks. As a response to this problem,
-HTML5 introduced a method to let web designers take control over the viewport, through the `<meta>` tag.
-
-With html2pdf, you can specify the kind of viewport your original file was designed for,
-even when it isn't specified by a `<meta>` element.
-
-```java
-ConverterProperties props = new ConverterProperties();
-props.setMediaDeviceDescription(new MediaDeviceDescription(MediaType.PRINT));
-```
-
 ### tagWorkerFactory
 
 If you want to define custom rules for existing HTML tags,
@@ -155,4 +131,40 @@ ConverterProperties props = new ConverterProperties();
 FontProvider dfp = new DefaultFontProvider(true, false, false);
 dfp.addFont("/path/to/MyFont.ttf");
 props.setFontProvider(dfp);
+```
+
+### mediaDeviceDescription
+
+In HTML, it is possible to specify CSS rules depending on the media that the document will be rendered on.
+The most common use case is to add some rules for printing, so that the document fits nicely on a normal-width page.
+
+You can do this either by specifying a separate stylesheet in the HTML `<head>` tag ...
+
+```html
+<head>
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <link rel="stylesheet" type="text/css" href="print.css" media="print">
+</head> 
+```
+
+... or by adding a `@media` annotation in your CSS rules:
+
+```css
+@media only print {
+    p {
+        margin-left:36px;
+    }
+}
+@media not print {
+    p {
+        margin-left:216px;
+    }
+}
+```
+
+If your input file uses this feature, then you can simply tell html2pdf to interpret the relevant set of rules:
+
+```java
+ConverterProperties props = new ConverterProperties();
+props.setMediaDeviceDescription(new MediaDeviceDescription(MediaType.PRINT));
 ```
