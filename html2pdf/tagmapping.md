@@ -21,7 +21,7 @@ This blog post will give you an overview of how HTML2PDF maps the HTML model ont
 
 ## A technical overview of the mapping process
 
-Let's take a look at how the mapping process is handled. In the diagram "Processing nodes" you can see how HTML2PDF works.
+Let's take a look at how the mapping process is handled. In the diagram "Processing nodes" you can see how HTML2PDF works. 
 
 <INSERT DIAGRAM>
 
