@@ -1,19 +1,17 @@
-# html2pdf: config options
+# pdfHTML: config options
 
 ## Introduction
 
-iText 7's new add-on html2pdf is a tool that aims to greatly simplify HTML to PDF conversion in Java or .NET.
+iText 7's new add-on pdfHTML is a tool that aims to greatly simplify HTML to PDF conversion in Java or .NET.
 This is a straightforward and uniform use case, so many users will get satisfactory results with the one-line code sample below.
-For more complex usage, you may need to provide some configuration to html2pdf.
+For more complex usage, you may need to provide some configuration to pdfHTML.
 In this post, I will attempt to explain why you may need to use the config options, and how to use them.
 
 ## Basics
 
-The default way to use html2pdf is either one of two basic one-line code samples:
+The default way to use pdfHTML is either one of two basic one-line code samples:
 
 ```java
-// "input.html" is the source (input) file
-// "output.pdf" is the target (output) file
 HtmlConverter.convertToPdf(new File("input.html"), new File("output.pdf"));
 ```
 
@@ -23,7 +21,7 @@ or
 HtmlConverter.convertToPdf("<p>input</p>", new FileOutputStream("output.pdf"));
 ```
 
-There are a number of overloads for these methods, all of which (including the ones above)
+There are several overloads for these methods, all of which (including the ones above)
 end up calling the method with the below signature:
 
 ```java
@@ -35,15 +33,15 @@ static void convertToPdf(InputStream htmlStream, PdfDocument pdfDocument, Conver
 Through the various method overloads, you can specify certain input parameter types in the first two arguments,
 but there is always the optional third parameter `ConverterProperties`.
 This parameter contains the basic configuration options that allow users to customize handling of the input data in various ways.
-We will now elaborate on these options so that you can configure your html2pdf code for optimal results.
+We will now elaborate on these options so that you can configure your pdfHTML code for optimal results.
 
 ### baseUri
 
 If the HTML file requires any external resources, such as a standalone CSS file or image files,
-then html2pdf file needs to know where these are located.
+then pdfHTML file needs to know where these are located.
 That location may either be a URI on the local file system or online.
 
-Html2pdf will try to use a reasonable default value in case you don't specify a baseUri.
+pdfHTML will try to use a reasonable default value in case you don't specify a baseUri.
 If you use a String parameter to pass your HTML, then the default value will be the folder where the code is executed.
 If you use the overload of `convertToPdf` with a File parameter, it will use the same location as the input file.
 
@@ -61,7 +59,7 @@ then you can create a bespoke ITagWorker implementation that will execute logic 
 The most common use cases are to handle a tag in a nonstandard way or as a no-op,
 but you can also implement a custom tag for your specific purposes.
 After you implement this interface or extend an existing implementation,
-you still need to register it with html2pdf so that it knows what to call.
+you still need to register it with pdfHTML so that it knows what to call.
 
 This can be achieved by extending `DefaultTagWorkerFactory` and overriding the following method:
 
@@ -99,7 +97,7 @@ This use case has been expanded upon in the blog post about tag mappings *TODO: 
 
 ### cssApplierFactory
 
-By default, html2pdf will only execute CSS logic on the standard HTML tags.
+By default, pdfHTML will only execute CSS logic on the standard HTML tags.
 If you have defined a custom HTML tag and you want to apply CSS to it,
 then you will also have to write an `ICssApplier` and register it by extending `DefaultTagWorkerFactory`.
 
@@ -108,10 +106,10 @@ In that case, you can extend the `ICssApplier` for that tag and write custom log
 
 ### fontProvider
 
-If you want to customize the fonts that can be used by html2pdf,
+If you want to customize the fonts that can be used by pdfHTML,
 then you can define a `FontProvider` that will act as a repository for those fonts.
 
-There is probably little reason to extend html2pdf's `DefaultFontProvider` class,
+There is probably little reason to extend pdfHTML's `DefaultFontProvider` class,
 because you can configure exactly which fonts will be supplied to the PDF rendering logic.
 On top of the basic behavior that you can define in the constructor,
 you can also add a font that you specify as a location on the system,
@@ -120,10 +118,10 @@ a `byte[]`, or an iText `FontProgram` object.
 `DefaultFontProvider` has a constructor with three boolean arguments, which allow you to specify:
 
 * whether or not to select the 14 standard PDF fonts
-* whether or not to select a number of Free fonts included with html2pdf
+* whether or not to select a number of Free fonts included with pdfHTML
 * whether or not to try and select all fonts installed in the system's default font folder
 
-The boolean arguments for the default constructor are (true, true, false).
+The boolean arguments for the default constructor are `(true, true, false)`.
 You can of course also add fonts one by one on custom locations.
 
 ```java
@@ -162,7 +160,7 @@ You can do this either by specifying a separate stylesheet in the HTML `<head>` 
 }
 ```
 
-If your input file uses this feature, then you can simply tell html2pdf to interpret the relevant set of rules:
+If your input file uses this feature, then you can simply tell pdfHTML to interpret the relevant set of rules:
 
 ```java
 ConverterProperties props = new ConverterProperties();
