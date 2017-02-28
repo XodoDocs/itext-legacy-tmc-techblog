@@ -49,10 +49,9 @@ List<IElement> iTextElements = HtmlConverter.convertToElements(
 
 ## Customizability
 
-HTML is a flexible standard, and while it is quite extensive, it does not cover every use case or intricacy. Fortun
-You can customize pdfHtml in many ways. And we've made pdfHtml very easy to ext
+HTML is a flexible standard, and while it is quite extensive, it does not cover every use case or intricacy. Fortunately, using pdfHTML you can define your own tags and write the necessary logic so that they are processed the way you want. We've made pdfHTML easy to extend for this specific scenario, allowing you to extend or replace our default implementations. In addition to HTML tags, we also provide the possibility for similar operations on Css styles and properties.
 
-You can add support for new tags you use in your work flow. 
+As an example, HTML has no tag dedicated to QR codes, but by leveraging the extensibility of pdfHTML and iText7's barcode module we van transform this piece of HTML (and accompanying Css) into pdf where the text in qr code tags is interpreted as the contents for the QR code.
 
 qr.html
 ```
@@ -75,9 +74,22 @@ With great power comes great current squared times resistance
 </html>
 ```
 
-[todo: insert img of qr.pdf]
+qr.css
+```
+qr{
+    border:solid 1px red;
+    height:200px;
+    width:200px;
+}
+```
 
-You can also change the behavior of existing tags, such as paragraphs and tables. Or you can choose to handle CSS differently. 
+Into this pdf
+![QR code output pdf][qr_code]
+
+
+//Some kind of conclusion here
 
 
 [hello_world]: Images/HelloWorld_Output.png "Hello World output"
+
+[qr_code]: Images/QRCode_Output.png "QR code example"
