@@ -16,11 +16,31 @@ The upcoming PDF 2.0 specification* has dealt with this some time ago by depreca
 
 *PDF 2.0 has been in the works for the past few years and is due for release this year, before the summer.
 
+Furthermore in 2009, the PAdES standard mentioned that "The use of SHA-1 is being phased out in some countries and hence the use of other hashing algorithms is recommended.". We have been warning developers using the LGPL-MLP versions of iText (dating from 2009) for many years that they shouldn't use some of the signature types that we knew would be deprecated in the PDF 2.0 specification —the long-awaited ISO-32000-2. In PDF 2.0, SHA-1 will be formally deprecated. This means that a PDF 2.0 writer should not use SHA-1 anymore, and a PDF 2.0 reader can reject signatures that still use SHA-1.
+
+Does this mean that PDFs that were signed using the SHA-1 algorithm in the past suddenly become invalid? In principle, it is now proven that the contents of a PDF can be changed without invalidating the signature, if that signature signed a message digest that was created with SHA-1.
 
 
-## How can I future proof my signatures?
+## How can I future proof my signing process?
 
-## How can I fix my SHA-1 signatures?
+Very easily. Stop using SHA-1 and start using another algorithm. And start keeping an eye out for news about that algorithm and cryptography in general. Unfortunately cryptography is an ever evolving industry and there is no definitive algorithm you can use, so you should stay informed on the industry.
+
+
+## How can I fix my existing SHA-1 signatures?
+
+Although it being deprecated for almost 6 years now, I expect a lot of people still use SHA-1 when signing their documents. This doesn't mean that these signatures are suddenly invalid or not reliable anymore. They're still valid and reliable up until a certain extent, but I wouldn't waste too much time before trying to fix existing signatures. 
+
+If you have a repository of PDF files still rely on SHA-1, PAdES-4 allows you to add a Document Security Store (DSS) including Validation-Related Information (VRI), as well as a document time-stamp (DTS) signature.  
+
+This document time-stamp is an additional signature that uses a more recent hashing algorithm to create the message digest. This procedure of adding a DSS and a document time-stamp should be repeated before the certificate of the last signature that was added expires, or when there are indications that the algorithms that were used, be it the cryptograph hash function or the encryption algorithm, could be jeopardized.
+
+Our free e-book on digital signatures in PDF describes how to add a DSS to a signed document. You can download the e-book here.
+
+```
+
+```
+
 
 ## Conclusion
 
+This attack doesn't change much for the PDF specification. PDF already anticipated that SHA-1 would have been broken as we can see in PAdES (2009) and PDF 2.0 (2017). We advise you to double check your PDF signatures and to apply a DSS when you've used SHA-1.
