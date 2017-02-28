@@ -21,9 +21,7 @@ Very easily. Stop using SHA-1 and start using another algorithm. And start keepi
 
 ## How can I fix my existing SHA-1 signatures?
 
-Although it being deprecated for almost 6 years now, I expect a lot of people still use SHA-1 when signing their documents. This doesn't mean that these signatures are suddenly invalid or not reliable anymore. They're still valid and reliable up until a certain extent, but I wouldn't waste too much time before fixing existing signatures. And you *should* fix these PDFs.
-
-If you have a repository of PDF files still rely on SHA-1, PAdES-4 allows you to add a Document Security Store (DSS) including Validation-Related Information (VRI), as well as a document time-stamp (DTS) signature.  
+Although it being deprecated for almost 6 years now, I expect a lot of people still use SHA-1 when signing their documents. If you have a repository of PDF files still rely on SHA-1, PAdES-4 allows you to add a Document Security Store (DSS) including Validation-Related Information (VRI), as well as a document time-stamp (DTS) signature.  
 
 This document time-stamp is an additional signature that uses a more recent hashing algorithm to create the message digest. This procedure of adding a DSS and a document time-stamp should be repeated before the certificate of the last signature that was added expires, or when there are indications that the algorithms that were used, be it the cryptograph hash function or the encryption algorithm, could be jeopardized.
 
