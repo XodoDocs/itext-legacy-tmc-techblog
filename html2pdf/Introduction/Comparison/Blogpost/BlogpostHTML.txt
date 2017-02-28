@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Html2Pdf Introductory Blogpost</title>
+    <link rel="stylesheet" type="text/css" href="Blogpost.css"/>
+</head>
+<body>
+<div>
+    <h1>Introduction</h1>
+    <p>Html2Pdf is a module based on <a href="http://www.itextpdf.com">iText7</a> core that allows you to transform html and accompanying css into a pdf-document</p>
+    <p>Html2Pdf aims to support the majority of html tags and css declarations, allowing you to create beautiful pdf documents without having to learn a new skillset.</p>
+</div>
+<div>
+    <h1>Default output</h1>
+    <p>Below are some examples of the output of Html2Pdf when no Css is specified</p>
+    <p>A paragraph containing <span>a span tag</span>, a <em>emphasized tag</em>, a <b>bold tag</b>, a <code>code tag</code>, a <cite> cite tag</cite>, a <s>s tag</s>, a <strong>strong tag</strong> and a <u>u tag</u> and a variable with both super and subscript: <var>x<sub>i</sub><sup>j</sup></var>.</p>
+    <h2>A Simple table</h2>
+    <table>
+        <tr>
+            <th>Header 0</th>
+            <th>Header 1</th>
+        </tr>
+        <tr>
+            <td>Data</td>
+            <td>Data</td>
+        </tr>
+        <tr>
+            <td>Data</td>
+            <td>data</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h2>An image</h2>
+    <img src="itis.jpg" alt="It is what it is"></img>
+</div>
+<div>
+    <h2>Some lists</h2>
+    <ol>
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+    </ol>
+
+    <ul>
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+    </ul>
+</div>
+
+<div>
+    <h1 class="fh">Css applied</h1>
+    <p>And some examples using the css found in <em class="fem">Blogpost.css</em></p>
+    <h2 class="fh2">A Simple table</h2>
+    <table>
+        <thead style="text-align:right">
+            <tr>
+                <th class="fth">Header 0</th>
+                <th class="fth">Header 1</th>
+            </tr>
+        </thead>
+        <tr>
+            <td class="ftd">Data</td>
+            <td class="ftdd">Data</td>
+        </tr>
+        <tr>
+            <td class="ftd">Data</td>
+            <td class="ftdd">data</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h2 class="fh2">An image</h2>
+    <img class="fimg" src="itis.jpg"></img>
+</div>
+<h2 class="fh2">Some lists</h2>
+<ol class="fol">
+    <li>item</li>
+    <li>item</li>
+    <li>item</li>
+</ol>
+
+<ul class="ful">
+    <li>item</li>
+    <li>item</li>
+    <li>item</li>
+</ul>
+</body>
+</html>
