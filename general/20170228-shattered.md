@@ -16,8 +16,8 @@ Does this mean that PDFs that were signed using the SHA-1 algorithm in the past 
 
 ## How can I future proof my signing process?
 
-Very easily. Stop using SHA-1 and start using another algorithm. And start keeping an eye out for news about that algorithm and cryptography in general. Unfortunately cryptography is an ever evolving industry and there is no definitive algorithm you can use, so you should stay informed on the industry.
-
+Very easily. Stop using SHA-1 and start using another algorithm. And start keeping an eye out for news about that algorithm and cryptography in general. Unfortunately cryptography is an ever evolving industry and there is no definitive algorithm you can use, so you should stay informed on the industry to guarantee that your signed documents are secure and reliable.
+    
 
 ## How can I fix my existing SHA-1 signatures?
 
