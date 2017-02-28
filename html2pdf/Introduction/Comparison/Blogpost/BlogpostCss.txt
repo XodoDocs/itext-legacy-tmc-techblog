@@ -1,0 +1,49 @@
+.ft{
+    width: 50%;
+}
+.ftd {
+    border: 1px solid black;
+    text-align: center
+}
+.ftdd {
+    border: 1px dashed black;
+    text-align: center
+}
+.fth{
+    border: 1px solid red;
+    font-size: larger;
+    font-weight: normal;
+    text-align: left;
+}
+.fimg {
+    left:150px;
+    position:relative;
+}
+
+.red{
+    font-color: auto;
+}
+
+.fem{
+    background-color: yellow;
+}
+
+.ful{
+    list-style-type: square;
+    color:green;
+}
+
+.fol{
+    list-style-type: upper-roman;
+    color:red;
+}
+
+.fh{
+    font-size: 24pt;
+    font-weight: bold;
+    font-style: italic;
+}
+.fh2{
+    font-size: 18pt;
+    font-style: italic;
+}
