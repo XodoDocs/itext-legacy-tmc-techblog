@@ -14,16 +14,18 @@ Furthermore in 2009, the PAdES standard mentioned that "The use of SHA-1 is bein
 Does this mean that PDFs that were signed using the SHA-1 algorithm in the past suddenly become invalid? In principle, it is now proven that the contents of a PDF can be changed without invalidating the signature, if that signature signed a message digest that was created with SHA-1.
 
 
-## How can I future proof my signing process?
+## Future proofing your signing processes
 
 Very easily. Stop using SHA-1 and start using another algorithm. And start keeping an eye out for news about that algorithm and cryptography in general. Unfortunately cryptography is an ever evolving industry and there is no definitive algorithm you can use, so you should stay informed on the industry to guarantee that your signed documents are secure and reliable.
     
 
-## How can I fix my existing SHA-1 signatures?
+## How to fix existing SHA-1 signatures
 
-Although it has been deprecated for almost 6 years now, I expect a lot of people still use SHA-1 when signing their documents. If you have a repository of PDF files that still rely on SHA-1, PAdES-4 allows you to add a Document Security Store (DSS) including Validation-Related Information (VRI), as well as a document time-stamp (DTS) signature.  
+Although it has been deprecated for almost 6 years now, I expect a lot of people still use SHA-1 when signing their documents. If you have a repository of PDF files that still rely on SHA-1, PAdES-4 allows you to add a Document Security Store (DSS) including Validation-Related Information (VRI), as well as a document time-stamp (DTS) signature. 
 
-This document time-stamp is an additional signature that uses a more recent hashing algorithm to create the message digest. This procedure of adding a DSS and a document time-stamp should be repeated before the certificate of the last signature that was added expires, or when there are indications that the algorithms that were used, be it the cryptograph hash function or the encryption algorithm, could be jeopardized.
+This process adds an additional signature through a time-stamp. It doesn't replace the original, SHA-1 signature, but it adds a new one. It is important to use a different, more recent hashing algorithm to create this signature. This way you can change the original contents to fit the original SHA-1 signature, but the second signature will be broken because the hashing algorithm you used in the time-stamp signature isn't SHA-1.
+
+This procedure of adding a DSS and a document time-stamp should be repeated before the certificate of the last signature that was added expires, or when there are indications that the algorithms that were used, be it the cryptograph hash function or the encryption algorithm, could be jeopardized.
 
 Our free e-book on digital signatures in PDF describes how to add a DSS to a signed document. You can download the e-book here.
 
