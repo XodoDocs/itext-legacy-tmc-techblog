@@ -29,9 +29,6 @@ This procedure of adding a DSS and a document time-stamp should be repeated befo
 
 Our free e-book on digital signatures in PDF describes how to add a DSS to a signed document. You can download the e-book here.
 
-```
-
-```
 
 
 ## Conclusion
