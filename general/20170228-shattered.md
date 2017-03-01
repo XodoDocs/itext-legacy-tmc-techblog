@@ -27,7 +27,7 @@ This process adds an additional signature through a time-stamp. It doesn't repla
 
 This procedure of adding a DSS and a document time-stamp should be repeated before the certificate of the last signature that was added expires, or when there are indications that the algorithms that were used, be it the cryptograph hash function or the encryption algorithm, could be jeopardized.
 
-Our free e-book on digital signatures in PDF describes how to add a DSS to a signed document. You can download the e-book here.
+Our free e-book on digital signatures in PDF describes how to add a DSS to a signed document. You can download the e-book [here](http://pages.itextpdf.com/ebook-digital-signatures-for-pdf.html).
 
 
 
