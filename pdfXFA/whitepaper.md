@@ -1,4 +1,4 @@
-# Everything everyone should know about XFA if they want to know everything there is to know about XFA
+# Everything everyone should know about XFA if they want to know the basics of XFA
 
 
 
@@ -18,6 +18,20 @@ As mentioned earlier, AcroForms are constructed using PDF syntax. This means tha
 
 ### Structure of XFA
 
+XFA isn't a single XML stream. It is a combination of multiple XML streams, called packets. There are a lot of packets described in the XFA specification, but the ones that you'll come in contact with are the following:
+
+- template xml
+- dataset xml
+- forms xml
+
+#### Template XML
+
+This packet describes the layout of the form. It will have rules on how 
+
+#### Dataset XML
+
+#### Forms XML
+
 ### PDF 2.0
 
 ## How to use pdfXFA
@@ -31,6 +45,8 @@ As mentioned earlier, AcroForms are constructed using PDF syntax. This means tha
 ### Insertion of XFA streams into a PDF
 
 ## Pitfalls
+
+
 
 ### Recognising whether XFA is present
 
