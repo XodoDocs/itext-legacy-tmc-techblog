@@ -1,30 +1,33 @@
-Flyer Template
-Name of product: pdfXFA
-Sub header: an iText 7 add-on (this is always here for iText 7 add ons)
-Title: Dynamic PDF XFA forms for an optimal user experience
-Paragraph:  approx. 120 words
-Dynamic PDF files are invaluable to automating document processes. XFA Forms allow your PDF forms to grow and reformat themselves, depending on the data entered. This allows for a more dynamic user interaction than you find in AcroForms. Plus pdfXFA offers an easy to use API that gives you customization options to make the right fit for your needs.
-In practice: 
-In a form, your PDF file can generate new fields based on user responses and automatically fill them if you set the proper parameters. This user interactivity allows you to serve your users with a custom version of each form depending on their specific answers and needs.
+Flyer Template  
+Name of product: pdfXFA  
+Sub header: an iText 7 add-on   
+Title: Dynamic PDF XFA forms for an optimal user experience  
+Paragraph:  approx. 120 words  
+PDF files are invaluable to automating document processes. XFA is one of the form technologies available in PDF and it allows you to provide your users with a better user experience. Based on XML, XFA Forms allow your PDF forms to grow, shrink, and restructure themselves at runtime, depending on the data entered and user interaction. This allows for a more dynamic user interaction than you find in AcroForms, the classic PDF forms.  pdfXFA allows you to finalize these forms by flattening them and offers an easy to use an API that gives you customization options to make the right fit for your needs.  
+In practice:   
+In an XFA form, your PDF file can generate new fields based on user responses and automatically restructure them. This user interactivity allows you to serve your users with a custom version of each form depending on their specific answers and needs.  
 
-Side Bar:
-Title: Flattening
-Paragraph: 80 words
-When you receive a filled out XFA Form and you don't want to edit it any further, you can opt to use pdfXFA to flatten your dynamic forms and turn them into static PDF files, ready to be archived. Flattening is the process that removes the functionality and user interactivity of a form but keeps the visual layout and structure. It is a way of finalizing your forms and securing their content.
+Side Bar:  
+Title: Flattening  
+Paragraph: 80 words  
+When you receive a filled out XFA Form and you don't want to edit it any further, you can opt to use pdfXFA to flatten your dynamic forms and turn them into static PDF files, ready to be archived. Flattening is the process that removes the functionality and user interactivity of a form but keeps the visual layout and structure. It is a way of finalizing your forms and securing their content.  
 
-Bottom Bar: Learn more at www.itextpdf.com/itext7/pdfXFA
+Bottom Bar: Learn more at www.itextpdf.com/itext7/pdfXFA  
 
-Back Side:
+Back Side:  
 
-How does it work: 107 words
+How does it work: 107 words  
 
-Of these examples- what would be most impactful on the back of a flyer? See pdfCalligraph flyer for sample.
+XFA is based on a set of XML streams. pdfXFA will read these streams and weave them together to get a representation of how the form would look like when rendered. It will then leverage the flexibility and power of the iText APIs to generate a PDF file that looks the same as the XFA form.
 
-Key advantages: 3-5 bullets
-1. Take advantage of XFA dynamic forms
-2. Secure your dynamic forms
-3. Simple API for customization
-Bottom Bar: Learn more at: www.itextpdf.com/itext7/pdfXFA
+Of these examples- what would be most impactful on the back of a flyer? See pdfCalligraph flyer for sample.  
+TODO
+
+Key advantages: 3-5 bullets  
+1. Take advantage of XFA dynamic forms  
+2. Secure your dynamic forms  
+3. Simple API for customization  
+Bottom Bar: Learn more at: www.itextpdf.com/itext7/pdfXFA  
 
 
 
