@@ -1,3 +1,53 @@
+Hi Gents, thanks for uploading this. I have put your draft into the flyer template (which I decided to create tonight, so I will share with everyone for future flyers) and edited a bit below.  There are some places missing information and most notably, I need your help on what example to use on the back.  I have added notes of how many words the sections should approximately be, to help give you an idea of how long the sections should be.  
+
+Things I would like you to review and edit in particular:
+
+1. I think the front page is in OK place, but I would like to add a bit more to the first paragraph for information.
+2. Example decisions for the back page
+3. Review and add feebdack or ideas for the key advantage bullets on the back.
+
+To help you visualize how this will look, see the pdfCalligraph flyer here:http://itextpdf.com/sites/default/files/attachments/iText_flyer_pdfCalligraph_A4_0.pdf
+
+
+Flyer Template
+Name of product: pdfHTML
+Sub header: an iText 7 add-on (this is always here for iText 7 add ons)
+Title: Leverage HTML flexibility in PDF
+Paragraph:  approx. 120 words
+pdfHtml is an iText7 module that allows you to easily convert HTML and accompanying CSS into beautiful PDF files. The API is easy to use, extensible, and fully customizable.  As an iText 7 add-on you can use pdfHTML for out of the box solutions on it’s own, or in conjunction with other iText 7 add ons if you want to get down to the nitty gritty with iText’s convenient document model and powerful low level functionality.
+Down to details (if we make the second paragraph a separate section)
+pdfHtml provides a convenient API which allows you to convert an HTML file to a PDF file or, to a list iText elements, giving you fine control over how to parse and insert the html elements. It also supports parts of the HTML 5 and CSS 3 specification that apply in a PDF context.
+
+Side Bar:
+Title: Customizable
+Paragraph: 80 words
+Using pdfHTML you can define your own HTML tags and write logic to ensure your tags are processed the way you want. We've made pdfHTML easy to expand by allowing you to extend or replace our default implementations. In addition to HTML tags, we also provide the possibility for similar operations on CSS styles and properties.
+
+Bottom Bar: Learn more at www.itextpdf.com/itext7/pdfhtml
+
+Back Side:
+
+How does it work: 107 words
+
+Of these three examples- what would be most impactful on the back of a flyer? We could potentially do two, but three might be a tight fit. See pdfCalligraph flyer for sample.
+Example 1: Input
+Example 2: Convert
+Example 3: Customizable
+As an example, HTML has no tag dedicated to QR codes, but by leveraging the extensibility of pdfHTML and iText7's barcode module we can transform this piece of HTML (and accompanying Css) into pdf where the text in QR code tags is interpreted as the contents for the QR code.
+
+Key advantages: 3-5 bullets
+1. Easily convert HTML and CSS to PDF
+2. API offers fine control
+3. Usable out of the box
+Bottom Bar: Learn more at: www.itextpdf.com/itext7/pdfHTML
+
+
+
+
+
+
+
+Start Original Draft Flyer from Samuel and Michael Below.
 flyer pdfHtml
 -------------
 #pdfHTML: (Insert catchy line here) 
