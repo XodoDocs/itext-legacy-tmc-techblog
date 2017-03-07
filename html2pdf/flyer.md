@@ -14,7 +14,7 @@ Flyer Template
 *Sub header:* an iText 7 add-on (this is always here for iText 7 add ons)  
 *Title:* Leverage HTML flexibility in PDF  
 *Paragraph:*  approx. 120 words 
-pdfHtml is an iText7 module that allows you to easily convert HTML and accompanying CSS into beautiful PDF files. The API is easy to use, extensible, and fully customizable.  As an iText 7 add-on you can use pdfHTML for out of the box solutions on its own. Or you could use it in conjunction with other iText 7 add ons if you want to get down to the nitty gritty with iText’s convenient document model and powerful low level functionality.
+pdfHtml is an iText7 module that allows you to easily convert HTML and accompanying CSS into beautiful PDF files, saving you time and tedious work. The API is easy to use, extensible, and fully customizable.  As an iText 7 add-on you can use pdfHTML for out of the box solutions on its own. Or you could use it in conjunction with other iText 7 add ons if you want to get down to the nitty gritty with iText’s convenient document model and powerful low level functionality.
 Down to details (if we make the second paragraph a separate section)  
 pdfHtml provides a convenient API which allows you to convert an HTML file to a PDF file or, to a list iText elements, giving you fine control over how to parse and insert the html elements. It also supports parts of the HTML 5 and CSS 3 specification that apply in a PDF context.  
 
@@ -30,7 +30,7 @@ See the back of this flyer for an example where we define our own QR code tag.
 *Back Side:*
 
 *How does it work:* 107 words
-pdfHtml provides a convenience API which allows you to convert an HTML file straight to a PDF file or to a list iText elements, giving you fine control over how to parse and insert the html elements.
+pdfHtml provides a convenient API which allows you to convert an HTML file straight to a PDF file or to a list iText elements, giving you fine control over how to parse and insert the html elements.
 
 input.html
 ```
