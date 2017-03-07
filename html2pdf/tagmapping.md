@@ -1,9 +1,9 @@
-# HTML 2 PDF :: How HTML tags are mapped onto iText layout objects
+# pdfHTML :: How HTML tags are mapped onto iText layout objects
 
 
 ## iText Layout objects
 
-iText has had a document model for a long time and it has allowed developers to quickly grasp how to use iText without having to know much about the PDF specification. The model we use closely resembles HTML, because this model, used by both HTML and iText, is based on how documents are formed structurally. This model is designed using concepts that most people can easily understand, such as paragraphs and tables. iText uses objects such as these to simplify the creation of PDF documents and HTML uses similar objects to let you construct HTML files. If you look at both models then you'll see that there are a lot of similarities. There are so many similarities that during the design process of the iText 7 layout module we took a few ideas and implemented these into the iText model, e.g. based on the p-tag's nesting behavior it is not possible to nest Paragraph objects in iText. 
+iText’s a document model allows developers to quickly grasp how to use iText without having to understand the PDF specification. The model we use closely resembles HTML, and is based on how documents are formed structurally. This model is designed using concepts that most people can easily understand, such as paragraphs and tables. iText uses objects such as these to simplify the creation of PDF documents and HTML uses similar objects to let you construct HTML files. If you look at both models you'll see a number of similarities. So many in fact, that during the design process for the iText 7 layout module we took a few ideas and implemented them into the iText model.
 
 Having so much so overlap between HTML and iText objects means that the object models can easily be mapped onto one another. There are a few tags in HTML that don't make sense in the context of PDF, but most do correspond to an iText equivalent. This table gives you a brief overview of the default mapping we provided:
 
@@ -14,25 +14,25 @@ BDI - SpanTagWorker
 BDO - SpanTagWorker
 <TODO: insert tag mapping table>
 
-We tried to map every HTML tag that makes in a PDF file to an iText layout object. This is easy for some objects, a span is still a span, but for other objects we had to decide that they were a modified version of what we already implemented. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div. After all, when you squint your eyes, an article can be seen as a div under a different name. Some tags were not included because they don't make sense in a PDF such as Audio.
+We tried to map every HTML tag that makes in a PDF file to an iText layout object. This is easy for some objects, a span is still a span, but for other objects we had to decide that they were a modified version of what we already implemented. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div. After all, when you squint your eyes, an article can be seen as a div under a different name. Some tags were not included because they were not relevant in a PDF, such as Audio.
 
-This blog post will give you an overview of how HTML2PDF maps the HTML model onto the iText model and how you can influence this process.
+This blog post will give you an overview of how pdfHTML maps the HTML model onto the iText model, and how you can influence this process.
 
 
 ## A technical overview of the mapping process
 
-Let's take a look at how the mapping process is handled. In the diagram "Processing nodes" you can see how HTML2PDF works. 
+Let's take a look at how the mapping process is handled. In the diagram "Processing nodes" you can see how PDFHTML works. 
 
 <INSERT DIAGRAM>
 
-There are 4 steps that HTML2PDF goes through to make an iText layout object: 
+There are 4 steps that pdfHTML goes through to make an iText layout object: 
 
 1. Create the layout object  
 The first step is the most obvious one: If an HTML tag corresponds to an iText Layout object then at one point you have to make an iText Layout object. This is done through the ITagWorker interface. We'll dive into the TagWorkers later on in this post.
 2. Process children  
-HTML2PDF processes the tags depth-first: if this tag has any child tags it will loop over all the child tags and go through this flow again with the child tags before finishing the flow for the current tag. Meaning that if a child tag has more children, it will go over them as well, and so on.
+pdfHTML processes the tags depth-first: if this tag has any child tags it will loop over all the child tags and go through this flow again with the child tags before finishing the flow for the current tag. Meaning that if a child tag has more children, it will go over them as well, and so on.
 3. Apply the CSS  
-After processing the child tags, HTML2PDF will apply the CSS to the iText Layout object. This is done through CSS Appliers.
+After processing the child tags, PDFHTML will apply the CSS to the iText Layout object. This is done through CSS Appliers.
 4. Return to the parent layout object  
 The Layout object is now complete. It contains its child elements and its CSS is also applied. This object will now be returned to its parent tag for further handling.
 
@@ -50,7 +50,7 @@ It is important to know that for each tag the HtmlProcessor encounters, by defau
 
 ### customizing the mapping
 
-While our set of tags is quite large and covers most needs, HTML2PDF doesn't support every tag. Some tags don't make sense in a PDF context or maybe you added your own custom tags to your HTML files for processing purposes. You might want to process an unsupported tag and at least add some of its content to the output PDF. Or maybe you want to map every table tag onto a span object, just because you can. Well, you can! HTML2PDF allows for some very extensive customisation concerning the mapping and there's a few options:
+While our set of tags is quite large and covers most needs, pdfHTML doesn't support every tag. Some tags are not relevant in a PDF context or maybe you added your own custom tags to your HTML files for processing purposes. You might want to process an unsupported tag and at least add some of its content to the output PDF. Or maybe you want to map every table tag onto a span object, just because you can. Well, you can! pdfHTML allows for some very extensive customization concerning the mapping and there's a few options:
 
 1. You can implement the ITagWorkerFactory interface
 2. You can extend the DefaultTagWorkerFactory and override the getCustomTagWorker method
@@ -186,7 +186,7 @@ public class QRCodeTagWorker implements ITagWorker {
 }
 ```
 
-Because HTML2PDF doesn't know about the QRCodeTagWorker, we'll need to plug it in into our custom DefaultTagWorkerFactory implementation:
+Because PDFHTML doesn't know about the QRCodeTagWorker, we'll need to plug it in into our custom DefaultTagWorkerFactory implementation:
 ```
 public class CustomTagWorkerFactory extends DefaultTagWorkerFactory {
 
@@ -201,7 +201,7 @@ public class CustomTagWorkerFactory extends DefaultTagWorkerFactory {
 }
 ```
 
-Now, all we need to do it register this into the HTML2PDF workflow:
+Now, all we need to do it register this into the PDFHTML workflow:
 
 ```
 ConverterProperties converterProperties = new ConverterProperties();
@@ -218,12 +218,12 @@ Run this code sample and you'll get the following output:
 TODO INSERT IMAGE OF PDF FILE
 
 
-## outro
+## Summary/Conclusion
 
-Now that we've reached the end of this blog post, let's take a look at what we've learned of how HTML2PDF:
+Now that we've reached the end of this blog post, let's take a look at what we've learned of how pdfHTML:
 
-- The layout model has a lot of similarities to the HTML model, so mapping is relatively easy.
-- HTML2PDF iterates over the HTML structure depth-first to create its iText layout structure.
+- The layout model has a lot of similarities to the HTML model, so mapping is relatively easy
+- pdfHTML iterates over the HTML structure depth-first to create its iText layout structure
 - You can extend or customize the mapping using ITagWorkers and ITagWorkerFactory
 
-~Michaël.
+Try pdfHTML for yourself (DEMO), Free Trial. links
