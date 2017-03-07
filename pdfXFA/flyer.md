@@ -21,7 +21,25 @@ How does it work: 107 words
 XFA is based on a set of XML streams. pdfXFA will read these streams and weave them together to get a representation of how the form would look like when rendered. It will then leverage the flexibility and power of the iText APIs to generate a PDF file that looks the same as the XFA form.
 
 Of these examples- what would be most impactful on the back of a flyer? See pdfCalligraph flyer for sample.  
-TODO
+```
+List<String> javaScriptEvents = new ArrayList<String>();
+javaScriptEvents.add("click");
+        
+XFAFlattener xfaFlattener = new XFAFlattener();
+
+xfaFlattener
+        .setFlattenerProperties(
+                new XFAFlattenerProperties()
+                        .createXmpMetaData()
+                        .setPdfVersion(XFAFlattenerProperties.PDF_1_7)
+                        .setTagged())
+        .setExtraEventList(javaScriptEvents)
+        .setFontSettings(
+                new XFAFontSettings()
+                        .setEmbedExternalFonts(true)
+                        .setFontsPath(fontsDirectory))
+        .flatten(xfa, pdf);
+```
 
 Key advantages: 3-5 bullets  
 1. Take advantage of XFA dynamic forms  
