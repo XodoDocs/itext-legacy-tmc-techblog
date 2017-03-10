@@ -41,6 +41,18 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ## Simple example
 
+![Figure 1: pdfSweep example input document](Images/pdf2data_workflow_simple_001.png)
+**Figure 1**: landing page of pdf2Data web application
+
+![Figure 2: pdfSweep example input document](Images/pdf2data_workflow_simple_001.png)
+**Figure 2**: an example selector to extract the customer address
+
+![Figure 3: pdfSweep example input document](Images/pdf2data_workflow_simple_001.png)
+**Figure 3**: the template, opened in Adobe Acrobat
+
+![Figure 4: pdfSweep example input document](Images/pdf2data_workflow_simple_001.png)
+**Figure 4**: sample extraction
+
 ## A more in-depth look
 
 ### About the selectors
