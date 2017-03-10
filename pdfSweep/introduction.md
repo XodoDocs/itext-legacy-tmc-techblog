@@ -19,29 +19,36 @@ social security numbers, phone numbers, dates, etc
 * Once a strategy has been defined, any document that matches this template can be redacted. Simply pass the locations to pdfSweep, or invoke pdfAutoSweep with the pattern(s) of your choice.
 
 ```java
+
+// load the license needed to be able to run pdfSweep
 LicenseKey.loadLicenseFile(licenceFile);
 
+// set input and output file
 String input = "AliceInWonderland.pdf";
-String output = "AliceInWonderland_redacted.pdf";// define a strategy
+String output = "AliceInWonderland_redacted.pdf";
+
+// define a strategy
 CompositeLocationExtractionStrategy composite = new CompositeLocationExtractionStrategy();
 composite.add(new RegexMarkingStrategy("Alice", Color.PINK));
 composite.add(new RegexMarkingStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)", Color.GRAY));
 
+// load the document
 PdfDocument pdf = new PdfDocument(new PdfReader(input), new PdfWriter(output));
 
 // sweep
 PdfAutoSweep autoSweep = new PdfAutoSweep(composite);
 autoSweep.cleanUp(pdf);
 
+// close the document
 pdf.close();
 ```
 
 This is the original document:
 
-![Figure 1: Html2pdf internal flow][pdfsweep_input_document]  
+![Figure 1: pdfSweep example input document][Images/pdfsweep_input_document]  
 **Figure 1**: pdfsweep original input document
 
 And this is after redaction:
 
-![Figure 2: Html2pdf tag processing flow][pdfsweep_output_document]  
+![Figure 2: pdfSweep example output document][Images/pdfsweep_output_document]  
 **Figure 2**: pdfsweep redacted output document
