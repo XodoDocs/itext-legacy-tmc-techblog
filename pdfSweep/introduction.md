@@ -45,10 +45,11 @@ pdf.close();
 
 This is the original document:
 
-![Figure 1: pdfSweep example input document][Images/pdfsweep_input_document]  
+![Figure 1: pdfSweep example input document](Images/pdfsweep_input_document.png)
 **Figure 1**: pdfsweep original input document
 
 And this is after redaction:
 
-![Figure 2: pdfSweep example output document][Images/pdfsweep_output_document]  
+![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document)
 **Figure 2**: pdfsweep redacted output document
+
