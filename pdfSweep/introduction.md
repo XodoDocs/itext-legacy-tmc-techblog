@@ -21,8 +21,8 @@ social security numbers, phone numbers, dates, etc
 ```java
 LicenseKey.loadLicenseFile(licenceFile);
 
-String input = "C:\\Users\\Joris Schellekens\\Desktop\\pdfs\\AliceInWonderland.pdf";
-String output = "C:\\Users\\Joris Schellekens\\Desktop\\pdfs\\AliceInWonderland_redacted.pdf";// define a strategy
+String input = "AliceInWonderland.pdf";
+String output = "AliceInWonderland_redacted.pdf";// define a strategy
 CompositeLocationExtractionStrategy composite = new CompositeLocationExtractionStrategy();
 composite.add(new RegexMarkingStrategy("Alice", Color.PINK));
 composite.add(new RegexMarkingStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)", Color.GRAY));
@@ -38,4 +38,10 @@ pdf.close();
 
 This is the original document:
 
+![Figure 1: Html2pdf internal flow][pdfsweep_input_document]  
+**Figure 1**: pdfsweep original input document
+
 And this is after redaction:
+
+![Figure 2: Html2pdf tag processing flow][pdfsweep_output_document]  
+**Figure 2**: pdfsweep redacted output document
