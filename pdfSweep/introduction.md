@@ -28,9 +28,9 @@ String input = "AliceInWonderland.pdf";
 String output = "AliceInWonderland_redacted.pdf";
 
 // define a strategy
-CompositeLocationExtractionStrategy composite = new CompositeLocationExtractionStrategy();
-composite.add(new RegexMarkingStrategy("Alice", Color.PINK));
-composite.add(new RegexMarkingStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)", Color.GRAY));
+CompositeLocationExtractionStrategy composite = new CompositeLocationExtractionStrategy();			// a Composite strategy acts as a collection of other strategies
+composite.add(new RegexMarkingStrategy("Alice", Color.PINK));										// redact all occurences of the word 'Alice' with a pink marker
+composite.add(new RegexMarkingStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)", Color.GRAY));	// redact all occurences of 'White Rabbit' (with some variations on case) with a gray marker
 
 // load the document
 PdfDocument pdf = new PdfDocument(new PdfReader(input), new PdfWriter(output));
@@ -53,3 +53,4 @@ And this is after redaction:
 ![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document.png)
 **Figure 2**: pdfsweep redacted output document
 
+As is made clear by this example document (and the code to go with it), it is perfectly possbile to define a custom color for each snippet of text to be redacted.
