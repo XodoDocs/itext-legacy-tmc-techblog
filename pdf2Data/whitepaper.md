@@ -68,11 +68,6 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 		<td>fontSize</td>
 		<td>b</td>
 	</tr>
-
-	<tr>
-		<td>fontStyle</td>
-		<td>b</td>
-	</tr>	
 		
 </table>
 
