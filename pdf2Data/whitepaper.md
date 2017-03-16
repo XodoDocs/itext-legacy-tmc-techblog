@@ -57,19 +57,12 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ### About the selectors
 
-<table>
-
-	<tr>
-		<td>00</td>
-		<td>01</td>
-	</tr>	
-
-	<tr>
-		<td>10</td>
-		<td>11</td>
-	</tr>
-		
-</table>
+| name | functionality |
+|------|---------------|
+| fontFamily |	This selector extracts the font name of the annotated text region and then uses this font name to filter glyphs with that font name. It is assumed that all the annotated text of the region has the same font family.|
+| fontSize |	This selector extracts the font size of the annotated text region and then uses this font size to filter glyphs with that font size. It is assumed that all the annotated text of the region has the same font size.|
+| fontStyle |	This selector extracts the font style of the annotated text region, e.g. bold, italic, and then uses this font style to filter glyphs with this font style. It is assumed that all the annotated text of the region has the same font style. |
+| font	| The font selector identifies the font used for the text in the selector region and extracts all symbols with the same font from the PDF document. If the text in the selector region uses several fonts, only the first one is used. The font is considered as a combination of the font family, font size and font style. If only some of these properties should be honoured when extracting text, please use selectors fontFamily, fontSize, fontStyle |
 
 ### Typical usecase : processing an invoice
 
