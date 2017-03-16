@@ -76,6 +76,21 @@ Important: Keep in mind this is not intended as a replacement for the full docum
 | align	| For “align:left” this selector uses the left bound of annotation for selecting only those lines that begin near that boundary. For “align:right” this selector uses the right bound of annotation for selecting only those lines that end near that boundary. |
 | page	| This selector restricts the area to a given page nr. Use 1, 2, etc or -1 (for the last page), -2, etc |
 
+* picker:
+
+| name | functionality |
+|------|---------------|
+| picker | This selector drills down on an extracted group that was recognized on the previous step. The parameter is an integer number greater or less than 0 (it depends from direction: first-to-last for positive index and last-to-first for negative index). If it exceeds the number of input groups, the result will be empty. The typical usecase is that you've already selected a column of a table (using the table selector), and that you'd now like to drill down on the last row in the column. This is typically the case when the table lists purchased items, and the last row contains the total price. |
+
+* formats:
+
+| name | functionality |
+|------|---------------|
+| price	| recognizes a decimal number, possibly with decimal separator, group separator and preceding or following currency sign. Supported: dollar (sign, USD, CAD, HKD, AUD), euro (sign, EUR), yen (sign, JPY), pound (sign, GBP, EBP) |
+|date	| recognizes date string in a number of common formats. Supported: All permutations of MM (or M), DD (or D), YYYY (or YY) with separators like '.,/\-: ', literal representations of month are caught by '[A-Za-z]+' or '\w{3,4}' regexps |
+| iban	| recognizes IBAN string |
+| VAT	| Supports the VAT numbers of all 27 EU countries. (as of time of writing Feb 2017) |
+
 ### Typical usecase : processing an invoice
 
 ### Boilerplate code
