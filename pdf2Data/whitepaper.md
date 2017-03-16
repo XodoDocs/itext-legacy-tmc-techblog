@@ -60,13 +60,13 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 <table>
 
 	<tr>
-		<td>fontFamily</td>
-		<td>b</td>
+		<td>00</td>
+		<td>01</td>
 	</tr>	
 
 	<tr>
-		<td>fontSize</td>
-		<td>b</td>
+		<td>10</td>
+		<td>11</td>
 	</tr>
 		
 </table>
