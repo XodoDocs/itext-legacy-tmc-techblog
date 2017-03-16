@@ -89,6 +89,25 @@ extractor.parsePdf(sampleFile, targetPDF, targetXML);
 
 ## Practical guidelines
 
+1. Use the boundary selector with all four borders enabled to check that the text can be extracted.
+	
+	pdf2Data relies on internal PDF structure rather than visual presentation to extract the text. 
+	Not all text visible in the document can be reliably extracted from PDF documents. 
+	The boundary selector triggers one of the simplest low level text extraction algorithms, and it is always a good idea to try first or if other selectors don’t work for your document.
+
+2. Do not use the boundary selector with all four sides enabled in the final version of the template, unless the text has a fixed position on the page and can not grow depending on the variable data.
+
+	Try the table selector in the automatic mode if your data is located inside a table cell.
+	Table selector in automatic mode is the best choice for tables with clear borders around the cells (or at least between columns). 
+	It also tries a number of smart heuristic algorithms even if your table does not have any borders at all. 
+
+3. Use the pattern selector if your data is surrounded by boiler-plate text (i.e. text that is unlikely to change and always precedes or follows after the important data).
+	e.g. "total price: xxxx EUR"
+	
+4. Use the paragraph selector to combine several lines into a single paragraph or to select a paragraph with a predefined first (title) line.
+	Sometimes the extracted text comes out as a sequence of distinct lines. You can always try combining them into a single paragraph using Paragraph selector at the end. 
+	Paragraph selectors can also be used very efficiently to allocate the blocks of text with a predefined first (title) line.
+
 ## Deploying your own pdf2Data web application
 
 1. Download a Java SE Development Kit 8 and install it.
