@@ -75,12 +75,73 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ### Boilerplate code
 
+```java
+
+// build a new Pdf2DataExtractor based on a template
+Pdf2DataExtractor extractor = new Pdf2DataExtractor(template);
+
+// sampleFile: the file you wish to process
+// targetPdf: the path where you wish to store the annotated pdf (for visual inspection)
+// targetXML: the path where you wish to store the extracted data (in xml format)
+extractor.parsePdf(sampleFile, targetPDF, targetXML);
+
+```
+
 ## Practical guidelines
 
 ## Deploying your own pdf2Data web application
 
+1. Download a Java SE Development Kit 8 and install it.
+2. Download a Apache Tomcat 8.x software and install it.
+3. Download the pdf2Data web application war file
+4. Deploy the application on the installed Tomcat server
+   In most cases it is sufficient to copy a war file into subdirectory webapps in Tomcat directory
+ 
+5. Create the file “web.properties” as follows
+```
+dir.temp=your_folder_for_resources
+mail.to=pdf2data@duallab.com
+mail.smtp.host=smtp.duallab.com
+mail.smtp.port=25
+mail.ssl.smtp.port=567
+mail.ssl.enable=false
+mail.smtp.starttls.enable=false
+mail.from=your email address
+user.name=your email address
+user.password=your email password
+```
+
 ## Using the Command Line Interface (CLI)
+
+Using the CLI is done in a two-step process. First the template pdf is pre-processed. The annotations are extracted, along with their corresponding selectors, and stored in an xml file.
+The parser then uses the template information in the xml file alongside the document to be processed to produce both an xml document (containing the data) and a pfd document containing information about the recognition (for quality control purposes.)
 
 ### Preprocessor
 
+```
+java -jar preprocess.jar --template=Tempate.pdf --xml=Template.xml
+Arguments:
+-t=Template.pdf, --template=Template.pdf
+This argument defines a template PDF file that contains annotations with rules for each region.
+
+-x=Template.xml, --xml=Template.xml
+This argument defines an XML file that will contain rules for each region we want to recognize after preprocessing of the corresponding PDF file.
+```
+
 ### Parser
+
+```
+java -jar parse.jar --template=Template.xml --pdf=Test.pdf --outPdf=pdfFile.pdf --outXml=xmlFile.xml
+Arguments:
+-t=Template.xml, --template=Template.xml
+This argument defines an XML file with rules for recognizing regions of data.
+
+-p=Test.pdf, --pdf=Test.pdf
+This argument defines a PDF file with data we want to recognize.
+
+-r=pdfFile.pdf, --outPdf=pdfFile.pdf
+This argument defines a PDF file that will contain visual representation of recognized elements in the form of annotations.
+
+-x=xmlFile.xml, --outXml=xmlFile.xml
+This argument defines an XML file that will contain a recognized data from the corresponding PDF file.
+```
