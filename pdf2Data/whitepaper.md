@@ -57,7 +57,7 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ### About the selectors
 
-<table>
+<table style='table-layout:fixed;width:366pt'>
     <tr>
     <td>fontFamily</td>	
     <td>This selector extracts the font name of the annotated text region and then uses this font name to filter glyphs with that font name. It is assumed that all the annotated text of the region has the same font family.</td>
