@@ -73,12 +73,7 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 		<td>fontStyle</td>
 		<td>b</td>
 	</tr>	
-	
-	<tr>
-		<td>font</td>
-		<td>b</td>
-	</tr>	
-	
+		
 </table>
 
 ### Typical usecase : processing an invoice
