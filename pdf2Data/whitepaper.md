@@ -57,12 +57,24 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ### About the selectors
 
+Important: Keep in mind this is not intended as a replacement for the full documentation. Rather as an overview of the possibilities for data-extraction. 
+
+* font-based:
+
 | name | functionality |
 |------|---------------|
 | fontFamily |	This selector extracts the font name of the annotated text region and then uses this font name to filter glyphs with that font name. It is assumed that all the annotated text of the region has the same font family.|
 | fontSize |	This selector extracts the font size of the annotated text region and then uses this font size to filter glyphs with that font size. It is assumed that all the annotated text of the region has the same font size.|
 | fontStyle |	This selector extracts the font style of the annotated text region, e.g. bold, italic, and then uses this font style to filter glyphs with this font style. It is assumed that all the annotated text of the region has the same font style. |
 | font	| The font selector identifies the font used for the text in the selector region and extracts all symbols with the same font from the PDF document. If the text in the selector region uses several fonts, only the first one is used. The font is considered as a combination of the font family, font size and font style. If only some of these properties should be honoured when extracting text, please use selectors fontFamily, fontSize, fontStyle |
+
+* position-based:
+
+| name | functionality |
+|------|---------------|
+| boundary	| This selector restricts the area on the page where the data is located.The selector boundary without any additional properties means that only the data inside the selector region will be extracted. However, it is often useful to honour only some of the region borders. In this case these borders can be specified as additional properties of the boundary selector. For example, boundary:left selector means that only the symbols positioned to the right of the left boundary are extracted. Similarly, - boundary:top means that only the symbols positioned below the top boundary are extracted, - boundary: left right means that symbols between the left and right boundaries are selected, while the vertical position is ignored. Note. The selector boundary without arguments is equivalent to boundary: left right bottom top. |
+| align	| For “align:left” this selector uses the left bound of annotation for selecting only those lines that begin near that boundary. For “align:right” this selector uses the right bound of annotation for selecting only those lines that end near that boundary. |
+| page	| This selector restricts the area to a given page nr. Use 1, 2, etc or -1 (for the last page), -2, etc |
 
 ### Typical usecase : processing an invoice
 
