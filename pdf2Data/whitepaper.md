@@ -91,6 +91,26 @@ Important: Keep in mind this is not intended as a replacement for the full docum
 | iban	| recognizes IBAN string |
 | VAT	| Supports the VAT numbers of all 27 EU countries. (as of time of writing Feb 2017) |
 
+* text
+
+| name | functionality |
+|------|---------------|
+| paragraph	| This selector combines data into paragraphs with specified (NORMAL, LARGE, HUGE) line spacing and return them. By default, if line spacing isn’t specified selector will use normal line spacing.|
+| line	| This selector combines data into lines with specified (NORMAL, LARGE, HUGE) character spacing and returns them. By default, if char spacing isn’t specified selector will use normal char spacing. |
+
+* pattern-based
+
+| name | functionality |
+|------|---------------|
+| pattern | This selector is usual regular expression selector. It allows convenience selection of a piece of data to be extracted. You can specify a prefix, type of data to be extracted, and a suffix. E.g. (prefix) "total price"  <integer> (suffix) "EUR"|
+| regexp | The regExp selector implements the standard regular expression search with a few additional options.|
+
+* table
+
+| name | functionality |
+|------|---------------|
+| tableCluster | The tableCluster selector attempts to process symbols into a logical table. This selector has many parameters (including the number of columns, rows, the columns to be selected, the row to be selected, the headers, etc). Consult the full documentation for a thorough understanding. |
+
 ### Typical usecase : processing an invoice
 
 ### Boilerplate code
