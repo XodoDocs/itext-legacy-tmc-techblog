@@ -113,6 +113,9 @@ Important: Keep in mind this is not intended as a replacement for the full docum
 
 ### Typical usecase : processing an invoice
 
+See presentation in pdf2Data demo pack
+See video on SharePoint
+
 ### Boilerplate code
 
 ```java
