@@ -53,6 +53,8 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 ![Figure 4: pdfSweep example input document](Images/pdf2data_workflow_simple_004.png)
 **Figure 4**: sample extraction
 
+Please note that although this example makes use of our own pdf2Data server, it is of course possible to use your own. Or to simply forego the web interface altogether and define your template using the Adobe Reader commenting facilities.
+
 ## A more in-depth look
 
 ### About the selectors
