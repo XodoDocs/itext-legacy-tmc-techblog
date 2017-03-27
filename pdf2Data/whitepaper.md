@@ -22,7 +22,7 @@ From a technical side:
 The template relies on dynamic field selectors such as font, styl,e position and text patterns to find the required fields in your data. 
 It also leverages iText text extraction, which offers a high fidelity recognition process.
  
-* pdf2Data also comes with a convenient web application to enable you to define the selectors in a more intuitive wa than the previous method of relying on a PDF commenting tool such as Adobe Reader to define the selectors in special syntax.
+* pdf2Data also comes with a convenient web application software package to enable you to define the selectors in a more intuitive way than the previous method of relying on a PDF commenting tool such as Adobe Reader to define the selectors in special syntax.
 
 * It is also easilty integrated with pure Java API with CLI (command line interface) and REST interfaces.
  
