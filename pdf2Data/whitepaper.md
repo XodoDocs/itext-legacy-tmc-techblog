@@ -34,10 +34,12 @@ The whole recognition is based on the following steps:
 
 1. Select parts of the template that correspond to your data fields using the pdf2Data web application or any PDF Viewer with commenting functionality. 
 2. Define relevant rules for the correct data extraction in the comment attached to each selection. 
-3. Upload the template to our web site and see if we recognized your fields and data inside them. 
+3. Upload the template to the web site running the template engine ,and see if it recognized your fields and data inside them. 
 4. Upload any other PDF document that is based on the same template and check if we were able to recognize your data.
 
 Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for as many documents as needed. But they all need to be based on the same template. 
+
+**Please note that although this example makes use of our own pdf2Data server, it is of course possible to use your own. Or to simply forego the web interface altogether and define your template using the Adobe Reader commenting facilities.**
 
 ## Simple example
 
@@ -52,8 +54,6 @@ Steps 1 to 3 need to be done only once per template. Step 4 can be repeated for 
 
 ![Figure 4: pdfSweep example input document](Images/pdf2data_workflow_simple_004.png)
 **Figure 4**: sample extraction
-
-Please note that although this example makes use of our own pdf2Data server, it is of course possible to use your own. Or to simply forego the web interface altogether and define your template using the Adobe Reader commenting facilities.
 
 ## A more in-depth look
 
