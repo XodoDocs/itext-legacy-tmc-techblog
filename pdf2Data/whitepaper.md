@@ -209,3 +209,6 @@ This argument defines a PDF file that will contain visual representation of reco
 -x=xmlFile.xml, --outXml=xmlFile.xml
 This argument defines an XML file that will contain a recognized data from the corresponding PDF file.
 ```
+
+##Conclusion
+In this whitepaper we've briefly presented our new addon pdf2Data. Pdf2Data allows you to seamlessly integrate data extraction in your existing workflow. A template document has to be defined, either via Adobe Reader comments or through the available web-interface software package. Afterwards, this template can be applied effortlessly to ensure high-volume, high-throughput data transformations. The extracted data is put into an .XML file, which can then be read by a plethora of libraries.
