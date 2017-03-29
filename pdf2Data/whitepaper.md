@@ -178,7 +178,7 @@ user.password=your email password
 ## Using the Command Line Interface (CLI)
 
 Using the CLI is done in a two-step process. First the template pdf is pre-processed. The annotations are extracted, along with their corresponding selectors, and stored in an xml file.
-The parser then uses the template information in the xml file alongside the document to be processed to produce both an xml document (containing the data) and a pfd document containing information about the recognition (for quality control purposes.)
+The parser then uses the template information in the xml file alongside the document to be processed to produce both an xml document (containing the data) and a pdf document containing information about the recognition (for quality control purposes.)
 
 ### Preprocessor
 
