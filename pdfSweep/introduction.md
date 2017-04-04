@@ -117,6 +117,7 @@ As is made clear by this example document (and the code to go with it), it is pe
 To give a brief idea of the performance of pdfSweep, we've used the iPhone user manual as a reference. We've redacted the regular expression "(i|I)Phone". You can imagine this occurs quite a lot in that particular document.
 
 Here are the results
+
 | copies |	#pages | #Mb  | #Ms   |
 |--------|---------|------|-------|
 | 1	     | 130     | 3.23 |	6407  |
