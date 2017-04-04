@@ -28,9 +28,9 @@ String input = "AliceInWonderland.pdf";
 String output = "AliceInWonderland_redacted.pdf";
 
 // define a strategy
-CompositeLocationExtractionStrategy composite = new CompositeLocationExtractionStrategy();			// a Composite strategy acts as a collection of other strategies
-composite.add(new RegexMarkingStrategy("Alice", Color.PINK));										// redact all occurences of the word 'Alice' with a pink marker
-composite.add(new RegexMarkingStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)", Color.GRAY));	// redact all occurences of 'White Rabbit' (with some variations on case) with a gray marker
+CompositeLocationExtractionStrategy strategy = new CompositeLocationExtractionStrategy();			// a Composite strategy acts as a collection of other strategies
+strategy.add(new PatternLocationExtractionStrategy("Alice").setRedactionColor(Color.PINK));                                       // redact all occurences of the word 'Alice' with a pink marker
+strategy.add(new PatternLocationExtractionStrategy("((w|W)hite (r|R)abbit)|( rabbit)|(Rabbit)").setRedactionColor(Color.GRAY));   // redact all occurences of 'White Rabbit' (with some variations on case) with a gray marker
 
 // load the document
 PdfDocument pdf = new PdfDocument(new PdfReader(input), new PdfWriter(output));
