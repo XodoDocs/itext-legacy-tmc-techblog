@@ -30,6 +30,29 @@ In the past redaction meant printing a document, blacking out the necessary info
 A .pdf document contains instructions for rendering the document in a viewer. Adding an instruction to draw a black rectangle does not erase text-rendering instructions underneath the rectangle.
 This essentially means that covering up information no longer works, and actual removal/replacement is needed. Otherwise text-extraction (or simply copy/pasting the text from your viewer to a text editor) would yield the redacted data.
 
+## Challenges in redacting pdf documents
+
+Redacting a pdf document is significantly harder that simply covering up the data that is to be redacted.
+* Text rendering instructions do not need to appear in logical (reading) order
+* Text rendering instructions do not always constitute complete words/chunks of text
+* Transformations can be applied (shift, scale, font transformation, etc)
+* Pdf documents can contain metadata, which should also be checked.
+* Pdf documents can contain scripts. Thus adding the possibility of dynamic content.
+
+This is an example of raw PDF document. It tells the viewer to render the text "Appearance" and "Pilot"
+
+```java
+[a, -28.7356, p, 27.2652, p, 27.2652, e, -27.2652, a, -28.7356, r, 64.6889, a, -28.7356, n, 27.2652, c, -38.7594, e, 444] TJ
+/R10 10.44 Tf
+68.16 0.24 Td
+[", 17.1965, P, -18.7118, i, -9.35592, l, -9.35592, o, -17.2414, t, -9.35636, ", 17.1965,  , 250] TJ
+```
+
+Similar problems occur with images:
+* Images can be defined as a series of drawing operations
+* pdfSweep has to process all instructions and find where each shape intersects with the redaction rectangle. And has to find a neat way to avoid drawing in that rectangle.
+* Images can be added to a pdf document under many formats. Only formats that iText can support can sensibly be redacted.
+
 ## An example
 
 The pdfSweep workflow has just two easy steps:
