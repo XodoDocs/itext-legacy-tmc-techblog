@@ -99,7 +99,7 @@ And this is after redaction:
 ![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document.png)
 **Figure 2**: pdfsweep redacted output document
 
-As is made clear by this example document (and the code to go with it), it is perfectly possbile to define a custom color for each snippet of text to be redacted.
+As is made clear by this example document (and the code to go with it), it is perfectly possible to define a custom color for each snippet of text to be redacted.
 
 ## How does it work?
 
