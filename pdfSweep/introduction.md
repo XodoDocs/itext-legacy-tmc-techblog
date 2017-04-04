@@ -96,10 +96,10 @@ To give a brief idea of the performance of pdfSweep, we've used the iPhone user 
 Here are the results
 | copies |	#pages | #Mb  | #Ms   |
 |--------|---------|------|-------|
-| 1	     |   130   | 3.23 |	6407  |
+| 1	     | 130     | 3.23 |	6407  |
 | 2	     | 260     | 5.55 |	10253 |
 | 4	     | 520	   | 11.1 | 17946 |
-| 8      |	1040   | 22.5 | 23445 |
+| 8      | 1040    | 22.5 | 23445 |
 
 Where "copies" signifies howmany times the original input document was concatenated with itself. E.g. 4 copies means the document (of 130 pages) was concatenated 4 times (resulting in 520 pages).
 From this table we can clearly see pdfSweep performs linearly in relation to the size of the input document.
