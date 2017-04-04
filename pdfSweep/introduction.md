@@ -7,6 +7,29 @@ Confidentiality is assured, because the redacted information cannot be recovered
 In a secure two-step process, pdfSweep deletes text and images at user-defined coordinates, or as defined by a regular expression. 
 After having parsed the rendering information in the original PDF document, a new PDF document is created without the redacted content.
 
+## Why do we need redaction?
+
+* Freedom of Information Act
+* Government declassification procedures
+* Data that would endanger the privacy of others
+    * Social security numbers
+    * Phone numbers
+    * Bank account details
+    * Name/Firstname of people in a clinical trial
+* Proprietary information
+* Trade secrets
+* ..
+
+## A short history of redaction
+
+In the past redaction meant printing a document, blacking out the necessary information and making a photocopy of the document. That way, any information that is covered by dark ink simply does not get copied. This worked because paper is a WYSIWYG format. There is no hidden data, no metadata that needs to be erased.
+
+![Figure 0: Example redacted document](Images/example_redacted_document.png)
+**Figure 0**: Example redacted document
+
+A .pdf document contains instructions for rendering the document in a viewer. Adding an instruction to draw a black rectangle does not erase text-rendering instructions underneath the rectangle.
+This essentially means that covering up information no longer works, and actual removal/replacement is needed. Otherwise text-extraction (or simply copy/pasting the text from your viewer to a text editor) would yield the redacted data.
+
 ## An example
 
 The pdfSweep workflow has just two easy steps:
