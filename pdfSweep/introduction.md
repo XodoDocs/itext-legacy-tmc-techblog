@@ -7,7 +7,7 @@ Confidentiality is assured, because the redacted information cannot be recovered
 In a secure two-step process, pdfSweep deletes text and images at user-defined coordinates, or as defined by a regular expression. 
 After having parsed the rendering information in the original PDF document, a new PDF document is created without the redacted content.
 
-## pdfSweep Workflow
+## An example
 
 The pdfSweep workflow has just two easy steps:
 
@@ -54,3 +54,15 @@ And this is after redaction:
 **Figure 2**: pdfsweep redacted output document
 
 As is made clear by this example document (and the code to go with it), it is perfectly possbile to define a custom color for each snippet of text to be redacted.
+
+## How does it work?
+
+1. The end user can specify a regular expression, and optionally a color
+2. The document is processed a first time, all instructions in the .pdf document that relate to text rendering are processed. All characters along with their bounding rectangles in the document are stored.
+3. These intermediate datastructures are sorted so that all characters are now in logical (reading) order.
+4. The regular expression(s) provided by the user are matched.
+5. The information about where the match took place, and the bounding rectangles of the characters involved provide pdfSweep with the rectangles that need to be redacted.
+
+![Figure 3: pdfAutoSweep workflow](Images/pdfautosweep_diagram.png)
+**Figure 3**: pdfAutoSweep workflow
+
