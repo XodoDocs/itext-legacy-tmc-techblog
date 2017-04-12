@@ -9,6 +9,8 @@ After having parsed the rendering information in the original PDF document, a ne
 
 ## Why do we need redaction?
 
+Redaction can be useful whenever the publisher or author of a document wishes to take out certain information. Common usecases include;
+
 * Freedom of Information Act
 * Government declassification procedures
 * Data that would endanger the privacy of others
@@ -32,14 +34,7 @@ This essentially means that covering up information no longer works, and actual 
 
 ## Challenges in redacting pdf documents
 
-Redacting a pdf document is significantly harder that simply covering up the data that is to be redacted.
-* Text rendering instructions do not need to appear in logical (reading) order
-* Text rendering instructions do not always constitute complete words/chunks of text
-* Transformations can be applied (shift, scale, font transformation, etc)
-* Pdf documents can contain metadata, which should also be checked.
-* Pdf documents can contain scripts. Thus adding the possibility of dynamic content.
-
-This is an example of raw PDF document. It tells the viewer to render the text "Appearance" and "Pilot"
+This is a (well-behaved) example of raw PDF document. It tells the viewer to render the text "Appearance" and "Pilot"
 
 ```java
 [a, -28.7356, p, 27.2652, p, 27.2652, e, -27.2652, a, -28.7356, r, 64.6889, a, -28.7356, n, 27.2652, c, -38.7594, e, 444] TJ
@@ -47,6 +42,14 @@ This is an example of raw PDF document. It tells the viewer to render the text "
 68.16 0.24 Td
 [", 17.1965, P, -18.7118, i, -9.35592, l, -9.35592, o, -17.2414, t, -9.35636, ", 17.1965,  , 250] TJ
 ```
+
+In general though, redacting a pdf document is significantly harder that simply covering up the data that is to be redacted because:
+* Text rendering instructions do not need to appear in logical (reading) order
+* Text rendering instructions do not always constitute complete words/chunks of text
+* Transformations can be applied (shift, scale, font transformation, etc)
+* Pdf documents can contain metadata, which should also be checked.
+* Pdf documents can contain scripts. Thus adding the possibility of dynamic content.
+
 
 Similar problems occur with images:
 * Images can be defined as a series of drawing operations
@@ -125,6 +128,6 @@ Here are the results
 | 4	     | 520	   | 11.1 | 17946 |
 | 8      | 1040    | 22.5 | 23445 |
 
-Where "copies" signifies howmany times the original input document was concatenated with itself. E.g. 4 copies means the document (of 130 pages) was concatenated 4 times (resulting in 520 pages).
+Where "copies" signifies how many times the original input document was concatenated with itself. E.g. 4 copies means the document (of 130 pages) was concatenated 4 times (resulting in 520 pages).
 From this table we can clearly see pdfSweep performs linearly in relation to the size of the input document.
 
