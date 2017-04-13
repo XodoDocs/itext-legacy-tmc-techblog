@@ -142,7 +142,7 @@ pdfDocument.close();
 
 ```
 
-## How does it work?
+## How does pdfAutoSweep work?
 
 1. The end user can specify a regular expression, and optionally a color
 2. The document is processed a first time, all instructions in the .pdf document that relate to text rendering are processed. All characters along with their bounding rectangles in the document are stored.
