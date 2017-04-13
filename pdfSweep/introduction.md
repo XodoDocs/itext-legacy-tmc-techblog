@@ -170,15 +170,21 @@ The above examples have mostly showcased how to use pdfSweep on text. Redaction 
 
 To give a brief idea of the performance of pdfSweep, we've used the iPhone user manual as a reference. We've redacted the regular expression "(i|I)Phone". You can imagine this occurs quite a lot in that particular document.
 
+Where "copies" signifies how many times the original input document was concatenated with itself. E.g. 4 copies means the document (of 130 pages) was concatenated 4 times (resulting in 520 pages).
+
 Here are the results
 
-| copies |	#pages | #Mb  | #Ms   |
-|--------|---------|------|-------|
-| 1	     | 130     | 3.23 |	6407  |
-| 2	     | 260     | 5.55 |	10253 |
-| 4	     | 520	   | 11.1 | 17946 |
-| 8      | 1040    | 22.5 | 23445 |
+| copies |	#pages | #Input file size (Mb)  | #Milliseconds   |
+|--------|---------|------------------------|-----------------|
+| 1	     | 130     | 3.23                   | 6407            |
+| 2	     | 260     | 5.55                   | 10253           |
+| 4	     | 520	   | 11.1                   | 17946           |
+| 8      | 1040    | 22.5                   | 23445           |
 
-Where "copies" signifies how many times the original input document was concatenated with itself. E.g. 4 copies means the document (of 130 pages) was concatenated 4 times (resulting in 520 pages).
 From this table we can clearly see pdfSweep performs linearly in relation to the size of the input document.
 
+## Conclusion
+
+In this whitepaper, we've briefly presented our addon pdfSweep. PdfSweep allows you to seamlessly integrate data redaction in your existing workflow. Redaction rectangles have to be defined, either by using pdfAutoSweep which uses regular expressions to search for matching text and coordinates, or by programmatically enterting the coordinates. PdfSweep will redact both text, images and metadata ensuring complete confidentiality.
+
+Learn more at www.itextpdf.com
