@@ -61,7 +61,7 @@ Similar problems occur with images:
 The pdfSweep workflow has just two easy steps:
 
 * Select those parts of the document that you prefer to have redacted. 
-Either be specifying the coordinates, or by inputting a regular expression that fits your needs.
+Either by specifying the coordinates, or by inputting a regular expression that fits your needs.
 We have already provided a substantial list of common regular expressions to do some of the heavy lifting for you, such as;
 social security numbers, phone numbers, dates, etc
 
