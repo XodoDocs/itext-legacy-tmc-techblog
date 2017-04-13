@@ -65,7 +65,10 @@ Either be specifying the coordinates, or by inputting a regular expression that 
 We have already provided a substantial list of common regular expressions to do some of the heavy lifting for you, such as;
 social security numbers, phone numbers, dates, etc
 
-* Once a strategy has been defined, any document that matches this template can be redacted. Simply pass the locations to pdfSweep, or invoke pdfAutoSweep with the pattern(s) of your choice.
+* Pass the locations to pdfSweep, or invoke pdfAutoSweep with the pattern(s) of your choice.
+
+This is an autosweep example that redacts the words 'Alice' and 'White Rabbit' and 'Rabbit' (regardless of casing).
+It marks all occurences of Alice with a pink rectangle, and all occurences of 'Rabbit' with a gray rectangle.
 
 ```java
 
@@ -103,6 +106,41 @@ And this is after redaction:
 **Figure 2**: pdfsweep redacted output document
 
 As is made clear by this example document (and the code to go with it), it is perfectly possible to define a custom color for each snippet of text to be redacted.
+
+Similarly, you could also have specified the exact locations yourself. Following code-snippet demonstrates that usecase:
+
+```java
+String input = "iphone_user_guide_untagged.pdf";
+String output = "iphone_user_guide_redacted.pdf";       
+
+// load licensekey
+LicenseKey.loadLicenseFile("itext_dev_master_license.xml");
+
+// define rectangles
+List<Rectangle> rects = Arrays.asList(  new Rectangle(60f, 80f, 460f, 65f), 
+                                        new Rectangle(300f, 370f, 215f, 260f)
+                                      );
+
+// turn rectangles into cleanup locations
+int pagesNum = 130;
+List<PdfCleanUpLocation> cleanUpLocations = new ArrayList<>();
+for (int i = 0; i < pagesNum; ++i) {
+   for (int j = 0; j < rects.size(); ++j) {
+       cleanUpLocations.add(new PdfCleanUpLocation(i + 1, rects.get(j)));
+   }
+}
+
+// open document
+PdfDocument pdfDocument = new PdfDocument(new PdfReader(input), new PdfWriter(output));
+
+// perform cleanup
+PdfCleanUpTool cleaner = new PdfCleanUpTool(pdfDocument, cleanUpLocations);
+cleaner.cleanUp();
+
+// close document
+pdfDocument.close();
+
+```
 
 ## How does it work?
 
