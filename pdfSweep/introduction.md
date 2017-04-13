@@ -142,6 +142,19 @@ pdfDocument.close();
 
 ```
 
+### Images
+
+The above examples have mostly showcased how to use pdfSweep on text. Redaction can also be performed on images. Images are automatically redacted when they intersect with the rectangles the user provided. The redacted areas are covered with a colored rectangle, and the underlying image is changed (to prevent image extraction from yielding the original image.)
+
+![Figure 3: Tony Soprano before redaction](Images/tony_soprano_1.png)
+**Figure 3**: Tony Soprano as displayed in the original pdf document
+
+![Figure 4: Tony Soprano with redaction](Images/tony_soprano_2.png)
+**Figure 4**: Tony Soprano as displayed after the eyes have been redacted to provide anonimity
+
+![Figure 5: Extracted image of Tony Soprano](Images/tony_soprano_3.png)
+**Figure 5**: Extracted image of Tony Soprano, notice that the original content is gone
+
 ## How does pdfAutoSweep work?
 
 1. The end user can specify a regular expression, and optionally a color
