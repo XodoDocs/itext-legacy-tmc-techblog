@@ -166,6 +166,31 @@ The above examples have mostly showcased how to use pdfSweep on text. Redaction 
 ![Figure 3: pdfAutoSweep workflow](Images/pdfautosweep_diagram.png)
 **Figure 3**: pdfAutoSweep workflow
 
+## Pre-configured regular expressions
+
+Most of the regular expressions that are already configered to work with autoSweep have been copied from the O' Reilly reference work "Regular Expressions Cookbook". What follows is a short listing of some of these regular expressions and their intended matches.
+
+| name                       | matches                                                                             |
+|----------------------------|-------------------------------------------------------------------------------------|
+| ROMAN_NUMERALS_STRICT      | A Roman number, matching only those numbers that are valid.                         |
+| ROMAN_NUMERALS_FLEXIBLE    | A Roman number, also matching IIII (4), whereas STRICT only matches IV              |
+| US_SOCIAL_SECURITY_NUMBER  | A social security number (ddd-dd-dddd)                                              |
+| US_ZIP_CODE                | A US zip code (either 5 digit format, or 5+4 format)                                |
+| US_CURRENCY                |                                                                                     |
+| CANADA_ZIP_CODE            |                                                                                     |
+| UK_ZIP_CODE                |                                                                                     |
+|                            |                                                                                     |
+| DATE_MM_DD_YYYY            |                                                                                     |
+| DATE_MM_DD_YYYY_HH_MM_SS   |                                                                                     |
+| DATE_DD_MM_YYYY            |                                                                                     |
+| DATE_DD_MM_YYYY_HH_MM_SS   |                                                                                     |
+|                            |                                                                                     |
+| IPV4_ADDRESS               |                                                                                     |
+| IPV6_ADDRESS               |                                                                                     |
+| MAC_ADDRESS                |                                                                                     |
+| EMAIL_ADDRESS              |                                                                                     |
+| HTTP_URL                   |                                                                                     |
+
 ## Performance
 
 To give a brief idea of the performance of pdfSweep, we've used the iPhone user manual as a reference. We've redacted the regular expression "(i|I)Phone". You can imagine this occurs quite a lot in that particular document.
