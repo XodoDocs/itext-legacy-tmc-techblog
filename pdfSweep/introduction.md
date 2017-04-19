@@ -183,11 +183,11 @@ Most of the regular expressions that are already configered to work with autoSwe
 | DATE_MM_DD_YYYY            | a date, specified in MM/DD/YYYY, separator can be 'space' '/' or '-'                |
 | DATE_MM_DD_YYYY_HH_MM_SS   | a date, specified in MM/DD/YYYY HH:MM:SS                                            |
 | DATE_DD_MM_YYYY            | a date, specified in DD/MM/YYYY, separator can be 'space' '/' or '-'                |
-| DATE_DD_MM_YYYY_HH_MM_SS   |                                                                                     |
+| DATE_DD_MM_YYYY_HH_MM_SS   | a date, specified in MM/DD/YYYY HH:MM:SS                                            |
 |                            |                                                                                     |
 | IPV4_ADDRESS               | an Internet Protocol (v4) address                                                   |
 | IPV6_ADDRESS               | an Internet Protocol (v6) address                                                   |
-| MAC_ADDRESS                |                                                                                     |
+| MAC_ADDRESS                | a Media Access Control address                                                      |
 | EMAIL_ADDRESS              |                                                                                     |
 | HTTP_URL                   |                                                                                     |
 
