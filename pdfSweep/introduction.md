@@ -180,9 +180,9 @@ Most of the regular expressions that are already configered to work with autoSwe
 | CANADA_ZIP_CODE            | a Canadian zip code                                                                 |
 | UK_ZIP_CODE                | a UK zip code                                                                       |
 |                            |                                                                                     |
-| DATE_MM_DD_YYYY            |                                                                                     |
-| DATE_MM_DD_YYYY_HH_MM_SS   |                                                                                     |
-| DATE_DD_MM_YYYY            |                                                                                     |
+| DATE_MM_DD_YYYY            | a date, specified in MM/DD/YYYY, separator can be 'space' '/' or '-'                |
+| DATE_MM_DD_YYYY_HH_MM_SS   | a date, specified in MM/DD/YYYY HH:MM:SS                                            |
+| DATE_DD_MM_YYYY            | a date, specified in DD/MM/YYYY, separator can be 'space' '/' or '-'                |
 | DATE_DD_MM_YYYY_HH_MM_SS   |                                                                                     |
 |                            |                                                                                     |
 | IPV4_ADDRESS               | an Internet Protocol (v4) address                                                   |
