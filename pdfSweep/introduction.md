@@ -177,16 +177,16 @@ Most of the regular expressions that are already configered to work with autoSwe
 | US_SOCIAL_SECURITY_NUMBER  | A social security number (ddd-dd-dddd)                                              |
 | US_ZIP_CODE                | A US zip code (either 5 digit format, or 5+4 format)                                |
 | US_CURRENCY                |                                                                                     |
-| CANADA_ZIP_CODE            |                                                                                     |
-| UK_ZIP_CODE                |                                                                                     |
+| CANADA_ZIP_CODE            | a Canadian zip code                                                                 |
+| UK_ZIP_CODE                | a UK zip code                                                                       |
 |                            |                                                                                     |
 | DATE_MM_DD_YYYY            |                                                                                     |
 | DATE_MM_DD_YYYY_HH_MM_SS   |                                                                                     |
 | DATE_DD_MM_YYYY            |                                                                                     |
 | DATE_DD_MM_YYYY_HH_MM_SS   |                                                                                     |
 |                            |                                                                                     |
-| IPV4_ADDRESS               |                                                                                     |
-| IPV6_ADDRESS               |                                                                                     |
+| IPV4_ADDRESS               | an Internet Protocol (v4) address                                                   |
+| IPV6_ADDRESS               | an Internet Protocol (v6) address                                                   |
 | MAC_ADDRESS                |                                                                                     |
 | EMAIL_ADDRESS              |                                                                                     |
 | HTTP_URL                   |                                                                                     |
