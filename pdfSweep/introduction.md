@@ -163,8 +163,8 @@ The above examples have mostly showcased how to use pdfSweep on text. Redaction 
 4. The regular expression(s) provided by the user are matched.
 5. The information about where the match took place, and the bounding rectangles of the characters involved provide pdfSweep with the rectangles that need to be redacted.
 
-![Figure 3: pdfAutoSweep workflow](Images/pdfautosweep_diagram.png)
-**Figure 3**: pdfAutoSweep workflow
+![Figure 6: pdfAutoSweep workflow](Images/pdfautosweep_diagram.png)
+**Figure 6**: pdfAutoSweep workflow
 
 ## Pre-configured regular expressions
 
