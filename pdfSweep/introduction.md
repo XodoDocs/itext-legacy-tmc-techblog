@@ -172,11 +172,11 @@ Most of the regular expressions that are already configered to work with autoSwe
 
 | name                       | matches                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------|
-| ROMAN_NUMERALS_STRICT      | A Roman number, matching only those numbers that are valid.                         |
-| ROMAN_NUMERALS_FLEXIBLE    | A Roman number, also matching IIII (4), whereas STRICT only matches IV              |
-| US_SOCIAL_SECURITY_NUMBER  | A social security number (ddd-dd-dddd)                                              |
-| US_ZIP_CODE                | A US zip code (either 5 digit format, or 5+4 format)                                |
-| US_CURRENCY                |                                                                                     |
+| ROMAN_NUMERALS_STRICT      | a Roman number, matching only those numbers that are valid.                         |
+| ROMAN_NUMERALS_FLEXIBLE    | a Roman number, also matching IIII (4), whereas STRICT only matches IV              |
+| US_SOCIAL_SECURITY_NUMBER  | a social security number (ddd-dd-dddd)                                              |
+| US_ZIP_CODE                | a US zip code (either 5 digit format, or 5+4 format)                                |
+| US_CURRENCY                | an amount of US dollars                                                             |
 | CANADA_ZIP_CODE            | a Canadian zip code                                                                 |
 | UK_ZIP_CODE                | a UK zip code                                                                       |
 |                            |                                                                                     |
@@ -188,8 +188,8 @@ Most of the regular expressions that are already configered to work with autoSwe
 | IPV4_ADDRESS               | an Internet Protocol (v4) address                                                   |
 | IPV6_ADDRESS               | an Internet Protocol (v6) address                                                   |
 | MAC_ADDRESS                | a Media Access Control address                                                      |
-| EMAIL_ADDRESS              |                                                                                     |
-| HTTP_URL                   |                                                                                     |
+| EMAIL_ADDRESS              | an email address                                                                    |
+| HTTP_URL                   | a url                                                                               |
 
 ## Performance
 
