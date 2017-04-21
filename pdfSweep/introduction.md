@@ -12,6 +12,7 @@ After having parsed the rendering information in the original PDF document, a ne
 Redaction can be useful whenever the publisher or author of a document wishes to take out certain information. Common usecases include;
 
 * Freedom of Information Act
+* General Data Protection Regulation
 * Government declassification procedures
 * Data that would endanger the privacy of others
     * Social security numbers
