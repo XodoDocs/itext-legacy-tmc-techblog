@@ -59,7 +59,7 @@ Similar problems occur with images:
 
 ## An example
 
-The pdfSweep workflow has just two easy steps:
+The basic pdfSweep workflow has just two easy steps:
 
 * Select those parts of the document that you prefer to have redacted. 
 Either by specifying the coordinates, or by inputting a regular expression that fits your needs.
@@ -70,6 +70,16 @@ social security numbers, phone numbers, dates, etc
 
 This is an autosweep example that redacts the words 'Alice' and 'White Rabbit' and 'Rabbit' (regardless of casing).
 It marks all occurences of Alice with a pink rectangle, and all occurences of 'Rabbit' with a gray rectangle.
+
+## Alternative example
+
+In an alternative workflow, you can add human verification in the workflow
+
+* Select those parts of the document that you'd prefer to have redacted
+
+* Call AutoSweep with the method tentativeCleanUp. This will produce a document where the content was not redacted. But where all content that should be redacted is marked with an annotation. Adobe reader can manage these annotations for you. Allowing you to remove redaction annotations, add extra annotations, and add comments.
+
+* Once you have made your final selection about which redaction annotations to keep, you can hit "apply redaction" in Adobe reader.
 
 ```java
 
