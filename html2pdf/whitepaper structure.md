@@ -2,14 +2,14 @@
 	S> what does it do
 	S> what does it need (itext 7)
 > HTML & CSS
-	B> content tagging, cascading
-	B> DOM
-	B> browser layout engine
-	B> media queries
+x	B> content tagging, cascading
+x	B> DOM
+x	B> browser layout engine
+x	B> media queries
 > pdfHtml
 	S> basic workflow
 	S> example (with flowchart)
-	B> config options
+x	B> config options
 	S> customizations (+ examples)
 	B> integrations (pdfCalligraph)
 	S> PDF substandards (PDF/A, PDF/UA)
