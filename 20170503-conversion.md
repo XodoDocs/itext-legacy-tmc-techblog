@@ -17,8 +17,16 @@ Naturally, the conversion from structured to unstructured is easy. Discarding in
 Our addon pdfHTML is a good example of this, going from a rich structured format to a rich unstructured format.
 Using external libraries it is perfectly possible to convert from .doc and .docx to .pdf.
 
-# What iText could do
-
 # What iText does not do
 
 iText can not convert from (untagged) .pdf to HTML. Doing so would require iText to find structure in an unstructured document. The simple task of finding tables, and correctly identifying rows, columns and merged cells is already considered a topic of research. Correctly identifying all possible realizations of varied media is no mean feat.
+
+Similarly, iText can not convert from poor formats (json, xml, raw text) to pdf. Since iText would then have to start adding style attributes (font, font-family, size, layout, etc) where there was none to begin with. And even though some effort could be made in defining a default, it would not take long for someone to come along with a perfectly valid usecase for wanting something other than the default.
+
+# But I have <some software kit> installed, and it converts pdf to <whatnot> perfectly!
+
+Typical example here is software that claims to convert html to pdf. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning.
+
+# Conclusion
+
+Ultimately it comes down to quality. If you want a lossy, stupid conversion, feel free to use a stupid tool. If you need software that is built to adhere to the standards, and deliver high-performance, high-througput document processing, use iText.
