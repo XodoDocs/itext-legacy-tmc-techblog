@@ -23,7 +23,7 @@ iText can not convert from (untagged) .pdf to HTML. Doing so would require iText
 
 Similarly, iText can not convert from poor formats (json, xml, raw text) to pdf. Since iText would then have to start adding style attributes (font, font-family, size, layout, etc) where there was none to begin with. And even though some effort could be made in defining a default, it would not take long for someone to come along with a perfectly valid usecase for wanting something other than the default.
 
-# But I have <some software kit> installed, and it converts pdf to <whatnot> perfectly!
+# But I have *some software kit* installed, and it converts pdf to *whatnot* perfectly!
 
 Typical example here is software that claims to convert html to pdf. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning.
 
