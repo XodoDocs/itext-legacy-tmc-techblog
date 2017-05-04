@@ -1,8 +1,8 @@
-# Conversion
+# About conversion
 
 Data conversion is the conversion of computer data from one format to another. Throughout a computer environment, data is encoded in a variety of ways. For example, computer hardware is built on the basis of certain standards, which requires that data contains, for example, parity bit checks. Similarly, the operating system is predicated on certain standards for data and file handling. Furthermore, each computer program handles data in a different manner. Whenever any one of these variables is changed, data must be converted in some way before it can be used by a different computer, operating system or program. Even different versions of these elements usually involve different data structures. For example, the changing of bits from one format to another, usually for the purpose of application interoperability or of capability of using new features, is merely a data conversion. Data conversions may be as simple as the conversion of a text file from one character encoding system to another; or more complex, such as the conversion of office file formats, or the conversion of image and audio file formats.
 
-# Some background knowledge
+# Assumptions
 
 For the purposes of this article we define two axis along which any document format can be defined.
 First "richness", a format is said to be rich if it can contain more than plain text. In this regard we consider json to be a poor format, although it can contain urls that reference external sources, and urls to reference images, it requires external interpretation. Pdf is considered a rich format. A pdf document can contain images, links, videos, tables, various fonts, colors etc.
@@ -25,7 +25,7 @@ Similarly, iText can not convert from poor formats (json, xml, raw text) to pdf.
 
 # But I have *some software kit* installed, and it converts pdf to *whatnot* perfectly!
 
-Typical example here is software that claims to convert html to pdf. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning.
+Typical example here is software that claims to convert html to pdf. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning. This typically means that the resulting html document can no longer be used afterwards as input to any process that expects valid/sensible html markup.
 
 # Conclusion
 
