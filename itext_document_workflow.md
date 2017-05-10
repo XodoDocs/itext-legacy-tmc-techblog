@@ -4,6 +4,14 @@ iText is a software developer toolkit that allows users to integrate PDF functio
 
 # document workflow
 
+## information aquisition
+
+## templating
+
+## pdf generation
+
+## pdf redaction
+
 # example usecase(s)
 
 # learn more
