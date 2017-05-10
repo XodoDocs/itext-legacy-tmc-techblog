@@ -38,7 +38,7 @@ This will throw an exception when the key is invalid or corrupt.
 If you're using iText 7, you'll need to use version 2.x.y of the license key library.  
 If you're using iText 5, you'll need to use version 1.x.y of the license key library.
 
-You **can't** mix the versions. Don't use version 1.x.y with iText 5.x.y. This will not work.
+You **can't** mix the versions. Don't use version 2.x.y with iText 5.x.y. This will not work.
 
 Please use the latest version within the appropriate major version to have the latest features and bug fixes available.
 
