@@ -4,11 +4,17 @@ iText is a software developer toolkit that allows users to integrate PDF functio
 
 # document workflow
 
+iText can be used in many places of your document workflow.
+
 ## information aquisition
 
-## templating
+For information aquisition, iText can help process incoming pdf document. If your data is structured enough, you could benifit from using pdf2Data wich allows you to use templating to extract data in xml form. If your data is unstructured, you could use the iText Core Library to extract raw text, images, links, etc.
 
 ## pdf generation
+
+### program your document
+
+### templating
 
 ## pdf redaction
 
