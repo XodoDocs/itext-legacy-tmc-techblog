@@ -5,6 +5,7 @@ Data conversion is the conversion of computer data from one format to another. T
 # Assumptions
 
 For the purposes of this article we define two axis along which any document format can be defined.
+
 First "richness", a format is said to be rich if it can contain more than plain text. In this regard we consider json to be a poor format, although it can contain urls that reference external sources, and urls to reference images, it requires external interpretation. Pdf is considered a rich format. A pdf document can contain images, links, videos, tables, various fonts, colors etc. Html (for the purposes of this paper) is (semi-)rich. There is a canonical interpretation for how certain tags ought to be rendered (e.g. strong, italic, underline, paragraph, etc). This is more than can be said about a random json object, or xml snippet. However, when push comes to shove it is ultimately nothing more than plaintext backed up by some standards.
 
 Second we look at "structure". A format is said to be structured if a logical (user-intuitive) structure can be derived from the work, or is already present in the work. HTML is a structured format, as elements typically embody entities users can relate to (paragraph, table, image, etc). (untagged) Pdf is an unstructured format, as a pdf document typically only contains the instructions needed to render the document in a viewer.
@@ -19,14 +20,14 @@ Using external libraries it is perfectly possible to convert from .doc and .docx
 
 # What iText does not do
 
-iText can not convert from (untagged) .pdf to HTML. Doing so would require iText to find structure in an unstructured document. The simple task of finding tables, and correctly identifying rows, columns and merged cells is already considered a topic of research. Correctly identifying all possible realizations of varied media is no mean feat.
+iText can not convert from (untagged) .pdf to HTML. Doing so would require iText to find structure in an unstructured document. The seemingly simple task of finding tables, and correctly identifying rows, columns and merged cells is already considered a topic of research. Correctly identifying all possible realizations of varied media is no mean feat.
 
 Similarly, iText can not convert from poor formats (json, xml, raw text) to pdf. Since iText would then have to start adding style attributes (font, font-family, size, layout, etc) where there was none to begin with. And even though some effort could be made in defining a default, it would not take long for someone to come along with a perfectly valid usecase for wanting something other than the default.
 
 # But I have *some software kit* installed, and it converts pdf to *whatnot* perfectly!
 
-Typical example here is software that claims to convert html to pdf. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning. This typically means that the resulting html document can no longer be used afterwards as input to any process that expects valid/sensible html markup.
+Typical example here is software that claims to convert pdf to html. And although the software can achieve the same look (arguably), it certainly can't inject structure. You'll find that these tools more often than not simply try to mimic the visual appearance of a .pdf, rather than attempt to divine meaning. This typically means that the resulting html document can no longer be used afterwards as input to any process that expects valid/sensible html markup.
 
 # Conclusion
 
-Ultimately it comes down to quality. If you want a lossy, stupid conversion, feel free to use a stupid tool. If you need software that is built to adhere to the standards, and deliver high-performance, high-througput document processing, use iText.
+Ultimately it comes down to quality. If you want a lossy, unstructured conversion, feel free to use a generic tool. If you need software that is built to adhere to the standards, and deliver high-performance, high-througput document processing, use iText.
