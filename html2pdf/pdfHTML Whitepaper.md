@@ -1,25 +1,30 @@
 # pdfHTML: Whitepaper
-## Introduction 
-### What is it?
-pdfHTML is an add-on module on the iText7 framework that transforms HTML and accompanying CSS into a PDF Documents.
-Built for creation of pdf files from html-templates, pdfHTML allows you to automate pdf generation for documents like internal reports, tickets, invoices and more.
 
-pdfHTML provides you with the means for creating beatiful and fucntional pdfs
-without forcing your designers to learn the complex pdf syntax or the intracies of the iText7 framework.
+## Introduction
+
+### What is it?
+
+pdfHTML is an add-on module for the iText7 framework that transforms HTML and accompanying CSS into a PDF Document.
+Built for creation of PDF files from HTML templates, pdfHTML allows you to automate PDF generation for documents like internal reports, tickets, invoices, and more.
+
+pdfHTML provides you with the means for creating beatiful and functional PDFs
+without forcing your designers to learn the complex PDF syntax or the intricacies of the iText7 framework.
 They simply need to utilize their common, well-honed HTML and CSS skills to create the template,
 and pdfHTML takes care of the rest, staying as close as possible to the way the HTML is rendered inside a browser.
+
 ### How to use it (Basic Example)
 
 ## Input formats
 
 ### HTML & CSS
+
 HTML is a markup language that allows content creators to make simple human-readable files with explicit semantic metadata in the form of tags.
 This metadata is then used by a HTML viewing application to determine where on the screen the content will be shown.
 The HTML file in itself is a plain-text file utilizing a number of specific constructs, and it is a HTML viewer's responsibility to portray the content faithfully.
 It is most prominently used for markup of web pages, and as such the primary HTML viewer applications are browsers.
 
 The main feature of HTML is the concept of *tags*, which denote the limits of a textual element.
-For example, a piece of content that constitutes a paragraph will be surrounded by the opening and closing tags of type p:
+For example, a piece of content that constitutes a paragraph will be surrounded by the opening and closing tags of type `p`:
 
 ```html
 <p>This content constitutes a paragraph</p>
@@ -37,21 +42,21 @@ A list is a wrapper around a number of list items:
 Similar constructs exist for smaller units of text, for tables, headers, images, videos, hyperlinks, sections,
 and other common semantic divisions that can be made in a web page's content.
 
-Browsers will interpret these tags to layout and display the document,
-using a number of reasonable defaults that will result in a readable document.
+Browsers will interpret these tags to a visual layout and display the document,
+using a number of reasonable defaults that will result in a readable rendering.
 However, that would result in all web pages basically looking the same structurally.
 Changing the visual properties of an element is relatively easy:
-for any tag, you can add attributes to set a property to a non-default value.
+for any tag, you can add attributes to set an HTML property to a non-default value.
 
 ```html
 <p style="background-color:yellow;">Text</p>
 ```
 
 This looks easy, but becomes problematic for longer documents and especially when editing files,
-and when you want a certain layout to be consistent over a number of separate HTML documents.
+or when you want a certain layout to be consistent over a number of separate HTML documents.
 
 CSS can solve this problem by allowing pooling of the stylistic properties of HTML tags,
-so that they're defined in one place and will apply to all attributes of a certain type.
+so that they're defined in one place and will apply to all elements of a certain type.
 As such, long documents don't need a lot of manual styling if the CSS is well-written.
 
 An easy example can show the basic use case for CSS.
@@ -65,7 +70,7 @@ If no style sheets are used, then all styling must happen in the HTML `style` at
 <p style="color:red;font-size:16;background-color:yellow;">Text 5</p>
 ```
 
-When using a style sheet, you can define all style attributes once and have them defined on every part of the HTML content that fulfills the condition.
+When using a style sheet, you can define all style attributes once and have them defined on every part of the HTML content that fulfills a certain condition.
 That implies that there is only one place where all style attributes are defined, which makes it easier to analyze problems and to change a property for all instances.
 
 ```html
@@ -113,6 +118,7 @@ or to use a combination of multiple CSS files for one HTML file.
 The CSS format also has other uses, mostly tied in with other XML-based formats such as SVG.
 
 ### DOM
+
 An essential feature of HTML, and related standards such as XML, is that they require that all elements are strictly nested in each other.
 ```html
 <div><p>legal</p></div>
@@ -156,7 +162,9 @@ You can do this either by specifying a separate stylesheet in the HTML `<head>` 
 ```
 
 ## pdfHTML: an in-depth look
+
 ### Basics: Tag & Css mapping
+
 ### Simple Example
 
 ### Configuration Options
@@ -185,22 +193,22 @@ relative to the baseUri folder you specified or to the default value.
 #### fontProvider
 
 If you want to customize the fonts that can be used by pdfHTML,
-then you can define a `FontProvider` that will act as a repository for those fonts.
+then you can define a `FontProvider` object that will act as a repository for those fonts.
 
-There is probably little reason to extend pdfHTML's `DefaultFontProvider` class,
-because you can configure exactly which fonts will be supplied to the PDF rendering logic.
-On top of the basic behavior that you can define in the constructor,
-you can also add a font that you specify as a location on the system,
+There is a standard implementation available in the pdfHTML project which is called `DefaultFontProvider`.
+There is probably little reason to extend this class, because you can configure exactly which fonts should be supplied to the PDF rendering logic.
+On top of the basic behavior that you can define in the constructor, you can also add a font that you specify as a location on the system,
 a `byte[]`, or an iText `FontProgram` object.
 
-`DefaultFontProvider` has a constructor with three boolean arguments, which allow you to specify:
+`DefaultFontProvider` has a constructor with three boolean arguments, which allow you to specify (in this order):
 
 * whether or not to select the 14 standard PDF fonts
 * whether or not to select a number of Free fonts included with pdfHTML
-* whether or not to try and select all fonts installed in the system's default font folder
+* whether or not to try and select all fonts installed in the system's default font folder(s)
 
-The boolean arguments for the default constructor are `(true, true, false)`.
-You can of course also add fonts one by one on custom locations.
+There is also a default no-argument constructor for `DefaultFontProvider`;
+the values of the boolean arguments for the default constructor are `(true, true, false)`.
+In addition to this, you can of course also add fonts one by one on custom locations.
 
 ```java
 ConverterProperties props = new ConverterProperties();
@@ -220,24 +228,24 @@ props.setMediaDeviceDescription(new MediaDeviceDescription(MediaType.PRINT));
 
 The registered `MediaType` constants are:
 
-* MediaType.ALL
-* MediaType.AURAL
-* MediaType.BRAILLE
-* MediaType.EMBOSSED
-* MediaType.HANDHELD
-* MediaType.PRINT
-* MediaType.PROJECTION
-* MediaType.SCREEN
-* MediaType.SPEECH
-* MediaType.TTY
-* MediaType.TV
+* `MediaType.ALL`
+* `MediaType.AURAL`
+* `MediaType.BRAILLE`
+* `MediaType.EMBOSSED`
+* `MediaType.HANDHELD`
+* `MediaType.PRINT`
+* `MediaType.PROJECTION`
+* `MediaType.SCREEN`
+* `MediaType.SPEECH`
+* `MediaType.TTY`
+* `MediaType.TV`
 
 ### Customizations
 
-There are two plugin mechanisms in pdfHtml that allow you to execute custom behavior on your HTML and CSS conversion process.
-They work very similarly to one another, and are also .
+There are two plugin mechanisms in pdfHTML that allow you to execute custom behavior on your HTML and CSS conversion process.
+They work very similarly to one another.
 
-Much like the configuration options specified above, registering your plugin code with pdfHtml happens through the `ConverterProperties`:
+Much like the configuration options specified above, registering your plugin code with pdfHTML happens through the `ConverterProperties`:
 
 ```java
 ConverterProperties props = new ConverterProperties();
@@ -248,7 +256,7 @@ props.setCssApplierFactory(new MyCssApplierFactory()); // Custom CSS parsing
 #### tagWorkerFactory
 
 If you want to define custom rules for existing HTML tags,
-then you can create a bespoke ITagWorker implementation that will execute logic defined by you.
+then you can create a bespoke `ITagWorker` implementation that will execute logic defined by you.
 The most common use cases are to handle a tag in a nonstandard way or as a no-op,
 but you can also implement a custom tag for your specific purposes.
 After you implement this interface or extend an existing implementation,
@@ -275,7 +283,7 @@ public class MyTagWorkerFactory extends DefaultTagWorkerFactory {
 }
 ```
 
-One particular use case might be to add dynamic content to your pdf, such as barcodes: in that case,
+One particular use case might be to add dynamic content to your PDF, such as barcodes: in that case,
 you can define `<qrcode>http://www.example.com</qrcode>` in the source HTML,
 rather than having to generate an image separately.
 Your custom TagWorker then leverages the iText APIs to create the QR code, and adds it to the document.
@@ -293,8 +301,28 @@ In that case, you can extend the `ICssApplier` for that tag and write custom log
 
 TODO: add color-blindness example
 
-### Integration with existing add-ons
-pdfCalligraph example
-### Advanced Example: Accessible pdf creation
+#### createAcroForm
+
+Since version 1.0.1, pdfHTML supports the `<form>` tag and its constituents `<input>`, `<button>`, `<textarea>`, etc.
+They can be shown in the PDF file as either their visual rendering or as actual form fields in the AcroForm format.
+AcroForms are a way to use a PDF file as an input form with a fixed layout.
+
+The createAcroForm option will allow you to leverage the AcroForm capability of the PDF format.
+By default this boolean value is set to `false`, so your document will not be editable as a PDF form.
+
+### Integration with existing iText add-on
+
+pdfHTML integrates seamlessly with pdfCalligraph, iText's advanced typography module,
+which is needed in order to correctly show text in complex alphabets such as Arabic and Hindi.
+Users of that module know that leveraging it in an application which uses iText requires absolutely no extra code:
+if the pdfCalligraph module is available on the classpath at the time that the PDF instructions are written,
+then its code will be used to create correct writing in the relevant writing system.
+
+This also holds true for pdfHTML: all you need is the JAR and a license file for pdfCalligraph,
+and your HTML parsing code will work out of the box.
+
+### Advanced Example: Accessible PDF creation
+
 ## Roadmap
+
 ## Comparison to XMLWorker

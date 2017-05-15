@@ -11,10 +11,9 @@ x	B> media queries
 	S> example (with flowchart)
 x	B> config options
 	S> customizations (+ examples)
-	B> integrations (pdfCalligraph)
+x	B> integrations (pdfCalligraph)
 	S> PDF substandards (PDF/A, PDF/UA)
 > roadmap (truly necessary ? => talk with Raf and Ilya)
-	> form tags etc
 	> documentation
 	> release cycle
 > comparison to XMLWorker
