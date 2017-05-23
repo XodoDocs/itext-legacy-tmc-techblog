@@ -1,6 +1,6 @@
 > introduction
-	S> what does it do
-	S> what does it need (itext 7)
+x	S> what does it do
+X	S> what does it need (itext 7)
 > HTML & CSS
 x	B> content tagging, cascading
 x	B> DOM
