@@ -175,37 +175,33 @@ You can do this either by specifying a separate stylesheet in the HTML `<head>` 
 On a conceptual level, pdfHTML works by mapping HTML tags to iText7 layout objects, and CSS property declarations to iText layout properties.
 On a practical level, this process happens through the use of Tagworkers and Cssappliers. Each HTML tag is mapped to a TagWorker and CSSApplier, and those classes contain the necessary logic to process the tag, selecting the iText layout object it corresponds to and applying any necessary CSS.
 When processing the HTML DOM, pdfHTML walks through the tree in a depth-first manner, starting the translation on a tag, and then recursively processing all its children, ending the processing when all it's children have been processed.
+The visualization of this process can be seen in figures A and B
+
+![Figure A: pdfHTML internal flow][internal_flow]  
+**Figure A**: pdfHTML high level flow
+
+![Figure B: pdfHTML tag processing flow][tag_processing]  
+**Figure B**: pdfHTML tag processing
 
 ### Simple Example
 
 For a very basic example on how to use pdfHTML, we will use the html for the DOM example, and enrich it with some simple CSS.
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>DOM Example</title>
+<html>
+	<head>
 	<link rel="stylesheet" type="text/css" href="simple.css"/>
 </head>
 <body>
-    <h1>Header</h1>
-    <div>
-        <p>Paragraph inside a div.</p>
-        <a href="http://www.itextpdf.com">A link</a>
-    </div>
+	<p>456</p>
+	<div>123</div>
 </body>
 </html>
 ```
 ```css
 div{
     color: red;
-    border: solid 1px black;
 }
 
-p{
-    border: 1pt solid black;
-    color: blue;
-}
 ```
 
 We will write the output directly to a PDF file, using the following code:
@@ -215,7 +211,10 @@ HtmlConverter.convertToPdf(new FileInputStream(htmlSource), new FileOutputStream
 ```
 
 The resulting pdf:
-[SimplePDF]
+
+![Figure X: pdfHTML output][SimplePDF]
+**Figure X:** pdfHTML output
+
 
 ### Configuration Options
 
@@ -338,7 +337,6 @@ you can define `<qrcode>http://www.example.com</qrcode>` in the source HTML,
 rather than having to generate an image separately.
 Your custom TagWorker then leverages the iText APIs to create the QR code, and adds it to the document.
 
-TODO: add QRCode example
 
 The input
 ```html
@@ -371,10 +369,13 @@ qr{
 ```
 The output without a custom tagworker
 
-[QRCode_noTagworker]
+![Figure X: Output with no custom tagworker][QRCode_noTagworker]
+Figure X: Output with no custom tagworker
 
 The output with a custom tagworker
-[QRCode]
+
+![Figure X: Output with custom tagworker][QRCode]
+Figure X: Output with custom tagworker
 
 The custom tagworker itself
 
@@ -473,6 +474,11 @@ public class QRCodeTagWorker implements ITagWorker {
 The custom tagWorkerFactory
 
 ```java
+import com.itextpdf.html2pdf.attach.ITagWorker;
+import com.itextpdf.html2pdf.attach.ProcessorContext;
+import com.itextpdf.html2pdf.attach.impl.DefaultTagWorkerFactory;
+import com.itextpdf.html2pdf.html.node.IElementNode;
+
 public class QRCodeTagWorkerFactory extends DefaultTagWorkerFactory {
 
     @Override
@@ -577,11 +583,20 @@ Input html and CSS
 }
 ```
 Standard output
-[colourblindness_base]
+
+![Figure X: standard output][Rainbow]
+
+Figure X: standard output
 
 Using custom CSS appliers
-[colourblindness_]
-[colourblindness_]
+
+![Figure X: output simulating achromatomaly][Rainbow_achromatomaly]
+
+Figure X: output simulating achromatomaly
+
+![Figure X: output simulating deuteranopia][Rainbow_deuteranopia]
+
+Figure X: output simulating deuteranopia
  
  
 Cssapplier code
@@ -704,8 +719,56 @@ and your HTML parsing code will work out of the box.
 
 ### Advanced Example: Accessible PDF creation
 
+With minimal effort, pdfHTML can be configured to generate PDFs that comply to the accesibility standards Pdf/A an Pdf/UA, by leveraging the both the autmate
+
 ## Roadmap
 
 ## Comparison to XMLWorker
+###pdfHTML
+Supports more HTML tags & CSS features such as:
+<abbr>
+floating & fixed positioning
+@media
+
+More easily extensible for custom tags
+
+Integrates seamlessly with other iText functionality such as:
+Barcodes
+PDF/A
+pdfCalligraph
+
+Does not require XHTML to function
+XHTML is a very strict subset of HTML
+
+###XMLWorker
+XMLWorker development
+Initially designed to be top-to-bottom and text line based
+Does not mesh well with block level elements
+
+XMLWorker limitations
+No generic handling of styles
+No support for CSS3, media queries (e.g. screen vs print)
+Nesting of divs, tables gives problems
+Brittle handling of imperfect input (e.g. tags that are not closed properly)
+No convenient extension mechanism (custom HTML elements, custom CSS handling)
+--> Even small extensions requires the pipeline to be build from scratch
+
+
 
 [DOM]: Images/DOM_Example.png "DOM Example"
+
+[internal_flow]: Images/Blogpost_overview_internal_flow.png "Internal flow"
+
+[tag_processing]: Images/Blogpost_overview_flow_tagProcessing.png "Tag processing flow"
+
+[SimplePDF]: Images/simple_trimmed.png "Simple output"
+
+[QRCode_noTagworker]: Images/QRCode_text_trimmed.png "QRCode output without custom tag"
+
+[QRCode]: Images/QRCode_image_trimmed.png "QRCode output"
+
+[Rainbow]: Images/rainbow_base_trimmed.png "Rainbow"
+
+[Rainbow_achromatomaly]: Images/rainbow_achromatomaly_trimmed.png "Rainbow achromatomaly"
+
+[Rainbow_deuteranopia]: Images/rainbow_deuteranopia_trimmed.png "Rainbow deuteranopia"

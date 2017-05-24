@@ -8,9 +8,9 @@ x	B> browser layout engine
 x	B> media queries
 > pdfHtml
 	S> basic workflow
-	S> example (with flowchart)
+x	S> example (with flowchart)
 x	B> config options
-	S> customizations (+ examples)
+x	S> customizations (+ examples)
 x	B> integrations (pdfCalligraph)
 	S> PDF substandards (PDF/A, PDF/UA)
 > roadmap (truly necessary ? => talk with Raf and Ilya)
