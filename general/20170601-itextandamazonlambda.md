@@ -799,4 +799,13 @@ If you have an amazon echo dot device, and the account for that device is tied t
 
 [Bruno Lowagie using the iTextPDFReader](https://www.youtube.com/watch?v=cBJyd18MxaQ&t=129s)
 
+# sources
+
+You can find the full source code for this project at [github](https://git.itextsupport.com/users/joris.schellekens/repos/itextpdfreader/browse)
+
 # recap
+
+In this tutorial we used AWS Amazon Lambda to power an Alexa Skill.
+We used iText under the hood to enable us to work with tagged pdf documents.
+
+Learn more? Go to [itextpdf.com](http://itextpdf.com)
