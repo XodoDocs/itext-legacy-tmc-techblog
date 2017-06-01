@@ -26,7 +26,7 @@ You will need:
 We want our audiobook reader to be able to navigate the document, by chapter, page and paragraph.
 This concept (chapter, page, paragraph) will be called PdfUnit from now on.
 
-{code:java}
+```java
 public enum PdfUnit{
     
     DOCUMENT,       // entire document
@@ -36,7 +36,7 @@ public enum PdfUnit{
     PARAGRAPH       // a single paragraph
     
 }
-{code}
+```
 
 Every piece of text in the document can then be represented with 3 characteristics:
  - paragraph
@@ -44,7 +44,7 @@ Every piece of text in the document can then be represented with 3 characteristi
  - chapter
  We'll model this as a PdfLocation.
  
- {code:java}
+```java
  public class PdfLocation {
     
     private final int chapter;
@@ -95,7 +95,7 @@ Every piece of text in the document can then be represented with 3 characteristi
         return "chapter " + (chapter + 1) + (chapterPart == 0 ? "" : (", part " + (chapterPart + 1))) + ", page " + (page + 1) +  ", paragraph " + (paragraph + 1);
     }
 }
-{code}
+```
  
 You'll notice that we added a fourth level, chapter parts. This is a workaround for one of the limitations offered by the Alexa API.
 This API allows you to voice only 8000 characters at once. Although this is not a limitation for paragraphs or pages, complete chapters are often
@@ -107,7 +107,7 @@ Each chapter splits into chapter-parts, each chapter part splits into pages and 
 
 This way, we can use tree-walking algorithms to go to a previous or next PdfUnit.
 
-{code:java}
+```java
 public class PdfNavigationNode
     {
         private PdfUnit unit = PdfUnit.PARAGRAPH;
@@ -161,13 +161,13 @@ public class PdfNavigationNode
             return parent;
         }
     }
-{code}
+```
 
 Now of course, we need a way of building this tree structure.
 Since there are multiple options for this, we first define an interface. 
 ITreeBuildingAlgorithm enables us to pass around any function that turns a list of marked content into a (root) PdfNavigationNode.
 
-{code:java}
+```java
 public interface ITreeBuildingAlgorithm {
     
     /**
@@ -178,12 +178,12 @@ public interface ITreeBuildingAlgorithm {
     public PdfNavigationNode build(List<IMarkedContent> content);
    
 }
-{code}
+```
 
 
 We then build a specific implementation of this interface, that will build trees the Alexa API can voice.
 
-{code:java}
+```java
 public class AlexaTreeBuildingAlgorithm implements ITreeBuildingAlgorithm{
 
     private static final int MAX_CHAPTER_PART_LENGTH = 7500;
@@ -286,7 +286,7 @@ public class AlexaTreeBuildingAlgorithm implements ITreeBuildingAlgorithm{
         }
     }   
 }
-{code}
+```
 
 # navigating the document
 
