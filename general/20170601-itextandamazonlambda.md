@@ -23,6 +23,144 @@ You will need:
  
 # reading a tagged pdf document
 
+One of the advantages of tagged pdf documents is that we get a lot of information on the structure of the document aside from the actual content.
+In order the correctly handle this, we build a custom class that extracts this information.
+
+```java
+public class MarkedContentExtractor 
+{
+    public static interface IMarkedContent
+    {
+        public String getText();
+        public int getMCId();
+        public PdfName getRole();
+        public int getPageNr();
+    }
+        
+    private final ITextSelectionStrategy strategy;
+    
+    public MarkedContentExtractor()
+    {
+        this.strategy = new MTextSelectionStrategy();
+    }
+    
+    public MarkedContentExtractor(ITextSelectionStrategy strategy)
+    {
+        this.strategy = strategy;
+    }
+    
+    public List<IMarkedContent> extract(PdfDocument doc)
+    {                             
+        // extract all
+        Map<Integer, Map<Integer, MarkedContent>> mcs = new HashMap<>();
+        for(int i=1;i<=doc.getNumberOfPages();i++)
+        {
+            mcs.put(i, new HashMap<Integer, MarkedContent>());
+            MarkedContentStrategy markedContentStrategy = new MarkedContentStrategy(strategy);
+            PdfTextExtractor.getTextFromPage(doc.getPage(i), markedContentStrategy); 
+            for(MarkedContent mc : markedContentStrategy.getMarkedContent())
+            {
+                mc.setPage(i);           
+                mcs.get(i).put(mc.getMCId(), mc);
+            }
+        }     
+                  
+        // query struct tree
+        IPdfStructElem root = doc.getStructTreeRoot();       
+        List<IPdfStructElem> els = new ArrayList<>();
+        Stack<IPdfStructElem> stk = new Stack<>();
+        stk.push(root);
+        while(!stk.isEmpty())
+        {
+            IPdfStructElem e = stk.pop();
+            if(e instanceof PdfMcrNumber)
+                els.add(e);
+            if(e.getKids() == null)
+                continue;
+            else
+                for(IPdfStructElem  c : e.getKids())
+                    stk.push(c);
+        }        
+
+        for(IPdfStructElem e : els)
+        {
+            if(e instanceof PdfMcrNumber)
+            {
+                PdfMcrNumber pse = (PdfMcrNumber) e;
+                int mcid = pse.getMcid();
+                int page = doc.getPageNumber(pse.getPageObject());
+                if(!mcs.containsKey(page) || !mcs.get(page).containsKey(mcid))
+                    continue;
+                PdfName role = hasParentWithRole(pse, PdfName.H) ? PdfName.H : pse.getRole();
+                mcs.get(page).get(mcid).setRole(role);
+            }
+        }
+        
+        // return
+        List<IMarkedContent> retval = new ArrayList<>();
+        for(Map<Integer, MarkedContent> submap : mcs.values())
+        {
+            retval.addAll(submap.values());
+        }
+        return retval;
+    }
+
+    private boolean hasParentWithRole(IPdfStructElem e, PdfName role)
+    {
+        IPdfStructElem parent = e;
+        while(parent.getParent() != null && !parent.equals(parent.getParent()))
+        {
+            if(parent.getRole() != null && parent.getRole().equals(role))
+                return true;
+            parent = parent.getParent();
+        }
+        return false;
+    }
+
+}
+```
+
+This class reads a document and then lists IMarkedContent objects, which contain text, an ID, a page number, and a role (eg: 'heading')
+We'll provide a default implementation of this interface as a pojo (plain old java object)
+
+```java
+class MarkedContent implements MarkedContentExtractor.IMarkedContent
+{
+    private PdfName role;
+    private String text;
+    private final int mcid;
+    private int pageNr;
+    
+    public MarkedContent(PdfName name, String text, int id)
+    {
+        this.role = name;
+        this.text = text;
+        this.mcid = id;
+        this.pageNr = 0;
+    }
+    
+    public void setPage(int pageNr){ this.pageNr = pageNr; }
+    
+    @Override
+    public int getPageNr(){ return pageNr; }
+    
+    public void setRole(PdfName role){ this.role = role; }
+    
+    @Override
+    public PdfName getRole(){ return role; }
+    
+    public void setText(String s){ this.text = s; }
+    
+    @Override
+    public String getText(){ return text; }
+    
+    @Override
+    public int getMCId(){ return mcid; }
+}
+```
+
+# structuring the document
+
 We want our audiobook reader to be able to navigate the document, by chapter, page and paragraph.
 This concept (chapter, page, paragraph) will be called PdfUnit from now on.
 
