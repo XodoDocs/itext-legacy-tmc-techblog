@@ -739,6 +739,19 @@ In this snippet:
  
 # testing our application
 
+First, we need to wrap everything in a single .jar file.
+In the amazon console panel, navigate to Lambda. (https://console.aws.amazon.com/lambda/)
+1. Create a new lambda function, choosing the blank function as a template.
+
+2. For code entry type, select "upload a .ZIP or JAR file"
+   upload the zip you created.
+
+3. in configuration, select the runtime (java 8 should be fine)
+   set the full path to the handler
+   you'll need to create and set a dummy role to be able to execute this function
+   
+4. Nothing should be changed in Triggers, Tags and Monitoring
+  
 # deploying
 
 # recap
