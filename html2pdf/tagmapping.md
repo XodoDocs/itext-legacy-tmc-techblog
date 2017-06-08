@@ -5,16 +5,7 @@
 
 iText’s a document model allows developers to quickly grasp how to use iText without having to understand the PDF specification. The model we use closely resembles HTML, and is based on how documents are formed structurally. This model is designed using concepts that most people can easily understand, such as paragraphs and tables. iText uses objects such as these to simplify the creation of PDF documents and HTML uses similar objects to let you construct HTML files. If you look at both models you'll see a number of similarities. So many in fact, that during the design process for the iText 7 layout module we took a few ideas and implemented them into the iText model.
 
-Having so much so overlap between HTML and iText objects means that the object models can easily be mapped onto one another. There are a few tags in HTML that don't make sense in the context of PDF, but most do correspond to an iText equivalent. This table gives you a brief overview of the default mapping we provided:
-
-<TODO: insert tag mapping table>
-A - ATagWorker
-Article - DivTagWorker
-BDI - SpanTagWorker
-BDO - SpanTagWorker
-<TODO: insert tag mapping table>
-
-We tried to map every HTML tag that makes in a PDF file to an iText layout object. This is easy for some objects, a span is still a span, but for other objects we had to decide that they were a modified version of what we already implemented. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div. After all, when you squint your eyes, an article can be seen as a div under a different name. Some tags were not included because they were not relevant in a PDF, such as Audio.
+Having so much so overlap between HTML and iText objects means that the object models can easily be mapped onto one another. There are a few tags in HTML that don't make sense in the context of PDF, but most do correspond to an iText equivalent. This is easy for some objects, a span is still a span, but for other objects we had to decide that they were a modified version of what we already implemented. For instance, an "article" tag is mapped onto a "div" element. The iText 7 layout model doesn't know the concept of an article, so we mapped the article onto a div. After all, when you squint your eyes, an article can be seen as a div under a different name. Some tags were not included because they were not relevant in a PDF, such as Audio.
 
 This blog post will give you an overview of how pdfHTML maps the HTML model onto the iText model, and how you can influence this process.
 
@@ -35,9 +26,6 @@ pdfHTML processes the tags depth-first: if this tag has any child tags it will l
 After processing the child tags, PDFHTML will apply the CSS to the iText Layout object. This is done through CSS Appliers.
 4. Return to the parent layout object  
 The Layout object is now complete. It contains its child elements and its CSS is also applied. This object will now be returned to its parent tag for further handling.
-
-
-TODO use example to demonstrate the 4 steps. Possibly use flow created by Samuel, the stack diagram.
 
 
 ### ITagWorkers and ITagWorkerFactory
