@@ -24,20 +24,19 @@ The actual PDF output - as well as the layout differences in HTML on different s
 
 A power user with a background in web design creates a theme that will be used as the default background layout for a number of templates;
 in this way, a theme is comparable to company stationary.
-This user needs to have knowledge of how to create a responsive HTML design
-which will look great on all output formats from a full HD desktop to a smartphone screen.
-In the theme, they must insert a specific template instruction to define where the dynamic content will be placed in the HTML file,
+This user can make full use of responsive HTML design features in order to make the templates look great
+on all output formats from a full HD desktop to a smartphone screen.
+In the theme, they can insert a specific template instruction to define where the dynamic content will be placed in the HTML file,
 and hence in its visual representation.
 
 A business user then visually designs a number of templates, positioning the dynamic data fields in a structure of their choice.
-They can use demo data during this design process that conforms to the structure of the data
+They can use a number of demo data sets during this design process that conforms to the structure of the data
 that will be used by the actual document generation process.
 
 The output of the design process in the front-end is a template file, which can then be deployed on the DITO Server.
-The back-end engine will transform the template into fully compliant HTML, including the data that is retrieved from your existing database.
+The back-end engine will transform the template into fully compliant HTML, including the data that is retrieved from your data sources.
 This HTML output can either be a static web page, such as a web representation of an invoice, or an interactive form for data capture.
-This HTML file can be converted further to PDF with iText 7’s add-on tool pdfHtml,
-and either or both can be served to end users and/or sent to file storage/archiving. 
+Alternatively, the template can be converted further to PDF, and can be served to end users and/or sent to file storage/archiving. 
 
 ## Add-ons
 
