@@ -1,36 +1,42 @@
 *all developers are encouraged to contribute to this file whenever possible so as to keep this up to date*
 
 # Core
-- create PDFs
+
+with the iText7 core you can easily:
+
+- create PDF's, more specifically:
     - PDF/A
     - tagged PDF
-    - PDF/UA
+    - PDF/UA and
     - encrypted PDFs
 - stamp PDFs
-    - watermarks
-    - add new pages and content
-- digital signatures
+    - with watermarks
+    - by adding new pages and content
+- create and validate digital signatures
     - PAdES compliant
     - LTV enabled signatures
     - validate signatures
-- text extraction
-- forms
-    - create AcroForms
-    - fill AcroForms
-    - fill XFA Forms
-    - flatten AcroForms
-    - read form data
-- barcodes
-    - 1D barcodes
-    - 2D barcodes (QR, datamatrix)
+- extract text
+- create, fill out, read and flatten forms, more specifically:
+    - AcroForms and
+    - XFA Forms
+- generate and add barcodes, more specifically:
+    - 1D barcodes and
+    - 2D barcodes (QR code, data matrix)
     
 # pdfSweep
-- easily redact content from a pdf document by specifying rectangles
+
+pdfSweep is an iText7 add-on, that
+
+- easily redacts content from a pdf document by specifying rectangles
 - works on images as well as text
-- (in review stage) redact content by specifying a regular expression
+- redacts content by specifying a regular expression
 
 # pdfDebug
-- inspect PDFs during debug process
+
+pdfDebug is an iText7 add-on, that
+
+- inspects PDFs during the debugging process
 
 # pdfCalligraph
 - plug-and-play for complex script systems such as
