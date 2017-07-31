@@ -39,23 +39,39 @@ pdfDebug is an iText7 add-on, that
 - inspects PDFs during the debugging process
 
 # pdfCalligraph
-- plug-and-play for complex script systems such as
-    - devanagari
-    - tamil
-    - kannada
-    - khmer
+
+pdfCalligraph is an iText7 add-on, that seamlessly integrates with the iText7 core and other add-ons.
+Providing superior rendering and support for complex writing systems such as:
+
+    - Devanagari
+    - Tamil
+    - Kannada
+    - Khmer
 
 # pdfHtml
+
+pdfHTML is an iText7 add-on that is able to:
+
 - convert HTML to
     - a PDF file
-    - a PdfDocument class
+    - a PdfDocument class, or
     - iText elements
-- customize by using your own custom tags, custom attributes, and custom CSS properties
+- customize by using your own custom tags, attributes, and CSS properties
+- support CSS3
+- HTML5
 
 # pdfInvoice
-- create PDFs based on the ZUGFeRD standard
-    - XML included!
+
+pdfInvoice is an iText7 add-on, that
+
+- creates PDFs based on the ZUGFeRD standard
+- providing machine-readable invoices
 
 # pdf2Data
-- extract content from a pdf document
-- content can be defined by location, structure element (table, nth row of table, ..), font, fontsize, etc
+
+pdf2Data is an iText7 add-on, created by our partner Dual Lab, that:
+
+- extracts content from a pdf document
+- allows end-users to define content by location, structure element (table, nth row of table, ..), font, fontsize, etc
+- turns complex PDF documents into machine-readable XML documents
+- getting your documents ready for integration in your company workflow
