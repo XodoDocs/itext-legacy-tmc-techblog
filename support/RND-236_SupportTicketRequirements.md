@@ -25,6 +25,18 @@ Examples:
 
  * Bad: C# Math Confusion
  * Good: Why does using float instead of int give me different results when all of my inputs are integers?
+ 
+ * Bad: Pdf/iText not working
+ * Good: Table layout is not as expected: text is centered instead of left-aligned
+
+ * Bad: Text extraction not working
+ * Good: Text extraction run in Web environment using simple strategy returns unexpected results (with current and expected results in the description)
+
+ * Bad: Layout Issues (containing three seperate issues)
+ * Good: 
+   1. pdfXFA omits duplex pages while flattening
+   2. pdfXFA incorrect page numbering while flattening
+   3. pdfXFA duplictes master page page headers while flattening 
 
 ## Be clear about your overall objective
 Sometimes it’s easy to get into the details without ever explaining what you’re actually trying to do. So start with that. It helps us understand what you’re trying to do. We might be able to show you a different route, or cut to the chase and let you know it’s not supported.
