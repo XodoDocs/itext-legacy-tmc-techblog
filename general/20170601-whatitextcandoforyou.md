@@ -59,6 +59,15 @@ Providing superior rendering and support for complex writing systems such as:
     - Tamil
     - Kannada
     - Khmer
+    - Hebrew
+    - Arabic
+    - Bengali
+    - Gurmukhi
+    - Gujarati
+    - Odia
+    - Telugu
+    - Malayalam
+    - Thai    
 
 # pdfHtml
 
