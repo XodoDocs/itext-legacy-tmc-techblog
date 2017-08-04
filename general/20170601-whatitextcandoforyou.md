@@ -1,5 +1,17 @@
 *all developers are encouraged to contribute to this file whenever possible so as to keep this up to date*
 
+# Technical specification
+
+    - versions
+         - java (1.7 or higher)
+         - maven dependency
+
+    - .net
+        - NuGet package
+    
+    - support
+        - through jira ticketing system
+        - through StackOverflow
 # Core
 
 with the iText7 core you can easily:
