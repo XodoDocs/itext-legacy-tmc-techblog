@@ -1,16 +1,12 @@
 # iText DITO
 
-## The need
+## The need and solution
 
-In electronic document workflows, employees who design a template for data capture are usually not involved in designing the post-processing formats and workflows. This disconnect in unfortunate as in most situations, the business user who knows which information they need from the customer, also knows how the processed output should look like. iText DITO will change this and merge this into a single work flow: The business user creates a web form and can see what it will look like on a smartphone or tablet, and how it will be shown in a PDF document.
-
-## The solution
-
-One of the few things missing from HTML is a reliable way to capture the data and render it in a consistent paginated form. This consistent paginated form has always been part of the PDF specification and contributed to the success of PDF. However, there is no easy or ready made solution that allows you interactively and dynamically capture user data while keeping the consistency in the processed file. iText DITO will bridge that gap, providing an interactive designer tool to define content templates in HTML which can also reliably be converted to a predefined layout in PDF. 
+In electronic document workflows, employees who design a template for data capture are usually not involved in designing the post-processing formats and work flows. This disconnect is unfortunate as in most situations, the business user who knows which information they need from the customer, also knows how the processed output should look like. iText DITO will change this and merge this into a single work flow: The business user creates a web form and can see what it will look like on a smart phone or tablet, and how it will be shown in a PDF document. This allows for a faster design process and for a more consistent look and feel across different forms and documents.
 
 iText DITO provides a full layer of design and connectivity elements on top of the iText7 platform (core, add-ons, third party products). It includes all necessary elements for interactive design of e-forms and templates, as well as subsequent processing of the inserted data and output documents. Business users discover an easy and user-friendly design environment, for an interactive and strictly non-technical design approach. The front end also caters to interactive forms.
 
-The actual PDF output - as well as the layout differences in HTML on different screen sizes - can easily be previewed in the designer tool.
+The actual PDF output - as well as the layout differences in HTML on different screen sizes - can easily be previewed in the designer tool. One of the few things missing from HTML is a reliable way to capture the data and render it in a consistent paginated form. This consistent paginated form has always been part of the PDF specification and contributed to the success of PDF. However, there is no easy or ready made solution that allows you interactively and dynamically capture user data while keeping the consistency in the processed file. iText DITO will bridge that gap, providing an interactive designer tool to define content templates in HTML which can also reliably be converted to a predefined layout in PDF. 
 
 ## Components
 
@@ -30,4 +26,8 @@ The output of the design process in the front-end is a template file, which can 
 
 ## Add-ons
 
-iText DITO leverages the proven strengths of iText 7 to provide high-quality output documents at the end of the document workflow. In addition to the iText 7 core library, you can also make use of the iText 7 add ons that are available. You can seamlessly integrate Indic languages using the pdfCalligraph add-on or convert your templates to ZUGFeRD compliant documents using the pdfInvoice add-on.
+iText DITO leverages the proven strengths of iText 7 to provide high-quality output documents at the end of the document workflow. In addition to the iText 7 core library, you can also make use of the iText 7 add ons that are available. You can seamlessly integrate Indic languages using the pdfCalligraph add-on or convert your templates to ZUGFeRD compliant documents using the pdfInvoice add-on. The possibilities are endless.
+
+## Conclusion
+
+iText DITO merges two related flows into a single flow that's easy to maintain and control. Its easy-to-use designer will allow you to output high quality and consistent documents, while being highly extensible and customizable because of the SDK it offers and the underlying potential of iText 7 and its add-ons.
