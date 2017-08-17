@@ -174,78 +174,75 @@ public class StackOverflowSpeechletRequestStreamHandler extends SpeechletRequest
 }
 ````
 
+# building the amazon lambda function
+
+1. Go to https://aws.amazon.com/
+2. Click 'sign in to the console' (top right)
+3. Enter your credentials
+4. Click on 'Lambda' in the overview of services
+5. You should now be in the Amazon Lambda Dashboard
+6. Click 'Create Function'
+7. Click 'Author from scratch'
+8. Add 'Alexa Skills Kit' as the trigger
+9. Click 'Next'
+10. Enter a name, description, and select 'Java 8' as the runtime
+11. Upload your complete jar (the jar should contain all depedencies)
+12. Enter the path to the SpeechRequestStreamHandler, and an execution role with the right permissions. (e.g. if you are accessing databases, you need to execute with a role that has permissions to access these databases)
+13. Click 'Next' and review the configuration
+
+You should see something like 'ARN - arn:aws:lambda:us-east-1:012345678901:function:xxxxxxxxxxxx' atop your screen.
+Copy this ID, the Alexa Skill API will ask you for it later.
+
 # building the alexa skill
 
+1. Go to https://developer.amazon.com/alexa
+2. Click 'sign in' (top right)
+3. Enter your credentials
+4. Click on 'Alexa' in the ribbon atop the page
+5. Click on the 'Get started' button in the 'Alexa Skills Kit' option
+6. Click the 'Add a new skill' button
+7. In the first tab, you'll see the application ID (something like 'amzn1.ask.skill.aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa')
+   This should be filled in in your SpeechRequestStreamHandler. You want this to be the only application with access to your skill.
+8. Fill in the required field in all the tabs (information about target audience, category of your skill, whether it has in-app purchases, etc)
+
+We used the following for the intent schema
+
+````
+{
+  "intents": [
+    {
+      "intent": "leaderboardIntent"
+    }
+  ]
+}
+````
+
+and the sample utterances
+
+````
+leaderboardIntent give me the iText leaderboard
+leaderboardIntent give me the leaderboard
+leaderboardIntent show me the itext leaderboard
+leaderboardIntent show me the leaderboard
+leaderboardIntent recite the itext leaderboard
+leaderboardIntent recite the leaderboard
+````
 
 # testing our application
 
-## amazon lambda
-
-First, we need to wrap everything in a single .jar file.
-In the amazon console panel, navigate to Lambda. (https://console.aws.amazon.com/lambda/)
-1. Create a new lambda function, choosing the blank function as a template.
-
-2. For code entry type, select "upload a .ZIP or JAR file"
-   upload the zip you created.
-
-3. in configuration, select the runtime (java 8 should be fine)
-   set the full path to the handler
-   you'll need to create and set a dummy role to be able to execute this function
-   
-4. Nothing should be changed in Triggers, Tags and Monitoring
-
-## alexa
-
-1. go to https://developer.amazon.com/edw/home.html#/skills
-
-2. create a new skill
-
-3. Fill in details like Skill Type, Language, Name, and Invocation Name
-   You'll see that the Alexa API generated an application Id for your skill.
-   You'll need to fill this in at the SpeechletRequestStreamHandler to ensure only this skill can activate the lambda function.
-   Obviously, that means you will need to recompile and repackage your code.
-   
-4. build the interaction model, this is well-documented in GitHub examples
-
-5. In the configuration tab, fill in the lambda ARN (amazon resource name) that points to your lambda function   
-
-## testing
-
-You should now be able to test your skill by entering an example utterance and seeing the reply that comes back from our lambda function.
-As an example, we typed "Where am I?" which causes the iTextPDFReader skill to look up your current PdfLocation and print it as a string.
-
-```json
-{
-  "version": "1.0",
-  "response": {
-    "outputSpeech": {
-      "type": "PlainText",
-      "text": "You are currently at chapter 1, page 1, paragraph 1. There are 9 pages in this chapter. There are 3 chapters in this book."
-    },
-    "card": {
-      "content": "You are currently at chapter 1, page 1, paragraph 1. There are 9 pages in this chapter. There are 3 chapters in this book.",
-      "title": "iText Reader",
-      "type": "Simple"
-    },
-    "shouldEndSession": false
-  },
-  "sessionAttributes": {}
-}
-```
+One of the tabs on the Alexa Skills Kit page allows you to test your new skill by typing one of the sample utterances.
+It then shows you the json that was sent back and forth.
+This is a quick and easy way to verify whether your skill was properly set up.
 
 # deploying
 
 If you have an amazon echo dot device, and the account for that device is tied to your developer device you should be able to use your skill on your dot.
+This is an example of another skill we built at iText.
 
 [Bruno Lowagie using the iTextPDFReader](https://www.youtube.com/watch?v=cBJyd18MxaQ&t=129s)
-
-# sources
-
-You can find the full source code for this project at [github](https://git.itextsupport.com/users/joris.schellekens/repos/itextpdfreader/browse)
 
 # recap
 
 In this tutorial we used AWS Amazon Lambda to power an Alexa Skill.
-We used iText under the hood to enable us to work with tagged pdf documents.
 
 Learn more? Go to [itextpdf.com](http://itextpdf.com)
