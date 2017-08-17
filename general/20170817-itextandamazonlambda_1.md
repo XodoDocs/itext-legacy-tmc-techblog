@@ -149,8 +149,30 @@ public class StackOverflowSpeechlet implements Speechlet {
 ````
 
 
-# navigating the document
+# SpeechletRequestStreamHandler
 
+The SpeechletRequestStreamHandler handles access to your Speechlet. It checks whether the app accessing your logic has permission to do so.
+Usually the implementation is pretty straightforward.
+
+````java
+public class StackOverflowSpeechletRequestStreamHandler extends SpeechletRequestStreamHandler{
+    
+    private static final Set<String> supportedApplicationIds = new HashSet<String>();
+    static {
+        /*
+         * This Id can be found on https://developer.amazon.com/edw/home.html#/ "Edit" the relevant
+         * Alexa Skill and put the relevant Application Ids in this Set.
+         */
+        // supportedApplicationIds.add("amzn1.echo-sdk-ams.app.[unique-value-here]");
+        supportedApplicationIds.add("amzn1.ask.skill.aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+    }
+
+    public StackOverflowSpeechletRequestStreamHandler() {
+        super(new StackOverflowSpeechlet(), supportedApplicationIds);
+    }    
+    
+}
+````
 
 # building the alexa skill
 
