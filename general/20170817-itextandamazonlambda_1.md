@@ -23,6 +23,10 @@ You will need:
  
 # interacting with StackOverflow
 
+The following utility class interacts with StackOverflow.
+Please use it at your own discretion. This code is meant as an example. 
+We do not condone high-volume scraping of StackOverflow.
+
 ````java
 public class StackOverflow {
 
@@ -55,7 +59,94 @@ public class StackOverflow {
 }
 ````
 
-# structuring the document
+# Speechlet
+
+A speechlet is the part of your Alexa Skill that interacts with the JSON data it receives from Amazon.
+It handles the core logic of your skill.
+
+````java
+public class StackOverflowSpeechlet implements Speechlet {
+
+    public void onSessionStarted(SessionStartedRequest ssr, Session sn) throws SpeechletException { }
+
+    public SpeechletResponse onLaunch(LaunchRequest lr, Session sn) throws SpeechletException { return null; }
+
+    public SpeechletResponse onIntent(IntentRequest ir, Session sn) throws SpeechletException {
+        
+        // get intent name
+        Intent intent = ir.getIntent();
+        String intentName = (intent != null) ? intent.getName() : null;
+
+        if(intentName.equals("leaderboardIntent"))
+        {
+            return build(buildSOString());
+        }
+
+        // exception
+        throw new SpeechletException("Invalid Intent");         
+    }
+
+    public void onSessionEnded(SessionEndedRequest ser, Session sn) throws SpeechletException { }
+
+    /*
+     * utility methods for converting stack overflow results to string
+     */
+    private String buildSOString()
+    {
+        String[] userids = {"2065017","512061","6074376","766786","6156384"};        // user-ids (on StackOverflow) for some of the iText dev team
+        String[] usernames = {"Benoit","Michael","Joris","Amedee","Samuel"};         // names of the iText dev team     
+
+        List<Object[]> pairs = new ArrayList<>();
+        for(int i=0;i<userids.length;i++)
+        {
+            String userID = userids[i];
+            String userName = usernames[i];
+            int userReputation = StackOverflow.getReputation(userID);
+            pairs.add(new Object[]{userName, userReputation});
+        }
+        // sort
+        java.util.Collections.sort(pairs, new Comparator<Object[]>() {
+            @Override
+            public int compare(Object[] o1, Object[] o2) {
+                Integer i1 = (Integer) o1[1];
+                Integer i2 = (Integer) o2[1];
+                return -i1.compareTo(i2);
+            }
+        });
+        String txt = "";
+        for(int i=0;i<pairs.size();i++)
+        {
+            txt += (pairs.get(i)[0].toString() + " has " + pairs.get(i)[1].toString() + " points. ");
+        }
+        return txt;
+    }
+
+    /*
+     * Utility methods for quickly building replies out of String
+     */
+    
+    private SpeechletResponse build(String text)
+    {
+        return build(text, true);
+    }
+    
+    private SpeechletResponse build(String text, boolean shouldEndSession)
+    {
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("iText Reader");
+        card.setContent(text);
+
+        // Create the plain text output.
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        speech.setText(text);
+
+        SpeechletResponse response = SpeechletResponse.newTellResponse(speech, card);
+        response.setShouldEndSession(shouldEndSession);
+        return response;        
+    }   
+}
+````
 
 
 # navigating the document
