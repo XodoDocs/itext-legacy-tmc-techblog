@@ -6,6 +6,15 @@ With Lambda, you can run code for virtually any type of application or backend s
 Just upload your code and Lambda takes care of everything required to run and scale your code with high availability. 
 You can set up your code to automatically trigger from other AWS services or call it directly from any web or mobile app.
 
+# why
+
+When you update your Facebook status, you’re using cloud computing. Checking your bank balance on your phone? You’re in the cloud again. Chances are you rely on cloud computing to solve the challenges faced by small businesses, whether you’re firing off emails on the move or using a bunch of apps to help you manage your workload.
+
+In short, cloud is fast becoming the new normal.
+This tutorial will show you how to use AWS Lambda. In a next installment, we'll add iText in the mix.
+By using existing cloud services and enriching them with iText, your document workflow can live in the cloud.
+e.g. Automatically run (cloud hosted) Java code to create an invoice (in a cloud file server) whenever a database (cloud based) gets updated.
+
 # project idea
 
 The idea behind this project is to create a service that can give a StackOverflow leaderboard.
