@@ -37,6 +37,14 @@ social security numbers, phone numbers, dates, etc
 This is an autosweep example that redacts the words 'Alice' and 'White Rabbit' and 'Rabbit' (regardless of casing).
 It marks all occurences of Alice with a pink rectangle, and all occurences of 'Rabbit' with a gray rectangle.
 
+![Figure 1: pdfSweep example input document](Images/pdfsweep_input_document.png)
+**Figure 1**: pdfsweep original input document
+
+And this is after redaction:
+
+![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document.png)
+**Figure 2**: pdfsweep redacted output document
+
 ## Conclusion
 
 In this blogpost, we've briefly presented our addon pdfSweep. PdfSweep allows you to seamlessly integrate data redaction in your existing workflow. Redaction rectangles have to be defined, either by using pdfAutoSweep which uses regular expressions to search for matching text and coordinates, or by programmatically enterting the coordinates. PdfSweep will redact both text, images and metadata ensuring complete confidentiality.
