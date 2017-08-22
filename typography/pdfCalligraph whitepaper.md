@@ -505,7 +505,7 @@ Document arabicPdf = new Document(new PdfDocument(new PdfWriter("/path/to/output
 arabicPdf.setTextAlignment(TextAlignment.RIGHT);
 
 // create a font, and make it the default for the document
-PdfFont f = PdfFontFactory.createFont("/path/to/arabicFont.ttf");
+PdfFont f = PdfFontFactory.createFont("/path/to/arabicFont.ttf", PdfEncodings.IDENTITY_H, true);
 arabicPdf.setFont(f);
 
 // add content: السلام عليكم (as-salaamu 'aleykum - peace be upon you)
@@ -555,7 +555,7 @@ FontSet set = new FontSet();
 set.addFont("/path/to/ArabicFont.ttf");
 set.addFont("/path/to/LatinFont.ttf");
 set.addFont("/path/to/GurmukhiFont.ttf");
-mixedDoc.setFontProvider(new FontProvider(fontSet));
+mixedDoc.setFontProvider(new FontProvider(set));
 
 // set the default document font to the family name of one of the entries in the FontSet
 mixedDoc.setProperty(Property.FONT, "MyFontFamilyName");
