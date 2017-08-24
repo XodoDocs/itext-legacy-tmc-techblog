@@ -34,15 +34,15 @@ social security numbers, phone numbers, dates, etc
 
 * Pass the locations to pdfSweep
 
-This is an autosweep example that redacts the words 'Alice' and 'White Rabbit' and 'Rabbit' (regardless of casing).
-It marks all occurences of Alice with a pink rectangle, and all occurences of 'Rabbit' with a gray rectangle.
+This is an autosweep example that redacts the words 'Tony Soprano' and 'Soprano' and 'Sopranos' (regardless of casing).
+It marks all occurences of these words with a black rectangle.
 
-![Figure 1: pdfSweep example input document](Images/pdfsweep_input_document.png)
+![Figure 1: pdfSweep example input document](Images/pdfsweep_input_document_2.png)
 **Figure 1**: pdfsweep original input document
 
 And this is after redaction:
 
-![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document.png)
+![Figure 2: pdfSweep example output document](Images/pdfsweep_output_document_2.png)
 **Figure 2**: pdfsweep redacted output document
 
 ## Conclusion
