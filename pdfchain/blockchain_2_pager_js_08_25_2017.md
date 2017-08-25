@@ -10,7 +10,7 @@ Once recorded, the data in any given block cannot be altered retroactively witho
 Functionally, a blockchain can serve as "an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way. 
 The ledger itself can also be programmed to trigger transactions automatically."
 
-![Figure 0: a blockchain being built](blockchain_01.png)
+![Figure 0: a blockchain being built](Images/blockchain_01.png)
 
 ## why should you use it?
 
@@ -88,12 +88,12 @@ putting a document on the blockchain
 ```java
 	// define a multichain instance
 	IBlockChain mc = new MultiChain(
-                "http://127.0.0.1",
-                4352,
-                "chain1",
-                "stream1",
-                "multichainrpc",
-                "BHcXLKwR218R883P6pjiWdBffdMx398im4R8BEwfAxMm");
+                "http://127.0.0.1",                                  // address of another node on the chain
+                4352,                                                // port
+                "chain1",                                            // name of the blockchain
+                "stream1",                                           // name of the stream
+                "multichainrpc",                                     // username
+                "BHcXLKwR218R883P6pjiWdBffdMx398im4R8BEwfAxMm");     // password
 
 	// provide the details about signing and hashing
 	sign.AbstractExternalSignature sgn = new sign.DefaultExternalSignature(new File("path_to_keystore"), "demo", "password");
