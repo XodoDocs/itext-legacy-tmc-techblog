@@ -78,6 +78,34 @@ When users interact with a signed document they can be assured of:
 
 ### Web of trust
 
+In cryptography, a web of trust is a concept to establish the authenticity of the binding between a public key and its owner.
+Essentially, it answers the question "When Alice sends me her public key, how do I know that this really belongs to the physical Alice I know?" 
+Because any imposter could give me their key, and claim to be Alice. Or, to put it simply, this solves problems related to identity.
+This maps nicely to the concept of a Certificate Authority (CA) which will be discussed later.
+
+In a web of trust context, there are again public and private keys.
+Public keys are accessible to everyone, like a phone-book. 
+Everyone can look up Alice’s public key. 
+Multiple people can of course claim to be Alice. 
+
+But other records can be added as well. 
+People can vouch for Alice and declare that they trust a particular combination of identity and key. 
+Let’s assume Bob wants to vouch for Alice. 
+He can look up her public key. He then signs her public key with his private key, and puts a record on the blockchain. 
+
+Now everyone can use Bob’s public key to decrypt that information. 
+They can verify that (at a certain point in time) Bob made the effort of using his private key to digitally sign Alice’s public key. 
+Because Bob is the only person supposed to know Bob’s key, this is condered as “Bob trusts Alice”
+
+By adding an extra status field (similar to ACK and NACK in the TCP protocol) we an enable Bob to revoke his trust in Alice. (Since blockchains do not allow deletion of records.)
+
+By having a flexible mechanism where trust is delegated to the end-users, rather than a centralized authority, applications built on top of this backbone can be flexible as well.
+It enables applications to work with various degrees or modes of trust:
+- Alice is trusted by the bank, she must be trustworthy
+- Alice is trusted by at least 60% of all the people Bob trusts
+- Alice is not trusted by the governments
+- etc
+
 ## Relation to pdf
 
 Pdf documents can be digitally signed.
