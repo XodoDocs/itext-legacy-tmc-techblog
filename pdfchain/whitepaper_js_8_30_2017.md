@@ -76,11 +76,42 @@ When users interact with a signed document they can be assured of:
 
 ## Relation to pdf
 
+Pdf documents can be digitally signed.
+
+- this requires a Certificate Authority,
+- and a centralized timeserver.
+- Documents can not be signed in parallel,
+- and signatures live in the document.
+
+A certificate authority or certification authority (CA) is an entity that issues digital certificates. 
+A digital certificate certifies the ownership of a public key by the named subject of the certificate. 
+This allows others (relying parties) to rely upon signatures or on assertions made about the private key that corresponds to the certified public key. 
+A CA acts as a trusted third party—trusted both by the subject (owner) of the certificate and by the party relying upon the certificate. 
+A common use is in issuing identity cards by national governments for use in electronically signing documents.
+
 ## Opportunities
 
 ## Theoretical usecase - high level
 
 ![Figure 2: Theoretical usecase - high level](Images/theoretical_usecase_01.png)
+
+On a high level, the idea is to separate the functionality of signing and integrity from a pdf, and bring those into the blockchain.
+Imagine an example usecase. 
+The document is created, and the document ID (along with its hash, and the name of the hashing algorithm) gets put on a public blockchain. 
+This does not cause any problems, since the hash typically does not allow you to rebuild the entire document. 
+We put the hashing algorithm on the chain as well to ensure long term validation.
+Now imagine that this document is an invoice. Bob has had some work done on his house, and the renovation company sends him an invoice. 
+Bob wants to sign the invoice to indicate he agrees with the price and will pay. 
+Bob’s private key is then used to encrypt the hash-value of the document. 
+This signature (comprising the ID of the document, the original hash-value, the signed hash-value, as well as the names of the hashing algorithm and signing algorithm) 
+are stored on the blockchain. 
+
+Alice, who works for the renovation company wants to check whether Bob has signed already. 
+She can easily look up all records on the blockchain for a given ID (the document ID). 
+One of these records ought to be the record Bob created earlier. 
+Since the record contains the original hash, and the names of all the algorithms involved, Alice can (using Bob’s public key) verify 2 things:
+- it was Bob that signed (hash + signed hash + private key)
+- Bob signed the exact document she sent him (ID + hash)
 
 ## Theoretical usecase - low level
 
