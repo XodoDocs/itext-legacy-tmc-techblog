@@ -85,7 +85,7 @@ This maps nicely to the concept of a Certificate Authority (CA) which will be di
 
 In a web of trust context, there are again public and private keys.
 Public keys are accessible to everyone, like a phone-book. 
-Everyone can look up Alice’s public key. 
+Everyone can look up Alice's public key. 
 Multiple people can of course claim to be Alice. 
 
 But other records can be added as well. 
@@ -94,7 +94,7 @@ Let's assume Bob wants to vouch for Alice.
 He can look up her public key. He then signs her public key with his private key, and puts a record on the blockchain. 
 
 Now everyone can use Bob's public key to decrypt that information. 
-They can verify that (at a certain point in time) Bob made the effort of using his private key to digitally sign Alice’s public key. 
+They can verify that (at a certain point in time) Bob made the effort of using his private key to digitally sign Alice's public key. 
 Because Bob is the only person supposed to know Bob's key, this is condered as "Bob trusts Alice"
 
 By adding an extra status field (similar to ACK and NACK in the TCP protocol) we an enable Bob to revoke his trust in Alice. (Since blockchains do not allow deletion of records.)
