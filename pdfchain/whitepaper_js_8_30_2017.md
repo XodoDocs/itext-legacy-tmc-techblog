@@ -50,7 +50,27 @@ SHA224("The quick brown fox jumps over the lazy dog.")
 0x 619cba8e8e05826e9b8c519c0a5c68f4fb653e8a3d8aa04bb2c8cd4c
  ````
  
+![Figure 1: a single iteration of SHA256](Images/sha_01.png)
+ 
 ### Encryption
+
+The public and private key pair comprise of two uniquely related cryptographic keys (basically long random numbers). 
+The public key is what its name suggests - public. It is made available to everyone via a publicly accessible repository or directory. 
+On the other hand, the private key must remain confidential to its respective owner.
+
+Because the key pair is mathematically related, whatever is encrypted with a public key may only be decrypted by its corresponding private key and vice versa.
+For example, if Bob wants to send sensitive data to Alice, and wants to be sure that only Alice may be able to read it, he will encrypt the data with Alice's public key. 
+Only Alice has access to her corresponding private key and as a result is the only person with the capability of decrypting the encrypted data back into its original form.
+
+As only Alice has access to her private key, it is possible that only Alice can decrypt the encrypted data. 
+Even if someone else gains access to the encrypted data, it will remain confidential as they should not have access to Alice's private key.
+Public Key Cryptography can therefore achieve confidentiality. However another important aspect of Public Key Cryptography is its ability to create a digital signature.
+
+A digital signature is a code (generated and authenticated by public key encryption) which is attached to an electronically transmitted document to verify its contents and the sender's identity.
+
+When users interact with a signed document they can be assured of:
+- Content Source: End users can confirm that the software really comes from the publisher who signed it.
+- Content Integrity: End users can verify that the software has not been modified since it was signed.
 
 ### Web of trust
 
