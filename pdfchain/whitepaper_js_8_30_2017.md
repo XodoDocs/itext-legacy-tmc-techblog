@@ -106,6 +106,8 @@ It enables applications to work with various degrees or modes of trust:
 - Alice is not trusted by the governments
 - etc
 
+![Figure 2: an example web of trust](Images/web_of_trust_01.gif)
+
 ## Relation to pdf
 
 Pdf documents can be digitally signed.
@@ -125,7 +127,7 @@ A common use is in issuing identity cards by national governments for use in ele
 
 ## Theoretical usecase - high level
 
-![Figure 2: Theoretical usecase - high level](Images/theoretical_usecase_01.png)
+![Figure 3: Theoretical usecase - high level](Images/theoretical_usecase_01.png)
 
 On a high level, the idea is to separate the functionality of signing and integrity from a pdf, and bring those into the blockchain.
 Imagine an example usecase. 
