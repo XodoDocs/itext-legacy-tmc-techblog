@@ -21,7 +21,7 @@ With a blockchain, the useful part is that once such a hash is stored, it can no
 2. the fact that your hash is in the blockchain gives you a point in time when the operation was done.
 
 Later you can say: 
-"Hey, I’ve created this hash on 10 Oct 2016: here is the transaction in the blockchain which contains the hash. I’ve created it according to this formula from this file. "
+"Hey, I've created this hash on 10 Oct 2016: here is the transaction in the blockchain which contains the hash. I've created it according to this formula from this file. "
 Now any person can take your file and compute the hash again and verify that it matches the one stored in the blockchain. 
 All this works because:
 
@@ -31,8 +31,8 @@ All this works because:
 
 ## Basic concepts
 
-Intuitively, a blockchain holds data. It collects this data in units called “blocks”. 
-There is a mechanism to prove a block has not been tampered with. And over time, blocks get chained together. This chaining organically enables a kind of “history”.
+Intuitively, a blockchain holds data. It collects this data in units called 'blocks'. 
+There is a mechanism to prove a block has not been tampered with. And over time, blocks get chained together. This chaining organically enables a kind of 'history'.
 
 ### Hashing
 
@@ -79,6 +79,8 @@ When users interact with a signed document they can be assured of:
 ## Opportunities
 
 ## Theoretical usecase - high level
+
+![Figure 2: Theoretical usecase - high level](Images/theoretical_usecase_01.png)
 
 ## Theoretical usecase - low level
 
