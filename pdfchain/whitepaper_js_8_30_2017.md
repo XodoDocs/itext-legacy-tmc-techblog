@@ -90,12 +90,12 @@ Multiple people can of course claim to be Alice.
 
 But other records can be added as well. 
 People can vouch for Alice and declare that they trust a particular combination of identity and key. 
-Let’s assume Bob wants to vouch for Alice. 
+Let's assume Bob wants to vouch for Alice. 
 He can look up her public key. He then signs her public key with his private key, and puts a record on the blockchain. 
 
-Now everyone can use Bob’s public key to decrypt that information. 
+Now everyone can use Bob's public key to decrypt that information. 
 They can verify that (at a certain point in time) Bob made the effort of using his private key to digitally sign Alice’s public key. 
-Because Bob is the only person supposed to know Bob’s key, this is condered as “Bob trusts Alice”
+Because Bob is the only person supposed to know Bob's key, this is condered as "Bob trusts Alice"
 
 By adding an extra status field (similar to ACK and NACK in the TCP protocol) we an enable Bob to revoke his trust in Alice. (Since blockchains do not allow deletion of records.)
 
@@ -258,12 +258,16 @@ The port of Antwerp, largest port of Belgium and second largest port of Europe i
 experimenting with blockchain-technology for the automation of logistics. This way, the port aims to speed up the many interactions between clients and stakeholders.
 They also aim to reduce the cost. Not just the cost of the enormous papertrail, but also price-fluctuations not being communicated clearly, a dollar to euro conversion not having been fixed, or a bill-of-laden mismatch.
 
-Transporting even a single container will include a minimum of 30 different parties. Going from the truck-drivers that delivered the goods that went into the container, to the people loading the container, the people taking the goods out of the container, as well as the harbormaster. Communication between all these parties occurs over a wide variety of platforms and media. Email, fax, phone being the most common ones. It’s no surprise that information gets lost or distorted along the way.
+Transporting even a single container will include a minimum of 30 different parties. 
+Going from the truck-drivers that delivered the goods that went into the container, to the people loading the container, the people taking the goods out of the container, 
+as well as the harbormaster. 
+Communication between all these parties occurs over a wide variety of platforms and media. Email, fax, phone being the most common ones. 
+It's no surprise that information gets lost or distorted along the way.
 
 Security is the largest issue. In order to ensure containers can only be moved and opened by the correct people, they are often locked with a code. 
 The code has to pass through all the communication-channels mentioned above. Most of them are insecure. 
 Containers often go missing, their content stolen. 
-And because the container isn’t continuously tracked, nobody can be blamed for its disappearance.
+And because the container isn't continuously tracked, nobody can be blamed for its disappearance.
 
 This is where blockchains provide the perfect fit. A single source of truth (the bill of laden) can be passed and signed (as a token) between all parties. 
 This offers stakeholders a way of tracking the container in real time. 
