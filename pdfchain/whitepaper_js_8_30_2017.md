@@ -1,24 +1,29 @@
 # Blockchains
 
+## Introduction
+
 A blockchain is a distributed database that is used to maintain a continuously growing list of records, called blocks. 
 Each block contains a timestamp and a link to a previous block. 
-A blockchain is typically managed by a peer-to-peer network collectively adhering to a protocol for validating new blocks. 
-By design, blockchains are inherently resistant to modification of the data. 
-Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks and a collusion of the network majority. 
+A blockchain is typically managed by a peer-to-peer network, which collectively adheres to a protocol for validating new blocks. 
+By design, blockchains are inherently resistant to modification of the data stored in them. 
+Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks, which requires collusion of the network majority. 
 Functionally, a blockchain can serve as "an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way. 
 The ledger itself can also be programmed to trigger transactions automatically." (wikipedia)
 
 ![Figure 0: a blockchain being built](Images/blockchain_01.png)
 
-## Why should you use it:
+### Why should you use it:
 
 A blockchain supersedes older technology that deals with authentication and non-repudiation.
-First, there are many ways you can sign a document.
-Typically by "signing" we mean creating a hash of a document and storing it.
-With a blockchain, the useful part is that once such a hash is stored, it can not be changed or deleted. This gives you two advantages:
+First, there are many ways you can digitally sign a document.
+Typically by "signing" we mean creating a hash of a document, creating a signature from that hash with a private key, and storing the signature.
+This has two effects:
 
-1. the hash itself identifies the file from which it was computed.
-2. the fact that your hash is in the blockchain gives you a point in time when the operation was done.
+1. the signature identifies the person who signed the document.
+2. the signature, when decrypted, identifies the file from which it was computed.
+
+Once such a signature is stored in a blockchain, it can not be changed or deleted. This gives you an extra advantage:
+3. the fact that your signature is in the blockchain gives you a point in time when the operation was done.
 
 Later you can say: 
 "Hey, I've created this hash on 10 Oct 2016: here is the transaction in the blockchain which contains the hash. I've created it according to this formula from this file. "
@@ -52,13 +57,13 @@ SHA224("The quick brown fox jumps over the lazy dog.")
  
 ![Figure 1: a single iteration of SHA256](Images/sha_01.png)
  
-One iteration in a SHA-2 family compression function. The blue components perform bitwise operations such as logical AND, OR, XOR and bitshift.
+This is one iteration in a SHA-2 family compression function. The blue components perform bitwise operations on the bytes, such as logical AND, OR, XOR and bitshift.
 The bitwise rotation uses different constants for SHA-512.
 The red box is addition modulo 2^32 for SHA-256, or 2^64 for SHA-512.
  
 ### Encryption
 
-The public and private key pair comprise of two uniquely related cryptographic keys (basically long random numbers). 
+The public and private key are a pair of uniquely related cryptographic keys, basically long random numbers. 
 The public key is what its name suggests - public. It is made available to everyone via a publicly accessible repository or directory. 
 On the other hand, the private key must remain confidential to its respective owner.
 
@@ -66,45 +71,45 @@ Because the key pair is mathematically related, whatever is encrypted with a pub
 For example, if Bob wants to send sensitive data to Alice, and wants to be sure that only Alice may be able to read it, he will encrypt the data with Alice's public key. 
 Only Alice has access to her corresponding private key and as a result is the only person with the capability of decrypting the encrypted data back into its original form.
 
-As only Alice has access to her private key, it is possible that only Alice can decrypt the encrypted data. 
+As only Alice has access to her private key, it is only possible for Alice to decrypt the encrypted data. 
 Even if someone else gains access to the encrypted data, it will remain confidential as they should not have access to Alice's private key.
-Public Key Cryptography can therefore achieve confidentiality. However another important aspect of Public Key Cryptography is its ability to create a digital signature.
+Public Key Cryptography can therefore achieve confidentiality.
 
-A digital signature is a code (generated and authenticated by public key encryption) which is attached to an electronically transmitted document to verify its contents and the sender's identity.
+However another important aspect of Public Key Cryptography is its ability to create a digital signature.
+A digital signature is a code (generated and authenticated by public key encryption) which is attached to an electronically transmitted document,
+and can be used to verify its contents and the sender's identity.
 
-When users interact with a signed document they can be assured of:
-- Content Source: End users can confirm that the software really comes from the publisher who signed it.
-- Content Integrity: End users can verify that the software has not been modified since it was signed.
+When users interact with a signed document, they can be assured of:
+- Content Source: End users can confirm that the document really comes from the publisher who signed it.
+- Content Integrity: End users can verify that the document has not been modified since it was signed.
 
 ### Web of trust
 
-In cryptography, a web of trust is a concept to establish the authenticity of the binding between a public key and its owner.
+In cryptography, a web of trust is a concept that can establish the authenticity of the binding between a public key and its owner.
 Essentially, it answers the question "When Alice sends me her public key, how do I know that this really belongs to the physical Alice I know?" 
-Because any imposter could give me their key, and claim to be Alice. Or, to put it simply, this solves problems related to identity.
-This maps nicely to the concept of a Certificate Authority (CA) which will be discussed later.
+Because any imposter could give me their key, and claim to be Alice.
+
+To put it simply, web of trust is a solution to problems related to identity. It nicely to the concept of a Certificate Authority (CA) which will be discussed later.
 
 In a web of trust context, there are again public and private keys.
-Public keys are accessible to everyone, like a phone-book. 
-Everyone can look up Alice's public key. 
-Multiple people can of course claim to be Alice. 
+Public keys are accessible to everyone, like a phone-book, and everyone can look up Alice's public key. 
+Multiple people can of course claim to be Alice.
 
-But other records can be added as well. 
-People can vouch for Alice and declare that they trust a particular combination of identity and key. 
-Let's assume Bob wants to vouch for Alice. 
-He can look up her public key. He then signs her public key with his private key, and puts a record on the blockchain. 
-
+But other records can be added as well: people can vouch for someone and declare that they trust a particular combination of identity and key. 
+Let's assume Bob wants to vouch for Alice. He looks up her public key, signs her public key with his own private key, and puts a record on the blockchain. 
 Now everyone can use Bob's public key to decrypt that information. 
 They can verify that (at a certain point in time) Bob made the effort of using his private key to digitally sign Alice's public key. 
-Because Bob is the only person supposed to know Bob's key, this is condered as "Bob trusts Alice"
+Because Bob is the only person supposed to know Bob's key, this is condered as "Bob trusts Alice".
 
-By adding an extra status field (similar to ACK and NACK in the TCP protocol) we an enable Bob to revoke his trust in Alice. (Since blockchains do not allow deletion of records.)
+By adding an extra status field - similar to ACK and NACK in the TCP protocol - we can enable Bob to revoke his trust in Alice.
+Since blockchains do not allow deletion of records, there is a full history of both positive and negative trust relationships between people.
 
 By having a flexible mechanism where trust is delegated to the end-users, rather than a centralized authority, applications built on top of this backbone can be flexible as well.
 It enables applications to work with various degrees or modes of trust:
-- Alice is trusted by the bank, she must be trustworthy
+
+- Alice is trusted by the bank, she must be trustworthy (because I trust the bank)
 - Alice is trusted by at least 60% of all the people Bob trusts
 - Alice is not trusted by the governments
-- etc
 
 ![Figure 2: an example web of trust](Images/web_of_trust_01.gif)
 
@@ -124,6 +129,8 @@ A CA acts as a trusted third party - trusted both by the subject (owner) of the 
 A common use is in issuing identity cards by national governments for use in electronically signing documents.
 
 ## Opportunities
+
+TODO
 
 ## Theoretical usecase - high level
 
@@ -147,9 +154,9 @@ Imagine an example usecase.
 	She can easily look up all records on the blockchain for a given ID (the document ID). 
 	One of these records ought to be the record Bob created earlier.  
 	
-	Since the record contains the original hash, and the names of all the algorithms involved, Alice can (using Bob's public key) verify 2 things:
-	- it was Bob that signed (hash + signed hash + private key)
-	- Bob signed the exact document she sent him (ID + hash)
+	Since the record contains the original hash, and the names of all the algorithms involved, Alice can verify 2 things:
+	- it was Bob that signed, using the hash, the signed hash, and Bob's public key
+	- Bob signed the exact document she sent him, using the document ID and the hash
 
 ## Theoretical usecase - low level
 
@@ -188,8 +195,8 @@ public interface IBlockChain {
 ### Concrete implementation using JSON-RPC and MultiChain
 
 As a proof of concept we have provided an implementation of the interface IBlockchain using JSON-RPC (remote procedure call) and MultiChain.
-If you want to learn more about setting up a blockchain instance with MultiChain, check out their website for more resources.
-In particular the getting started guide at https://www.multichain.com/getting-started/.
+If you want to learn more about setting up a blockchain instance with MultiChain, check out their website for more resources,
+in particular the getting started guide at https://www.multichain.com/getting-started/.
 
 ### Example(s)
 
@@ -254,22 +261,21 @@ shsh                             : <garbled>
 
 ## Usecase - port of Antwerp
 
-The port of Antwerp, largest port of Belgium and second largest port of Europe in terms of container-capacity is 
+The port of Antwerp, largest port of Belgium and second largest port of Europe in terms of container-capacity, is 
 experimenting with blockchain-technology for the automation of logistics. This way, the port aims to speed up the many interactions between clients and stakeholders.
-They also aim to reduce the cost. Not just the cost of the enormous papertrail, but also price-fluctuations not being communicated clearly, a dollar to euro conversion not having been fixed, or a bill-of-laden mismatch.
+They also aim to reduce the cost: not only the cost of the enormous papertrail, but also price-fluctuations not being communicated clearly, a dollar to euro conversion not having been fixed, or a bill-of-laden mismatch.
 
-Transporting even a single container will include a minimum of 30 different parties. 
-Going from the truck-drivers that delivered the goods that went into the container, to the people loading the container, the people taking the goods out of the container, 
+Transporting even a single container includes a minimum of 30 different parties, 
+going from the truck-drivers that delivered the goods that went into the container, to the people loading the container, the people taking the goods out of the container, 
 as well as the harbormaster. 
-Communication between all these parties occurs over a wide variety of platforms and media. Email, fax, phone being the most common ones. 
-It's no surprise that information gets lost or distorted along the way.
+Communication between all these parties occurs over a wide variety of platforms and media: the most common ones are email, fax, and phone. 
+It's no surprise that information is leaked, gets lost, or is distorted along the way.
 
 Security is the largest issue. In order to ensure containers can only be moved and opened by the correct people, they are often locked with a code. 
-The code has to pass through all the communication-channels mentioned above. Most of them are insecure. 
-Containers often go missing, their content stolen. 
+The code has to pass through all the communication-channels mentioned above. Most of these are insecure, and containers often go missing, their content stolen. 
 And because the container isn't continuously tracked, nobody can be blamed for its disappearance.
 
-This is where blockchains provide the perfect fit. A single source of truth (the bill of laden) can be passed and signed (as a token) between all parties. 
+This is where blockchains provide the perfect fit. A single source of truth, e.g. the bill of laden, can be passed and signed (as a token) between all parties. 
 This offers stakeholders a way of tracking the container in real time. 
 It also enables stakeholders to see where the container went missing, and under who's responsibility.
 
