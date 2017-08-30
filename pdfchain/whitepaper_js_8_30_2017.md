@@ -153,6 +153,105 @@ Imagine an example usecase.
 
 ## Theoretical usecase - low level
 
+### Implementation
+
+The interfaces we impose on blockchain implementations are minimal, yet they provide us with the needed abstraction to enable us to build complex applications and workflows on top of them.
+We abstract a blockchain as a multimap, allowing end-users to store an object (represented by Record, which is `HashMap<String, Object>`) and tying it to a key (String).
+
+```java
+public interface IBlockChain {
+
+    /**
+     * Put data on the blockchain
+     *
+     * @param key  the key being used to put the data on the blockchain
+     * @param data the data being put on the blockchain
+     */
+    public boolean put(String key, Record data);
+
+    /**
+     * Get data from the blockchain
+     *
+     * @param key the key being queried
+     * @return
+     */
+    public List<Record> get(String key);
+
+    /**
+     * Get all data from the blockchain
+     * @return
+     */
+    public List<Record> all();
+}
+```
+
+### Concrete implementation using JSON-RPC and MultiChain
+
+As a proof of concept we have provided an implementation of the interface IBlockchain using JSON-RPC (remote procedure call) and MultiChain.
+If you want to learn more about setting up a blockchain instance with MultiChain, check out their website for more resources.
+In particular the getting started guide at https://www.multichain.com/getting-started/.
+
+### Example(s)
+
+1. Putting a document on the blockchain
+
+```java
+	// define a multichain instance
+	IBlockChain mc = new MultiChain(
+                "http://127.0.0.1",                                  // address of another node on the chain
+                4352,                                                // port
+                "chain1",                                            // name of the blockchain
+                "stream1",                                           // name of the stream
+                "multichainrpc",                                     // username
+                "BHcXLKwR218R883P6pjiWdBffdMx398im4R8BEwfAxMm");     // password
+
+	// provide the details about signing and hashing
+	sign.AbstractExternalSignature sgn = new sign.DefaultExternalSignature(new File("path_to_keystore"), "demo", "password");
+
+	// file being handled
+	File inputFile = new File("input.pdf");
+
+	// instantiate blockchain
+	pdfchain.PdfChain blockchain = new pdfchain.PdfChain(mc, sgn);
+	
+	blockchain.put(inputFile);
+```
+
+2. Retrieving document information from the blockchain
+
+```java
+	IBlockChain mc = new MultiChain(
+                "http://127.0.0.1",
+                4352,
+                "chain1",
+                "stream1",
+                "multichainrpc",
+                "BHcXLKwR218R883P6pjiWdBffdMx398im4R8BEwfAxMm");
+
+	sign.AbstractExternalSignature sgn = new sign.DefaultExternalSignature(new File("path_to_keystore"), "demo", "password");
+
+	File inputFile = new File("input.pdf");
+
+	pdfchain.PdfChain blockchain = new pdfchain.PdfChain(mc, sgn);
+	for (Map<String, Object> docEntry : blockchain.get(inputFile)) {
+		for (Map.Entry<String, Object> entry : docEntry.entrySet())
+			System.out.println(padRight(entry.getKey(), 32) + " : " + entry.getValue());
+		System.out.println("");
+	}
+```
+
+```java
+blocktime                        : 1499691151
+id2                              : ????B?}?`?-o?R
+id1                              : z?L{?Wd=????G?
+publishers                       : [14pwDpkcfRvSiw6DJWpP7RdcYgv5NfRRn6Dudr]
+txid                             : b0092d7eb967ac2e45671742ddf1a0a96bc049a4bbfe3528888b6d9ff396b7a2
+hsh                              : ??B??????o?$'?A?d??L???xR?U
+confirmations                    : 22
+key                              : ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½È oï¿½$'ï¿½Aï¿½dï¿½ï¿½Lï¿½ï¿½ï¿½xRï¿½U
+shsh                             : <garbled>
+```
+
 ## Usecase - port of Antwerp
 
 ## Why work with us?
