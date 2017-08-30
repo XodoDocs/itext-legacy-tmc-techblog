@@ -254,10 +254,37 @@ shsh                             : <garbled>
 
 ## Usecase - port of Antwerp
 
+The port of Antwerp, largest port of Belgium and second largest port of Europe in terms of container-capacity is 
+experimenting with blockchain-technology for the automation of logistics. This way, the port aims to speed up the many interactions between clients and stakeholders.
+They also aim to reduce the cost. Not just the cost of the enormous papertrail, but also price-fluctuations not being communicated clearly, a dollar to euro conversion not having been fixed, or a bill-of-laden mismatch.
+
+Transporting even a single container will include a minimum of 30 different parties. Going from the truck-drivers that delivered the goods that went into the container, to the people loading the container, the people taking the goods out of the container, as well as the harbormaster. Communication between all these parties occurs over a wide variety of platforms and media. Email, fax, phone being the most common ones. It’s no surprise that information gets lost or distorted along the way.
+
+Security is the largest issue. In order to ensure containers can only be moved and opened by the correct people, they are often locked with a code. 
+The code has to pass through all the communication-channels mentioned above. Most of them are insecure. 
+Containers often go missing, their content stolen. 
+And because the container isn’t continuously tracked, nobody can be blamed for its disappearance.
+
+This is where blockchains provide the perfect fit. A single source of truth (the bill of laden) can be passed and signed (as a token) between all parties. 
+This offers stakeholders a way of tracking the container in real time. 
+It also enables stakeholders to see where the container went missing, and under who's responsibility.
+
 ## Why work with us?
 
 ### with regards to pdf
 
+We know that a lot of companies are currently looking into blockchain technology.
+So why would you chose to work with iText?
+
+- We are proven PDF experts.
+- We have upwards of 20 years of experience with PDF related software.
+- We are Members of ISO committee that sets PDF standards.
+
 ### with regards to blockchain
+
+- We have invested a substantial amount of time in investigating blockchain technology.
+- We are in the process of aquiring patents with regards to blockchain-PDF interaction.
+- We have many useful contacts with startups.
+- These startups typically offer a mutually beneficial cooperation, they learn about the possibilities of PDF documents. And we learn about how blockchain can be used in new and exciting ways.
 
 ## The hype
