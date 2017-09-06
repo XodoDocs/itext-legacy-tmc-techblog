@@ -8,11 +8,11 @@ A blockchain is typically managed by a peer-to-peer network, which collectively 
 By design, blockchains are inherently resistant to modification of the data stored in them. 
 Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks, which requires collusion of the network majority. 
 Functionally, a blockchain can serve as "an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way. 
-The ledger itself can also be programmed to trigger transactions automatically." (wikipedia)
+The ledger itself can also be programmed to trigger transactions automatically." (Source: Wikipedia)
 
 ![Figure 0: a blockchain being built](Images/blockchain_01.png)
 
-### Why should you use it:
+### Why should you use it
 
 A blockchain supersedes older technology that deals with authentication and non-repudiation.
 First, there are many ways you can digitally sign a document.
@@ -43,7 +43,7 @@ There is a mechanism to prove a block has not been tampered with. And over time,
 
 A cryptographic hash function allows one to easily verify that some input data maps to a given hash value. 
 But if the input data is unknown, it is deliberately difficult to reconstruct it (or equivalent alternatives) by knowing the stored hash value. 
-This is used for assuring integrity of transmitted data. (wikipedia)
+This is used for assuring integrity of transmitted data. (Source: Wikipedia)
 
 Even a small change in the message will (with overwhelming probability) result in a mostly different hash, due to the avalanche effect. 
 For example, adding a period to the end of this sentence changes almost half (111 out of 224) of the bits in the hash:
@@ -113,9 +113,9 @@ It enables applications to work with various degrees or modes of trust:
 
 ![Figure 2: an example web of trust](Images/web_of_trust_01.gif)
 
-## Relation to pdf
+## Relation to PDF
 
-Pdf documents can be digitally signed.
+PDF documents can be digitally signed.
 
 - this requires a Certificate Authority,
 - and a centralized timeserver.
@@ -136,7 +136,7 @@ TODO
 
 ![Figure 3: Theoretical usecase - high level](Images/theoretical_usecase_01.png)
 
-On a high level, the idea is to separate the functionality of signing and integrity from a pdf, and bring those into the blockchain.
+On a high level, the idea is to separate the functionality of signing and integrity from a PDF, and bring those into the blockchain.
 Imagine an example usecase. 
 
 1. 	The document is created, and the document ID (along with its hash, and the name of the hashing algorithm) gets put on a public blockchain. 
@@ -255,7 +255,7 @@ publishers                       : [14pwDpkcfRvSiw6DJWpP7RdcYgv5NfRRn6Dudr]
 txid                             : b0092d7eb967ac2e45671742ddf1a0a96bc049a4bbfe3528888b6d9ff396b7a2
 hsh                              : ??B??????o?$'?A?d??L???xR?U
 confirmations                    : 22
-key                              : ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½È oï¿½$'ï¿½Aï¿½dï¿½ï¿½Lï¿½ï¿½ï¿½xRï¿½U
+key                              : ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ oï¿½$'ï¿½Aï¿½dï¿½ï¿½Lï¿½ï¿½ï¿½xRï¿½U
 shsh                             : <garbled>
 ```
 
@@ -281,7 +281,7 @@ It also enables stakeholders to see where the container went missing, and under 
 
 ## Why work with us?
 
-### with regards to pdf
+### with regards to PDF
 
 We know that a lot of companies are currently looking into blockchain technology.
 So why would you chose to work with iText?
