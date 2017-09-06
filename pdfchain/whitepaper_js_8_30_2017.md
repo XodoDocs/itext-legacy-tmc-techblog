@@ -298,3 +298,5 @@ So why would you chose to work with iText?
 - These startups typically offer a mutually beneficial cooperation, they learn about the possibilities of PDF documents. And we learn about how blockchain can be used in new and exciting ways.
 
 ## The hype
+
+![Figure 4: The hype cycle - Gartner](Images/hype_cycle_01.png)
